@@ -1,6 +1,6 @@
 
 var app = new Vue({
-  el: "#main-view",
+  el: ".main-view",
   data: {
     text: "Hello World"
   }
