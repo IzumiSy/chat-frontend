@@ -23,8 +23,11 @@ var jsTargets = [
   "./js/*.js",
   "./js/**/*.js"
 ];
+var defaultTasks = [
+  "sass", "jade", "concat-js"
+];
 
-gulp.task("default", ["sass", "jade", "concat-js"], function() {
+gulp.task("default", defaultTasks, function() {
   gulp.src("app")
     .pipe(plumber())
     .pipe(server({
