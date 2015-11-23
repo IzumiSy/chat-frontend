@@ -11,17 +11,19 @@
     "url": "https://github.com/IzumiSy/chat-frontend/issues"
   },
   "dependencies": {
+    "bootstrap": "^3.3.5",
     "browserify": "^12.0.1",
+    "flat-ui": "^2.1.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.7.1",
     "gulp-jade": "^1.1.0",
     "gulp-jshint": "^1.12.0",
-    "gulp-sass": "^2.1.0",
-    "gulp-header": "^1.7.1",
     "gulp-plumber": "^1.0.1",
-    "gulp-webserver": "^0.9.1"
-    "bootstrap": "^3.3.5",
-    "flat-ui": "^2.1.1"
+    "gulp-sass": "^2.1.0",
+    "gulp-webserver": "^0.9.1",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0"
   }
 }
