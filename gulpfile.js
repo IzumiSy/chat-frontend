@@ -107,6 +107,7 @@ gulp.task("venders-concat-js", function() {
 });
 
 gulp.task("jshint", function() {
+  console.log("[TASK] jshint processing...");
   return gulp.src(targets.js)
     .pipe(jshint())
     .pipe(jshint.reporter("jshint-stylish"))
