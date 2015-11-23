@@ -24,6 +24,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "flat-ui": "^2.1.1",
+    "gulp-concat-css": "^2.2.0",
     "gulp-header": "^1.7.1",
     "gulp-plumber": "^1.0.1",
     "gulp-webserver": "^0.9.1"
