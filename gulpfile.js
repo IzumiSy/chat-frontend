@@ -63,7 +63,7 @@ gulp.task("default", defaultTasks, function() {
 
 gulp.task("sass", function() {
   console.log("[TASK] sass processing...");
-  gulp.src(targets.sass)
+  return gulp.src(targets.sass)
     .pipe(plumber())
     .pipe(sass())
     .pipe(header('@charset "utf-8";\n'))
@@ -72,7 +72,7 @@ gulp.task("sass", function() {
 
 gulp.task("jade", function() {
   console.log("[TASK] jade processing...");
-  gulp.src(targets.jade)
+  return gulp.src(targets.jade)
     .pipe(plumber())
     .pipe(jade({
       pretty: true
@@ -82,21 +82,21 @@ gulp.task("jade", function() {
 
 gulp.task("concat-js", function() {
   console.log("[TASK] concat-js processing...");
-  gulp.src(targets.js)
+  return gulp.src(targets.js)
     .pipe(plumber())
     .pipe(concat(concatJS))
     .pipe(gulp.dest(destDir))
 });
 
 gulp.task("jshint", function() {
-  gulp.src(targets.js)
+  return gulp.src(targets.js)
     .pipe(jshint())
     .pipe(jshint.reporter("jshint-stylish"))
 });
 
 gulp.task("concat-css", function() {
   console.log("[TASK] concat-css processing...");
-  gulp.src(targets.venders.css)
+  return gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(vendersCSS))
     .pipe(gulp.dest(destDir))
