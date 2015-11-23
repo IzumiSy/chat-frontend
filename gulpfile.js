@@ -44,6 +44,8 @@ var defaultTasks = [
   "sass", "jade", "concat-js", "concat-css"
 ];
 var destDir = "./dest/";
+var concatJS = "application.js"
+var vendersCSS = "venders.css"
 
 gulp.task("default", defaultTasks, function() {
   gulp.src(destDir)
@@ -79,20 +81,18 @@ gulp.task("jade", function() {
 });
 
 gulp.task("concat-js", function() {
-  var output = "application.js"
   console.log("[TASK] concat-js processing...");
   gulp.src(targets.js)
     .pipe(plumber())
-    .pipe(concat(output))
+    .pipe(concat(concatJS))
     .pipe(gulp.dest(destDir))
 });
 
 gulp.task("concat-css", function() {
-  var output = "venders.css"
   console.log("[TASK] concat-css processing...");
   gulp.src(targets.venders.css)
     .pipe(plumber())
-    .pipe(concat(output))
+    .pipe(concat(vendersCSS))
     .pipe(gulp.dest(destDir))
 });
 
