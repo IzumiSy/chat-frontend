@@ -47,7 +47,7 @@ gulp.task("sass", function() {
   gulp.src(sassTargets)
     .pipe(plumber())
     .pipe(sass())
-    .pipe(header('@charset "utf-8;\n'))
+    .pipe(header('@charset "utf-8";\n'))
     .pipe(gulp.dest("./app/"))
 });
 
@@ -62,7 +62,7 @@ gulp.task("jade", function() {
 });
 
 gulp.task("concat-js", function() {
-  var output = "app/application.js"
+  var output = "application.js"
   console.log("[TASK] concat-js processing...");
   gulp.src(jsTargets)
     .pipe(plumber())
