@@ -88,6 +88,12 @@ gulp.task("concat-js", function() {
     .pipe(gulp.dest(destDir))
 });
 
+gulp.task("jshint", function() {
+  gulp.src(targets.js)
+    .pipe(jshint())
+    .pipe(jshint.reporter("jshint-stylish"))
+});
+
 gulp.task("concat-css", function() {
   console.log("[TASK] concat-css processing...");
   gulp.src(targets.venders.css)
