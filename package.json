@@ -2,7 +2,6 @@
   "name": "chat-frontend",
   "version": "1.0.0",
   "description": "Chat Application",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IzumiSy/chat-frontend.git"
