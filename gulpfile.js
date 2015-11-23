@@ -43,12 +43,13 @@ var targets = {
 var defaultTasks = [
   "sass", "jade", "concat-js", "concat-css"
 ];
+var destDir = "./dest/";
 
 gulp.task("default", defaultTasks, function() {
-  gulp.src("app")
+  gulp.src(destDir)
     .pipe(plumber())
     .pipe(server({
-      root: "app",
+      root: destDir,
       livereload: true,
       open: true
      }));
@@ -64,7 +65,7 @@ gulp.task("sass", function() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(header('@charset "utf-8";\n'))
-    .pipe(gulp.dest("./app/"))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("jade", function() {
@@ -74,7 +75,7 @@ gulp.task("jade", function() {
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest("./app/"))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("concat-js", function() {
@@ -83,7 +84,7 @@ gulp.task("concat-js", function() {
   gulp.src(targets.js)
     .pipe(plumber())
     .pipe(concat(output))
-    .pipe(gulp.dest("./app/"))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("concat-css", function() {
@@ -92,10 +93,10 @@ gulp.task("concat-css", function() {
   gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(output))
-    .pipe(gulp.dest("./app/"))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("clean", function() {
-  del(["./app/*.*"]);
+  del([destDir + "*.*"]);
 });
 
