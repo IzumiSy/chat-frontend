@@ -24,7 +24,7 @@ var jsTargets = [
   "./js/**/*.js"
 ];
 
-gulp.task("default", function() {
+gulp.task("default", ["sass", "jade", "concat-js"], function() {
   gulp.src("app")
     .pipe(plumber())
     .pipe(server({
@@ -37,24 +37,27 @@ gulp.task("default", function() {
 });
 
 gulp.task("sass", function() {
+  console.log("[TASK] sass processing...");
   gulp.src(sassTargets)
-  .pipe(plumber())
-  .pipe(sass())
-  .pipe(header('@charset "utf-8;\n'))
-  .pipe(gulp.dest("./app/"))
+    .pipe(plumber())
+    .pipe(sass())
+    .pipe(header('@charset "utf-8;\n'))
+    .pipe(gulp.dest("./app/"))
 });
 
 gulp.task("jade", function() {
+  console.log("[TASK] jade processing...");
   gulp.src(jadeTargets)
-  .pipe(plumber())
-  .pipe(jade({
-    pretty: true
-  }))
-  .pipe(gulp.dest("./app/"))
+    .pipe(plumber())
+    .pipe(jade({
+      pretty: true
+    }))
+    .pipe(gulp.dest("./app/"))
 });
 
 gulp.task("concat-js", function() {
   var output = "app/application.js"
+  console.log("[TASK] concat-js processing...");
   gulp.src(jsTargets)
     .pipe(plumber())
     .pipe(concat(output))
