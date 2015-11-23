@@ -1,13 +1,16 @@
 var gulp     = require("gulp");
+
 var sass     = require("gulp-sass");
 var jade     = require("gulp-jade");
 var prefix   = require("gulp-autoprefixer");
 var header   = require("gulp-header");
 var server   = require("gulp-webserver");
 var plumber  = require("gulp-plumber");
+var jshint   = require("gulp-jshint")
+var concat   = require("gulp-concat");
+
 var del      = require("del");
 var sequence = require("run-sequence");
-var concat   = require("gulp-concat");
 
 var targets = {
   sass: [
@@ -41,10 +44,16 @@ var targets = {
 };
 
 var defaultTasks = [
-  "sass", "jade", "concat-js", "concat-css"
+  "sass",
+  "jade",
+  "concat-js",
+  "jshint",
+  "venders-concat-js",
+  "venders-concat-css"
 ];
 var destDir = "./dest/";
 var concatJS = "application.js"
+var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
 
 gulp.task("default", defaultTasks, function() {
@@ -57,8 +66,9 @@ gulp.task("default", defaultTasks, function() {
      }));
   gulp.watch(targets.sass, ["sass"]);
   gulp.watch(targets.jade, ["jade"]);
-  gulp.watch(targets.js, ["concat-js"]);
-  gulp.watch(targets.venders.css, ["concat-css"]);
+  gulp.watch(targets.js, ["concat-js", "jshint"]);
+  gulp.watch(targets.venders.js, ["venders-concat-js"]);
+  gulp.watch(targets.venders.css, ["venders-concat-css"]);
 });
 
 gulp.task("sass", function() {
@@ -88,14 +98,22 @@ gulp.task("concat-js", function() {
     .pipe(gulp.dest(destDir))
 });
 
+gulp.task("venders-concat-js", function() {
+  console.log("[TASK] venders-concat-js processing...");
+  return gulp.src(targets.venders.js)
+    .pipe(plumber())
+    .pipe(concat(vendersJS))
+    .pipe(gulp.dest(destDir))
+});
+
 gulp.task("jshint", function() {
   return gulp.src(targets.js)
     .pipe(jshint())
     .pipe(jshint.reporter("jshint-stylish"))
 });
 
-gulp.task("concat-css", function() {
-  console.log("[TASK] concat-css processing...");
+gulp.task("venders-concat-css", function() {
+  console.log("[TASK] venders-concat-css processing...");
   return gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(vendersCSS))
