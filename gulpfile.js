@@ -1,5 +1,4 @@
 var gulp     = require("gulp")
-
 var sass     = require("gulp-sass")
 var jade     = require("gulp-jade")
 var prefix   = require("gulp-autoprefixer")
@@ -8,9 +7,7 @@ var server   = require("gulp-webserver")
 var plumber  = require("gulp-plumber")
 var del      = require("del")
 var sequence = require("run-sequence")
-
-var concatJS  = require("gulp-concat")
-var concatCSS = require("gulp-concat-css")
+var concat   = require("gulp-concat")
 
 var sassTargets = [
   "./styles/*.scss",
@@ -66,7 +63,7 @@ gulp.task("concat-js", function() {
   console.log("[TASK] concat-js processing...");
   gulp.src(jsTargets)
     .pipe(plumber())
-    .pipe(concatJS(output))
+    .pipe(concat(output))
     .pipe(gulp.dest("./app/"))
 });
 
