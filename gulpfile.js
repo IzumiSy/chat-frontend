@@ -9,8 +9,11 @@ var plumber  = require("gulp-plumber");
 var jshint   = require("gulp-jshint")
 var concat   = require("gulp-concat");
 
-var del      = require("del");
-var sequence = require("run-sequence");
+var del        = require("del");
+var sequence   = require("run-sequence");
+var stringify  = require("stringify");
+var browserify = require("browserify");
+var source     = require("vinyl-source-stream");
 
 var targets = {
   sass: [
@@ -45,20 +48,18 @@ var targets = {
   }
 };
 
-var defaultTasks = [
-  "sass",
-  "jade",
-  "concat-js",
-  "jshint",
-  "venders-concat-js",
-  "venders-concat-css"
-];
 var destDir = "./dest/";
 var concatJS = "application.js"
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
 
-gulp.task("default", defaultTasks, function() {
+gulp.watch(targets.sass, ["sass"]);
+gulp.watch(targets.jade, ["jade"]);
+gulp.watch(targets.js, ["js"]);
+gulp.watch(targets.venders.js, ["venders-concat-js"]);
+gulp.watch(targets.venders.css, ["venders-concat-css"]);
+
+gulp.task("default", function() {
   gulp.src(destDir)
     .pipe(plumber())
     .pipe(server({
@@ -66,11 +67,9 @@ gulp.task("default", defaultTasks, function() {
       livereload: true,
       open: true
      }));
-  gulp.watch(targets.sass, ["sass"]);
-  gulp.watch(targets.jade, ["jade"]);
-  gulp.watch(targets.js, ["concat-js", "jshint"]);
-  gulp.watch(targets.venders.js, ["venders-concat-js"]);
-  gulp.watch(targets.venders.css, ["venders-concat-css"]);
+  sequence("sass", "jade", "concat-js", "jshint",
+           "venders-concat-js", "venders-concat-css",
+           "browserify");
 });
 
 gulp.task("sass", function() {
@@ -92,6 +91,10 @@ gulp.task("jade", function() {
     .pipe(gulp.dest(destDir))
 });
 
+gulp.task("js", function() {
+  sequence("concat-js", "browserify", "jshint");
+});
+
 gulp.task("concat-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
@@ -100,12 +103,15 @@ gulp.task("concat-js", function() {
     .pipe(gulp.dest(destDir))
 });
 
-gulp.task("venders-concat-js", function() {
-  console.log("[TASK] venders-concat-js processing...");
-  return gulp.src(targets.venders.js)
-    .pipe(plumber())
-    .pipe(concat(vendersJS))
-    .pipe(gulp.dest(destDir))
+gulp.task("browserify", function() {
+  console.log("[TASK] browserify processing...");
+  browserify({
+    entries: [destDir + concatJS]
+  })
+  .transform(stringify(['.html']))
+  .bundle()
+  .pipe(source(concatJS))
+  .pipe(gulp.dest(destDir))
 });
 
 gulp.task("jshint", function() {
@@ -113,6 +119,14 @@ gulp.task("jshint", function() {
   return gulp.src(targets.js)
     .pipe(jshint())
     .pipe(jshint.reporter("jshint-stylish"))
+});
+
+gulp.task("venders-concat-js", function() {
+  console.log("[TASK] venders-concat-js processing...");
+  return gulp.src(targets.venders.js)
+    .pipe(plumber())
+    .pipe(concat(vendersJS))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("venders-concat-css", function() {

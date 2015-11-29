@@ -3,15 +3,12 @@ Vue.use(VueRouter);
 var app = Vue.extend({});
 var router = new VueRouter();
 
-// TODO
-// templates should be replaced
-// with contents of jade files.
 var components = {
   root: Vue.extend({
-    template: "<div>root</div>"
+    template: require("./main.html")
   }),
-  enterance: Vue.extend({
-    template: "<div>enterance</div>"
+  entrance: Vue.extend({
+    template: require("./entrance.html")
   })
 };
 
@@ -19,8 +16,8 @@ router.map({
   "/": {
     component: components.root
   },
-  "/enter": {
-    component: components.enterance
+  "/entrance": {
+    component: components.entrance
   }
 });
 router.start(app, ".main-view-wrapper");
