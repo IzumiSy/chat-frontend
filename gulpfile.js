@@ -105,13 +105,13 @@ gulp.task("concat-js", function() {
 
 gulp.task("browserify", function() {
   console.log("[TASK] browserify processing...");
-  browserify({
-    entries: [destDir + concatJS]
-  })
-  .transform(stringify(['.html']))
-  .bundle()
-  .pipe(source(concatJS))
-  .pipe(gulp.dest(destDir))
+  return browserify({
+      entries: [destDir + concatJS]
+    })
+    .transform(stringify(['.html']))
+    .bundle()
+    .pipe(source(concatJS))
+    .pipe(gulp.dest(destDir))
 });
 
 gulp.task("jshint", function() {
