@@ -17,12 +17,16 @@ var components = {
     }),
     sidebar: Vue.extend({
       template: require("./components/_sidebar.html")
+    }),
+    messages: Vue.extend({
+      template: require("./components/_messages.html")
     })
   }
 };
 
 Vue.component("va-header", components.partials.header);
 Vue.component("va-sidebar", components.partials.sidebar);
+Vue.component("va-messages", components.partials.messages);
 
 router.map({
   "/": {
