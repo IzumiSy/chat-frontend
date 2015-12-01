@@ -1,0 +1,34 @@
+body {
+  .entrance-view {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: #1abf9c;
+    padding: 80px 300px 0 300px;
+
+    .form-section {
+      position: relative;
+      background-color: #edeff1;
+      border-radius: 6px;
+      min-height: 300px;
+      min-width: 400px;
+
+      .form-group.name {
+        padding: 30px;
+        padding-top: 180px;
+        padding-bottom: 0;
+      }
+
+      .form-group.enter {
+        position: relative;
+        padding: 30px;
+        padding-top: 0;
+
+        .btn.enter-button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
