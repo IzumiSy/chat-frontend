@@ -50,7 +50,6 @@ var targets = {
 
 var destDir = "./dest/";
 var appJS = "app.js";
-var concatJS = "application.js"
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
 
@@ -108,7 +107,7 @@ gulp.task("browserify", function() {
     })
     .transform(stringify(['.html']))
     .bundle()
-    .pipe(source(concatJS))
+    .pipe(source(appJS))
     .pipe(gulp.dest(destDir))
 });
 
