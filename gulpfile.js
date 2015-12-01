@@ -49,6 +49,7 @@ var targets = {
 };
 
 var destDir = "./dest/";
+var appJS = "app.js";
 var concatJS = "application.js"
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
@@ -67,9 +68,7 @@ gulp.task("default", function() {
       livereload: true,
       open: true
      }));
-  sequence("sass", "jade", "concat-js", "jshint",
-           "venders-concat-js", "venders-concat-css",
-           "browserify");
+  sequence("sass", "jade", "venders-concat-js", "venders-concat-css", "js");
 });
 
 gulp.task("sass", function() {
@@ -92,21 +91,20 @@ gulp.task("jade", function() {
 });
 
 gulp.task("js", function() {
-  sequence("concat-js", "browserify", "jshint");
+  sequence("copy-js", "browserify", "jshint");
 });
 
-gulp.task("concat-js", function() {
+gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
     .pipe(plumber())
-    .pipe(concat(concatJS))
     .pipe(gulp.dest(destDir))
 });
 
 gulp.task("browserify", function() {
   console.log("[TASK] browserify processing...");
   return browserify({
-      entries: [destDir + concatJS]
+      entries: [destDir + appJS]
     })
     .transform(stringify(['.html']))
     .bundle()
@@ -138,6 +136,6 @@ gulp.task("venders-concat-css", function() {
 });
 
 gulp.task("clean", function() {
-  del([destDir + "*.*"]);
+  del([destDir + "*.*", destDir + "/**/*"]);
 });
 
