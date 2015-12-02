@@ -18,9 +18,15 @@ body {
       margin-right: auto;
       margin-top: 100px;
 
+      img.logo {
+        position: relative;
+        margin-top: 30px;
+        margin: 30px 175px;
+      }
+
       .form-group.name {
         padding: 30px;
-        padding-top: 180px;
+        padding-top: 10px;
         padding-bottom: 0;
       }
 
