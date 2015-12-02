@@ -1,11 +1,12 @@
 body {
   .entrance-view {
     width: 100%;
+    min-width: 1000px;
     position: fixed;
     top: 0;
     bottom: 0;
     background-color: #1abf9c;
-    padding: 80px 300px 0 300px;
+    padding: 100px 350px 0 350px;
 
     .form-section {
       position: relative;
