@@ -44,11 +44,16 @@ var targets = {
       "./node_modules/vue/dist/vue.js",
       "./node_modules/vue-resource/dist/vue-resource.js",
       "./node_modules/vue-router/dist/vue-router.js"
+    ],
+
+    icons: [
+      "./node_modules/flat-ui/images/icons/png/*.png"
     ]
   }
 };
 
 var destDir = "./dest/";
+var assetsDir = "./dest/assets/";
 var appJS = "app.js";
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
@@ -67,7 +72,8 @@ gulp.task("default", function() {
       livereload: true,
       open: true
      }));
-  sequence("sass", "jade", "venders-concat-js", "venders-concat-css", "js");
+  sequence("sass", "jade", "js", "venders-concat-js",
+           "venders-concat-css", "copy-vendor-icons");
 });
 
 gulp.task("sass", function() {
@@ -100,7 +106,6 @@ gulp.task("js", function() {
 gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
-    .pipe(plumber())
     .pipe(gulp.dest(destDir))
 });
 
@@ -136,6 +141,12 @@ gulp.task("venders-concat-css", function() {
     .pipe(plumber())
     .pipe(concat(vendersCSS))
     .pipe(gulp.dest(destDir))
+});
+
+gulp.task("copy-vendor-icons", function() {
+  console.log("[TASK] copy-icons processing...");
+  return gulp.src(targets.venders.icons)
+    .pipe(gulp.dest(assetsDir))
 });
 
 gulp.task("clean", function() {
