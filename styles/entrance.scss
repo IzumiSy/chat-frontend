@@ -1,19 +1,22 @@
 body {
   .entrance-view {
     width: 100%;
-    min-width: 1000px;
+    min-width: 850px;
     position: fixed;
     top: 0;
     bottom: 0;
     background-color: #1abf9c;
-    padding: 100px 350px 0 350px;
 
     .form-section {
       position: relative;
       background-color: #edeff1;
       border-radius: 6px;
       min-height: 300px;
-      min-width: 400px;
+      min-width: 300px;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 100px;
 
       .form-group.name {
         padding: 30px;
