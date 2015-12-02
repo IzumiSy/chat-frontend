@@ -54,7 +54,7 @@ var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
 
 gulp.watch(targets.sass, ["sass"]);
-gulp.watch(targets.jade, ["jade"]);
+gulp.watch(targets.jade, ["html"]);
 gulp.watch(targets.js, ["js"]);
 gulp.watch(targets.venders.js, ["venders-concat-js"]);
 gulp.watch(targets.venders.css, ["venders-concat-css"]);
@@ -77,6 +77,10 @@ gulp.task("sass", function() {
     .pipe(sass())
     .pipe(header('@charset "utf-8";\n'))
     .pipe(gulp.dest(destDir))
+});
+
+gulp.task("html", function() {
+  sequence("jade", "browserify");
 });
 
 gulp.task("jade", function() {
