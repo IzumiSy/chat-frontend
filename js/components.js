@@ -7,7 +7,12 @@ module.exports = {
     template: require("./entrance.html"),
     methods: {
       enterRobby: function() {
-        // Implement login action
+        var requestName = ""
+        this.$http.get("/api/user/usable/" + requestName, function(d, stat, req) {
+          // Handles HTTP request
+        }).error(function(d, stat, req) {
+          // Handles error
+        });
       }
     }
    }),
