@@ -13,8 +13,8 @@ var app = new Vue({
       // Show a message that says "Your browser cannot browse this page"
     }
 
-    api.pingRequest(function(data, isError) {
-      if (isError) {
+    api.pingRequest(function(data, isSucceed) {
+      if (isSucceed) {
         // Jump to error page
       }
     });

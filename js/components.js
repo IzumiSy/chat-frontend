@@ -7,8 +7,8 @@ var actions = {
       return;
     }
 
-    api.createNewUser(rootObject.username, function(data, isError) {
-      if (!isError) {
+    api.createNewUser(rootObject.username, function(data, isSucceed) {
+      if (isSucceed) {
         // Extracts token from returned data and store it to localStorage.
         // Jump to the main chat page
       } else {
