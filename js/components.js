@@ -3,15 +3,16 @@ var api = require("./services/api.js");
 var actions = {
   enterRobby:  function(rootObject) {
     if (!rootObject.name) {
-      // show an error message
+      // Shows an error message
       return;
     }
 
     api.createNewUser(rootObject.username, function(data, isError) {
       if (!isError) {
-        console.log(data);
+        // Extracts token from returned data and store it to localStorage.
+        // Jump to the main chat page
       } else {
-        console.log("error");
+        // Shows an error message
       }
     });
   }
@@ -63,4 +64,3 @@ module.exports = {
     })
   }
 };
-
