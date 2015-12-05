@@ -20,7 +20,7 @@ module.exports = {
    }),
 
    error: Vue.extend({
-     template: null
+     template: null // TODO: create tempate
    }),
 
    // --------------------

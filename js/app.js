@@ -1,5 +1,5 @@
 var components = require("./components.js");
-var api        = require("./services/api.js");
+var api = require("./services/api.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -9,11 +9,19 @@ var app = new Vue({
     id: null
   },
   created: function() {
+
+    // Checks if the browser supports localStorage
+    if (!window.localStorage) {
+      // Show a message that says "Your browser cannot browse this page"
+    }
+
+    // Send ping to backend server to check if its alive or not
     api.pingRequest(function(data, isError) {
       if (isError) {
         // Jump to error page
       }
     });
+
   }
 });
 
