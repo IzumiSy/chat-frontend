@@ -1,3 +1,5 @@
+var api = require("./services/api.js");
+
 module.exports = {
   root: Vue.extend({
     template: require("./main.html")
@@ -7,12 +9,7 @@ module.exports = {
     template: require("./entrance.html"),
     methods: {
       enterRobby: function() {
-        var requestName = ""
-        this.$http.get("/api/user/usable/" + requestName, function(d, stat, req) {
-          // Handles HTTP request
-        }).error(function(d, stat, req) {
-          // Handles error
-        });
+        // Call api functions
       }
     }
    }),

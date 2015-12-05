@@ -8,7 +8,7 @@ var app = new Vue({
     id: null
   },
   created: function() {
-    console.log("Vue object created")
+    console.log("Vue object created");
   }
 });
 
