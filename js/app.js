@@ -1,10 +1,8 @@
 var api = require("./services/api.js");
-var routes = require("./routes.js");
+var router = require("./routes.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
-
-routes.setupMapping();
 
 var app = new Vue({
   data: {
