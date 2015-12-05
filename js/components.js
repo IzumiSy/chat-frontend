@@ -1,8 +1,9 @@
 var api = require("./services/api.js");
+var app = require("./app.js");
 
 var actions = {
   enterRobby:  function(rootObject) {
-    if (!rootObject.name) {
+    if (!rootObject.username) {
       // Shows an error message
       return;
     }
