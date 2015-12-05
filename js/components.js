@@ -12,9 +12,26 @@ module.exports = {
 
   entrance: Vue.extend({
     template: require("./entrance.html"),
+    data: function() {
+      return {
+        username: null
+      };
+    },
     methods: {
       enterRobby: function() {
-        // Call api functions
+        if (this.username) {
+          api.createNewUser(this.username, function(data, isError) {
+            if (!isError) {
+              console.log(data);
+            }
+            else {
+              console.log("error");
+            }
+          });
+        }
+        else {
+          // Show error message
+        }
       }
     }
    }),
