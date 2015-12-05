@@ -1,5 +1,22 @@
 var api = require("./services/api.js");
 
+var actions = {
+  enterRobby:  function(rootObject) {
+    if (!rootObject.name) {
+      // show an error message
+      return;
+    }
+
+    api.createNewUser(rootObject.username, function(data, isError) {
+      if (!isError) {
+        console.log(data);
+      } else {
+        console.log("error");
+      }
+    });
+  }
+};
+
 module.exports = {
 
   // -----------------
@@ -19,19 +36,7 @@ module.exports = {
     },
     methods: {
       enterRobby: function() {
-        if (this.username) {
-          api.createNewUser(this.username, function(data, isError) {
-            if (!isError) {
-              console.log(data);
-            }
-            else {
-              console.log("error");
-            }
-          });
-        }
-        else {
-          // Show error message
-        }
+        actions.enterRobby(this);
       }
     }
    }),

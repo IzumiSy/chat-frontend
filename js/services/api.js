@@ -9,7 +9,7 @@ var API_HOST =
 var resource = function(url) {
   var options = {
     emulateJSON: true
-  }
+  };
   return Vue.resource(url, null, null, options);
 };
 
