@@ -1,4 +1,5 @@
 var components = require("./components.js");
+var api        = require("./services/api.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -8,7 +9,7 @@ var app = new Vue({
     id: null
   },
   created: function() {
-    console.log("Vue object created");
+    api.pingRequest();
   }
 });
 
