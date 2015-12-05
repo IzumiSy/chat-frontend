@@ -1,5 +1,9 @@
 var PRODUCTION_SERVER = 'http://chat-server-1000.herokuapp.com';
-var API_HOST = (process.env.NODE_ENV === 'production') ? PRODUCTION_SERVER : 'localhost';
+var DEVELOPMENT_SERVER = 'http://localhost:3000';
+
+var API_HOST =
+  (process.env.NODE_ENV === 'production')
+    ? PRODUCTION_SERVER : DEVELOPMENT_SERVER;
 
 module.exports = {
   api: {
