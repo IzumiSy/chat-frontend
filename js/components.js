@@ -18,12 +18,10 @@ var actions = {
   }
 };
 
-module.exports = {
-
-  // -----------------
-  //  Page components
-  // -----------------
-
+// -----------------
+//  Page components
+// -----------------
+var _pages = {
   root: Vue.extend({
     template: require("./main.html")
   }),
@@ -44,23 +42,31 @@ module.exports = {
 
    error: Vue.extend({
      template: null // TODO: create tempate
-   }),
+   })
+};
 
-   // --------------------
-   //  Partial components
-   // --------------------
+// --------------------
+//  Partial components
+// --------------------
+var _partials = {
+  header: Vue.extend({
+    template: require("./components/_header.html")
+  }),
 
-  _partials: {
-    header: Vue.extend({
-      template: require("./components/_header.html")
-    }),
+  sidebar: Vue.extend({
+    template: require("./components/_sidebar.html")
+  }),
 
-    sidebar: Vue.extend({
-      template: require("./components/_sidebar.html")
-    }),
+  messages: Vue.extend({
+    template: require("./components/_messages.html")
+  })
+};
 
-    messages: Vue.extend({
-      template: require("./components/_messages.html")
-    })
-  }
+Vue.component("va-header", _partials.header);
+Vue.component("va-sidebar", _partials.sidebar);
+Vue.component("va-messages", _partials.messages);
+
+module.exports = {
+  pages: _pages,
+  partials: _partials
 };

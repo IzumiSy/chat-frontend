@@ -1,8 +1,10 @@
-var components = require("./components.js");
 var api = require("./services/api.js");
+var routes = require("./routes.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
+routes.setupMapping();
 
 var app = new Vue({
   data: {
@@ -21,21 +23,5 @@ var app = new Vue({
   }
 });
 
-Vue.component("va-header", components._partials.header);
-Vue.component("va-sidebar", components._partials.sidebar);
-Vue.component("va-messages", components._partials.messages);
-
-var router = new VueRouter();
-router.map({
-  "/": {
-    component: components.root
-  },
-  "/entrance": {
-    component: components.entrance
-  },
-  "/error": {
-    component: components.error
-  }
-});
-router.start(app, ".main-view-wrapper");
+module.exports = app;
 
