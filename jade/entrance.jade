@@ -2,7 +2,11 @@
   .form-section
     img.logo(src="assets/Pocket.png")
     .form-group.name
-      input.form-control.login-field(type="text" placeholder="Enter your name")
+      input.form-control.login-field(
+        type="text"
+        v-model="username"
+        placeholder="ログインネームを入力..."
+      )
     .form-group.enter
       a.btn.btn-primary.enter-button(v-on:click="enterRobby")
-        | Enter lobby
+        | チャットロビーへ入る
