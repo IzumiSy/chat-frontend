@@ -9,7 +9,11 @@ var app = new Vue({
     id: null
   },
   created: function() {
-    api.pingRequest();
+    api.pingRequest(function(data, isError) {
+      if (isError) {
+        // Jump to error page
+      }
+    });
   }
 });
 
@@ -24,6 +28,9 @@ router.map({
   },
   "/entrance": {
     component: components.entrance
+  },
+  "/error": {
+    component: components.error
   }
 });
 router.start(app, ".main-view-wrapper");

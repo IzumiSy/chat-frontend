@@ -12,27 +12,27 @@ module.exports = {
     checkName: Vue.resource(API_HOST + "/api/user/usable/")
   },
 
-  pingRequest: function() {
-    this.api.ping.get({}, function(d, stat, req) {
-      // Handles ping success
-    }).error(function(d, stat, req) {
-      // Handles ping error
+  pingRequest: function(callback) {
+    this.api.ping.get({}, function(data, stat) {
+      callback(data, false);
+    }).error(function(data, stat) {
+      callback(data, true)
     });
   },
 
-  createNewUser: function(name) {
-    this.api.newUser.post({}, function(d, stat, req) {
-      // Handles HTTP request
-    }).error(function(d, stat, req) {
-      // Handles errors
+  createNewUser: function(name, callback) {
+    this.api.newUser.post({}, function(data, stat) {
+      callback(data, false);
+    }).error(function(data, stat) {
+      callback(data, true);
     });
   },
 
-  checkNameAvailability: function(name) {
-    this.api.checkName.get({}, function(d, stat, req) {
-      // Handles HTTP request
-    }).error(function(d, stat, req) {
-      // Handles errors
+  checkNameAvailability: function(name, callback) {
+    this.api.checkName.get({}, function(data, stat) {
+      callback(data, false);
+    }).error(function(data, stat) {
+      callback(data, true);
     });
   }
 };

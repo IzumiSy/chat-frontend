@@ -1,6 +1,11 @@
 var api = require("./services/api.js");
 
 module.exports = {
+
+  // -----------------
+  //  Page components
+  // -----------------
+
   root: Vue.extend({
     template: require("./main.html")
   }),
@@ -13,6 +18,14 @@ module.exports = {
       }
     }
    }),
+
+   error: Vue.extend({
+     template: null
+   }),
+
+   // --------------------
+   //  Partial components
+   // --------------------
 
   _partials: {
     header: Vue.extend({
