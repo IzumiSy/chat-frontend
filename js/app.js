@@ -9,7 +9,7 @@ var app = new Vue({
     id: null
   },
   created: function() {
-    api.pingRequest();
+    // api.pingRequest();
   }
 });
 
