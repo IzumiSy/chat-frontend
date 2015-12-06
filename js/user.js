@@ -1,4 +1,4 @@
-app = require("../app.js");
+app = require("./app.js");
 
 var userService = {
   init: function() {
@@ -21,7 +21,7 @@ var userService = {
   },
 
   get: function(key) {
-    return Vue.prototype._$userServiceScope[key]
+    return Vue.prototype._$userServiceScope[key];
   }
 };
 

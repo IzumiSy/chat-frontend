@@ -1,5 +1,5 @@
-var api = require("./services/api.js");
-var user = require("./services/user.js");
+var api = require("./api.js");
+var user = require("./user.js");
 var router = require("./routes.js");
 
 Vue.use(VueRouter);

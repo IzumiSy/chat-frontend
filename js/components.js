@@ -1,5 +1,5 @@
-var api = require("./services/api.js");
-var user = require("./services/user.js");
+var api = require("./api.js");
+var user = require("./user.js");
 var app = require("./app.js");
 
 var actions = {
@@ -9,8 +9,6 @@ var actions = {
         // Shows an error message
         return;
       }
-
-      console.log(user.get("id"));
 
       api.createNewUser(rootObject.username, function(data, isSucceed) {
         if (isSucceed) {
