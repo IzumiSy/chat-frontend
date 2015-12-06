@@ -6,6 +6,8 @@ var storage = require("./storage.js");
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+router.mapRoutings();
+
 var app = new Vue({
   created: function() {
     if (!storage.isAvailable) {
