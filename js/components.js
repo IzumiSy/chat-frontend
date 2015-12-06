@@ -5,7 +5,8 @@ var controllers = require("./controllers.js");
 // -----------------
 var _pages = {
   root: Vue.extend({
-    template: require("./main.html")
+    template: require("./main.html"),
+    created: controllers.root.created
   }),
 
   entrance: Vue.extend({
@@ -45,11 +46,13 @@ var _partials = {
   })
 };
 
-Vue.component("va-header", _partials.header);
-Vue.component("va-sidebar", _partials.sidebar);
-Vue.component("va-messages", _partials.messages);
-
 module.exports = {
   pages: _pages,
-  partials: _partials
+  partials: _partials,
+
+  setupPartials: function() {
+    Vue.component("va-header", _partials.header);
+    Vue.component("va-sidebar", _partials.sidebar);
+    Vue.component("va-messages", _partials.messages);
+  }
 };

@@ -1,26 +1,60 @@
 var components = require("./components.js");
 var app = require("./app.js");
+var api = require("./api.js");
 
 // It is possible to map routings implicitly just by including
 // route.js without creating mapRoutings(...) function, but it would
 // be difficult to understand code stream in app.js if doing that.
 
-var router = new VueRouter();
+var routings = new VueRouter();
 
-router.map({
-  "/": {
-    component: components.pages.root
+var events = {
+  entrance: function() {
+    routings.go({ path: "/entrance" });
   },
-  "/entrance": {
-    component: components.pages.entrance
+
+  error: function() {
+    routings.go({ path: "/error" });
   },
-  "/error": {
-    component: components.pages.error
+
+  jump: function(args) {
+    if (args.path) {
+      routings.go({ path: args.path });
+    }
   }
-});
+};
 
-module.exports = {
+var functions = {
   mapRoutings: function() {
-    router.start(app, ".main-view-wrapper");
+    components.setupPartials();
+
+    routings.map({
+      "/": {
+        component: components.pages.root
+      },
+      "/entrance": {
+        component: components.pages.entrance
+      },
+      "/error": {
+        component: components.pages.error
+      }
+    });
+
+    // Always run ping check before transitions
+    routings.beforeEach(function() {
+      api.pingRequest(function(data, isSucceed) {
+        if (!isSucceed) {
+          events.error();
+        }
+      });
+    });
+
+    routings.start(app, ".main-view-wrapper");
+
+    routings.app.$on("route:entrance", events.entrance);
+    routings.app.$on("route:error", events.error);
+    routings.app.$on("route:jump", events.jump);
   },
 };
+
+module.exports = functions;

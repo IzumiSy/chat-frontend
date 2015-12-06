@@ -1,9 +1,15 @@
 var api = require("./api.js");
 var shared = require("./shared.js");
-var router = require("./routes.js");
 var storage = require("./storage.js");
+var router = require("./routes.js");
 
 var controllers = {
+  root: {
+    created: function() {
+       // Do something
+    }
+  },
+
   entrance: {
     enterRobby:  function(rootObject) {
       if (!rootObject.username) {
@@ -14,7 +20,7 @@ var controllers = {
       api.createNewUser(rootObject.username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
-          router.go({ path: "/" });
+          // Jump to the root page
         } else {
           // Shows an error message
         }
@@ -24,7 +30,7 @@ var controllers = {
     created: function() {
       var token = storage.get("token");
       if (token) {
-        router.go({ path: "/" });
+        // Jump to the root page
       }
     }
   }
