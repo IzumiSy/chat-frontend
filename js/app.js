@@ -1,6 +1,6 @@
 var api = require("./api.js");
 var router = require("./routes.js");
-var service = require("./service.js");
+var shared = require("./service.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -16,7 +16,7 @@ var app = new Vue({
         // Jump to error page
       }
 
-      service.init();
+      shared.init();
     });
   }
 });

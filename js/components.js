@@ -1,6 +1,6 @@
 var app = require("./app.js");
 var api = require("./api.js");
-var service = require("./service.js");
+var shared = require("./service.js");
 
 var actions = {
   entrance: {
