@@ -1,6 +1,6 @@
-var api = require("./api.js");
-var user = require("./user.js");
 var app = require("./app.js");
+var api = require("./api.js");
+var service = require("./service.js");
 
 var actions = {
   entrance: {
