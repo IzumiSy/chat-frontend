@@ -24,7 +24,7 @@ var _pages = {
    }),
 
    error: Vue.extend({
-     template: null // TODO: create tempate
+     template: require("./error.html")
    })
 };
 
