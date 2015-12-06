@@ -10,14 +10,20 @@ var controllers = {
     }
   },
 
+  error: {
+    reload: function() {
+      this.$root.$dispatch("route:root");
+    }
+  },
+
   entrance: {
-    enterRobby:  function(rootObject) {
-      if (!rootObject.username) {
+    enterRobby: function() {
+      if (!this.username) {
         // Shows an error message
         return;
       }
 
-      api.createNewUser(rootObject.username, function(data, isSucceed) {
+      api.createNewUser(this.username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
           // Jump to the root page

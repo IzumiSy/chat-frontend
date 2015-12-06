@@ -17,15 +17,16 @@ var _pages = {
       };
     },
     methods: {
-      enterRobby: function() {
-        controllers.entrance.enterRobby(this);
-      }
+      enterRobby: controllers.entrance.enterRobby
     },
     created: controllers.entrance.created
    }),
 
    error: Vue.extend({
-     template: require("./error.html")
+     template: require("./error.html"),
+     methods: {
+       reload: controllers.error.reload
+     }
    })
 };
 

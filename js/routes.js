@@ -9,6 +9,10 @@ var api = require("./api.js");
 var routings = new VueRouter();
 
 var events = {
+  root: function() {
+    routings.go({ path: "/" });
+  },
+
   entrance: function() {
     routings.go({ path: "/entrance" });
   },
@@ -53,6 +57,7 @@ var functions = {
 
     routings.app.$on("route:entrance", events.entrance);
     routings.app.$on("route:error", events.error);
+    routings.app.$on("route:root", events.root);
     routings.app.$on("route:jump", events.jump);
   },
 };
