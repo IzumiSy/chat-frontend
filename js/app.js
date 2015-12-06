@@ -11,7 +11,7 @@ var app = new Vue({
     }
 
     api.pingRequest(function(data, isSucceed) {
-      if (isSucceed) {
+      if (!isSucceed) {
         // Jump to error page
       }
     });
