@@ -1,5 +1,9 @@
 app = require("./app.js");
 
+// Vue.util.defineReactive(...) is actually not seemed
+// able to be used from user side, because it is inner API
+// of Vue.js to create reactive object.
+
 var dataSharedService = {
   init: function(name) {
     Vue.prototype._$userSharedServiceScope = {};
