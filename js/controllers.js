@@ -22,7 +22,7 @@ var controllers = {
     },
 
     created: function() {
-      token = storage.get("token");
+      var token = storage.get("token");
       if (token) {
         router.go({ path: "/" });
       }
