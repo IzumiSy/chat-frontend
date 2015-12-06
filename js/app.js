@@ -1,4 +1,5 @@
 var api = require("./services/api.js");
+var user = require("./services/user.js");
 var router = require("./routes.js");
 
 Vue.use(VueRouter);
@@ -14,6 +15,9 @@ var app = new Vue({
       if (!isSucceed) {
         // Jump to error page
       }
+
+      user.init();
+      user.set("id", null);
     });
   }
 });

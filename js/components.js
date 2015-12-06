@@ -1,21 +1,29 @@
 var api = require("./services/api.js");
+var user = require("./services/user.js");
 var app = require("./app.js");
 
 var actions = {
-  enterRobby:  function(rootObject) {
-    if (!rootObject.username) {
-      // Shows an error message
-      return;
-    }
-
-    api.createNewUser(rootObject.username, function(data, isSucceed) {
-      if (isSucceed) {
-        // Extracts token from returned data and store it to localStorage.
-        // Jump to the main chat page
-      } else {
+  entrance: {
+    enterRobby:  function(rootObject) {
+      if (!rootObject.username) {
         // Shows an error message
+        return;
       }
-    });
+
+      console.log(user.get("id"));
+
+      api.createNewUser(rootObject.username, function(data, isSucceed) {
+        if (isSucceed) {
+          // Jump to the main chat page
+        } else {
+          // Shows an error message
+        }
+      });
+    },
+
+    created: function() {
+      // Checks if userId has already set or not
+    }
   }
 };
 
@@ -36,9 +44,10 @@ var _pages = {
     },
     methods: {
       enterRobby: function() {
-        actions.enterRobby(this);
+        actions.entrance.enterRobby(this);
       }
-    }
+    },
+    created: actions.entrance.created
    }),
 
    error: Vue.extend({
