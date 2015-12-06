@@ -1,15 +1,15 @@
 app = require("./app.js");
 
-var userDefinedService = {
+var dataSharedService = {
   init: function(name) {
-    Vue.prototype._$userDefinedServiceScope = {};
+    Vue.prototype._$userSharedServiceScope = {};
     Vue.util.defineReactive(app, "$userService",
-      Vue.prototype._$userDefinedServiceScope);
+      Vue.prototype._$userSharedServiceScope);
     Vue.prototype._$setProperty = function(k, v) {
-      Vue.set(this._$userDefinedServiceScope, k, v);
+      Vue.set(this._$userSharedServiceScope, k, v);
     };
     Vue.prototype._$removeProperty = function(k, v) {
-      Vue.delete(this._$userDefinedServiceScope, k, v);
+      Vue.delete(this._$userSharedServiceScope, k, v);
     };
   },
 
@@ -22,8 +22,8 @@ var userDefinedService = {
   },
 
   get: function(key) {
-    return Vue.prototype._$userServiceScope[key];
+    return Vue.prototype._$userSharedServiceScope[key];
   }
 };
 
-module.exports = userDefinedService;
+module.exports = userSharedService;
