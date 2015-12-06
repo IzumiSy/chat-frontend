@@ -1,13 +1,14 @@
 var api = require("./api.js");
 var router = require("./routes.js");
-var shared = require("./service.js");
+var shared = require("./shared.js");
+var storage = require("./storage.js");
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
 var app = new Vue({
   created: function() {
-    if (!window.localStorage) {
+    if (!storage.isAvailable) {
       // Show a message that says "Your browser cannot browse this page"
     }
 
@@ -22,4 +23,3 @@ var app = new Vue({
 });
 
 module.exports = app;
-

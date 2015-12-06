@@ -1,6 +1,8 @@
 var app = require("./app.js");
 var api = require("./api.js");
-var shared = require("./service.js");
+var shared = require("./shared.js");
+var router = require("./routes.js");
+var storage = require("./storage.js");
 
 var actions = {
   entrance: {
@@ -12,7 +14,8 @@ var actions = {
 
       api.createNewUser(rootObject.username, function(data, isSucceed) {
         if (isSucceed) {
-          // Jump to the main chat page
+          storage.set("token", data.token);
+          router.go({ path: "/" });
         } else {
           // Shows an error message
         }
@@ -20,7 +23,10 @@ var actions = {
     },
 
     created: function() {
-      // Checks if userId has already set or not
+      token = storage.get("token");
+      if (token) {
+        router.go({ path: "/" });
+      }
     }
   }
 };
