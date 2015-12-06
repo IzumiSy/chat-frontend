@@ -26,4 +26,4 @@ var dataSharedService = {
   }
 };
 
-module.exports = userSharedService;
+module.exports = dataSharedService;
