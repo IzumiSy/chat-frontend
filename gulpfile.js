@@ -52,8 +52,8 @@ var targets = {
   }
 };
 
-var destDir = "./dest/";
-var assetsDir = "./dest/assets/";
+var distDir = "./dist/";
+var assetsDir = "./dist/assets/";
 var appJS = "app.js";
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
@@ -65,10 +65,10 @@ gulp.watch(targets.venders.js, ["venders-concat-js"]);
 gulp.watch(targets.venders.css, ["venders-concat-css"]);
 
 gulp.task("default", function() {
-  gulp.src(destDir)
+  gulp.src(distDir)
     .pipe(plumber())
     .pipe(server({
-      root: destDir,
+      root: distDir,
       livereload: true,
       open: true
      }));
@@ -82,7 +82,7 @@ gulp.task("sass", function() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(header('@charset "utf-8";\n'))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("html", function() {
@@ -96,7 +96,7 @@ gulp.task("jade", function() {
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("js", function() {
@@ -106,18 +106,18 @@ gulp.task("js", function() {
 gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("browserify", function() {
   console.log("[TASK] browserify processing...");
   return browserify({
-      entries: [destDir + appJS]
+      entries: [distDir + appJS]
     })
     .transform(stringify(['.html']))
     .bundle()
     .pipe(source(appJS))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("jshint", function() {
@@ -132,7 +132,7 @@ gulp.task("venders-concat-js", function() {
   return gulp.src(targets.venders.js)
     .pipe(plumber())
     .pipe(concat(vendersJS))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("venders-concat-css", function() {
@@ -140,7 +140,7 @@ gulp.task("venders-concat-css", function() {
   return gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(vendersCSS))
-    .pipe(gulp.dest(destDir))
+    .pipe(gulp.dest(distDir))
 });
 
 gulp.task("copy-vendor-icons", function() {
@@ -150,6 +150,6 @@ gulp.task("copy-vendor-icons", function() {
 });
 
 gulp.task("clean", function() {
-  del([destDir + "*.*", destDir + "/**/*"]);
+  del([distDir + "*.*", distDir + "/**/*"]);
 });
 
