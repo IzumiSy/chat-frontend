@@ -53,7 +53,7 @@ var functions = {
       });
     });
 
-    routings.start(app, ".main-view-wrapper");
+    routings.start(app, "body");
 
     routings.app.$on("route:entrance", events.entrance);
     routings.app.$on("route:error", events.error);
