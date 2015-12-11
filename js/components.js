@@ -42,8 +42,12 @@ var _partials = {
     template: require("./components/_sidebar.html")
   }),
 
-  messages: Vue.extend({
-    template: require("./components/_messages.html")
+  message_view: Vue.extend({
+    template: require("./components/_message_view.html")
+  }),
+
+  message_input: Vue.extend({
+    template: require("./components/_message_input.html")
   })
 };
 
@@ -54,6 +58,7 @@ module.exports = {
   setupPartials: function() {
     Vue.component("va-header", _partials.header);
     Vue.component("va-sidebar", _partials.sidebar);
-    Vue.component("va-messages", _partials.messages);
+    Vue.component("va-message-view", _partials.message_view);
+    Vue.component("va-message-input", _partials.message_input);
   }
 };
