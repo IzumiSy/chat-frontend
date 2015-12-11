@@ -34,19 +34,19 @@ body {
 
       > .main-row-container {
         height: 100%;
+        padding-bottom: 80px;
 
-        > .view-container {
+        > .message-view-wrapper {
           height: 100%;
+        }
+
+        > .message-input-wrapper {
+          height: 80px;
         }
       }
 
       .message-view {
-        height: 100%;
-        padding-bottom: 70px;
 
-        > .messages-main {
-          height: 100%;
-        }
       }
 
       .message-input {
