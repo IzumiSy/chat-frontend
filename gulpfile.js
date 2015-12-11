@@ -88,7 +88,7 @@ gulp.task("sass", function() {
 });
 
 gulp.task("html", function() {
-  sequence("jade", "browserify");
+  sequence("jade", "copy-js", "browserify");
 });
 
 gulp.task("jade", function() {
