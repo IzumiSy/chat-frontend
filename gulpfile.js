@@ -53,7 +53,9 @@ var targets = {
     icons: [
       "./node_modules/flat-ui/images/icons/png/*.png"
     ]
-  }
+  },
+
+  assets: "./assets"
 };
 
 var distDir = "./dist/";
@@ -67,6 +69,7 @@ gulp.watch(targets.jade, ["html"]);
 gulp.watch(targets.js, ["js"]);
 gulp.watch(targets.venders.js, ["venders-concat-js"]);
 gulp.watch(targets.venders.css, ["venders-concat-css"]);
+gulp.watch(targets.assets, ["copy-assets"]);
 
 gulp.task("default", function() {
   gulp.src(distDir)
@@ -77,7 +80,8 @@ gulp.task("default", function() {
       open: true
      }));
   sequence("sass", "jade", "js", "venders-concat-js",
-           "venders-concat-css", "copy-vendor-icons");
+           "venders-concat-css", "copy-vendor-icons",
+           "copy-assets");
 });
 
 gulp.task("sass", function() {
@@ -100,7 +104,7 @@ gulp.task("jade", function() {
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task("js", function() {
@@ -110,7 +114,7 @@ gulp.task("js", function() {
 gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task("browserify", function() {
@@ -121,14 +125,14 @@ gulp.task("browserify", function() {
     .transform(stringify(['.html']))
     .bundle()
     .pipe(source(appJS))
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task("jshint", function() {
   console.log("[TASK] jshint processing...");
   return gulp.src(targets.js)
     .pipe(jshint())
-    .pipe(jshint.reporter("jshint-stylish"))
+    .pipe(jshint.reporter("jshint-stylish"));
 });
 
 gulp.task("venders-concat-js", function() {
@@ -136,7 +140,7 @@ gulp.task("venders-concat-js", function() {
   return gulp.src(targets.venders.js)
     .pipe(plumber())
     .pipe(concat(vendersJS))
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task("venders-concat-css", function() {
@@ -144,13 +148,19 @@ gulp.task("venders-concat-css", function() {
   return gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(vendersCSS))
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(distDir));
 });
 
 gulp.task("copy-vendor-icons", function() {
   console.log("[TASK] copy-icons processing...");
   return gulp.src(targets.venders.icons)
-    .pipe(gulp.dest(assetsDir))
+    .pipe(gulp.dest(assetsDir));
+});
+
+gulp.task("copy-assets", function() {
+  console.log("[TASK] copy-assets processing...");
+  return gulp.src(targets.assets)
+    .pipe(gulp.dest(assetsDir));
 });
 
 gulp.task("clean", function() {
