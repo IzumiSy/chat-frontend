@@ -55,7 +55,7 @@ var targets = {
     ]
   },
 
-  assets: "./assets"
+  assets: "./assets/*.png"
 };
 
 var distDir = "./dist/";
