@@ -37,7 +37,8 @@ var targets = {
     css: [
       "./vender/css/normalize.css",
       "./node_modules/flat-ui/bootstrap/css/bootstrap.css",
-      "./node_modules/flat-ui/css/flat-ui.css"
+      "./node_modules/flat-ui/css/flat-ui.css",
+      "./node_modules/nanoscroller/bin/css/nanoscroller/css"
     ],
 
     js: [
@@ -45,7 +46,8 @@ var targets = {
       "./node_modules/bootstrap/dist/js/bootstrap.js",
       "./node_modules/vue/dist/vue.js",
       "./node_modules/vue-resource/dist/vue-resource.js",
-      "./node_modules/vue-router/dist/vue-router.js"
+      "./node_modules/vue-router/dist/vue-router.js",
+      "./node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js"
     ],
 
     icons: [
