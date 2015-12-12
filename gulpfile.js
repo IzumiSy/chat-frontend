@@ -8,6 +8,7 @@ var server   = require("gulp-webserver");
 var plumber  = require("gulp-plumber");
 var jshint   = require("gulp-jshint")
 var concat   = require("gulp-concat");
+var rename   = require("gulp-rename");
 
 var del        = require("del");
 var sequence   = require("run-sequence");
@@ -160,6 +161,7 @@ gulp.task("copy-vendor-icons", function() {
 gulp.task("copy-assets", function() {
   console.log("[TASK] copy-assets processing...");
   return gulp.src(targets.assets)
+    .pipe(rename({ prefix: "face-" }))
     .pipe(gulp.dest(assetsDir));
 });
 
