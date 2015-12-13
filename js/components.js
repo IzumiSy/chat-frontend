@@ -1,15 +1,45 @@
 var controllers = require("./controllers.js");
 
+// --------------------
+//  Partial components
+// --------------------
+var _partials = {
+  header: {
+    template: require("./components/_header.html")
+  },
+
+  sidebar: {
+    template: require("./components/_sidebar.html")
+  },
+
+  message_view: {
+    template: require("./components/_message_view.html")
+  },
+
+  message_input: {
+    template: require("./components/_message_input.html"),
+    methods: {
+      sendMessage: controllers.partials.messageInput.sendMessage
+    }
+  }
+};
+
 // -----------------
 //  Page components
 // -----------------
 var _pages = {
-  root: Vue.extend({
+  root: {
+    components: {
+      "va-header": _partials.header,
+      "va-sidebar": _partials.sidebar,
+      "va-message-view": _partials.message_view,
+      "va-message-input": _partials.message_input
+    },
     template: require("./main.html"),
     created: controllers.root.created
-  }),
+  },
 
-  entrance: Vue.extend({
+  entrance: {
     template: require("./entrance.html"),
     data: function() {
       return {
@@ -20,54 +50,17 @@ var _pages = {
       enterRobby: controllers.entrance.enterRobby
     },
     created: controllers.entrance.created
-   }),
+  },
 
-   error: Vue.extend({
-     template: require("./error.html"),
-     methods: {
-       reload: controllers.error.reload
-     }
-   })
-};
-
-// --------------------
-//  Partial components
-// --------------------
-var _partials = {
-  header: Vue.extend({
-    template: require("./components/_header.html")
-  }),
-
-  sidebar: Vue.extend({
-    template: require("./components/_sidebar.html")
-  }),
-
-  message_view: Vue.extend({
-    template: require("./components/_message_view.html")
-  }),
-
-  message_input: Vue.extend({
-    template: require("./components/_message_input.html"),
+  error: {
+    template: require("./error.html"),
     methods: {
-      sendMessage: controllers.partials.messageInput.sendMessage
+      reload: controllers.error.reload
     }
-  })
+  }
 };
 
 module.exports = {
   pages: _pages,
-  partials: _partials,
-
-  setupPartials: function() {
-    Vue.component("va-header", _partials.header);
-    Vue.component("va-sidebar", _partials.sidebar);
-    Vue.component("va-message-view", _partials.message_view);
-    Vue.component("va-message-input", _partials.message_input);
-  },
-
-  setupViews: function() {
-    Vue.component("va-root-view", _pages.root);
-    Vue.component("va-entrance-view", _pages.entrance);
-    Vue.component("va-error-view", _pages.error);
-  }
+  partials: _partials
 };

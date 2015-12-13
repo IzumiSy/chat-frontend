@@ -7,10 +7,13 @@ var storage = require("./storage.js");
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-components.setupPartials();
-components.setupViews();
-
 var app = new Vue({
+  components: {
+    "va-root-view": components.pages.root,
+    "va-entrance-view": components.pages.entrance,
+    "va-error-view": components.pages.error
+  },
+
   created: function() {
     if (!storage.isAvailable) {
       // Show a message that says "Your browser cannot browse this page"
