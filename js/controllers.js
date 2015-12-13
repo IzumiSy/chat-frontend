@@ -2,17 +2,20 @@ var api = require("./api.js");
 var shared = require("./shared.js");
 var storage = require("./storage.js");
 var router = require("./routes.js");
+var utils = require("./utils.js");
 
 var controllers = {
   root: {
     created: function() {
-       // Do something
+      if (!utils.checkLogin()) {
+        this.$broadcast("route:entrance");
+      }
     }
   },
 
   error: {
     reload: function() {
-      this.$root.$dispatch("route:root");
+      this.$dispatch("route:root");
     }
   },
 
