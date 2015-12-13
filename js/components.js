@@ -47,7 +47,10 @@ var _partials = {
   }),
 
   message_input: Vue.extend({
-    template: require("./components/_message_input.html")
+    template: require("./components/_message_input.html"),
+    methods: {
+      sendMessage: controllers.partials.messageInput.sendMessage
+    }
   })
 };
 

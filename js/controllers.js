@@ -8,14 +8,14 @@ var controllers = {
   root: {
     created: function() {
       if (!utils.checkLogin()) {
-        this.$broadcast("route:entrance");
+        // Jump to the entrance view
       }
     }
   },
 
   error: {
     reload: function() {
-      this.$dispatch("route:root");
+      // Jump to the root view
     }
   },
 
@@ -40,6 +40,14 @@ var controllers = {
       var token = storage.get("token");
       if (token) {
         // Jump to the root page
+      }
+    }
+  },
+
+  partials: {
+    messageInput: {
+      sendMessage: function() {
+        // send message
       }
     }
   }

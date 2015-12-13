@@ -4,5 +4,5 @@ div.row.message-input
       input.form-control(type="text")
   div.col-sm-2
     div.form-group
-      a.btn.btn-primary.say-button
+      a.btn.btn-primary.say-button(v-on:click="sendMessage")
        | 発言
