@@ -1,7 +1,6 @@
 var api = require("./api.js");
 var shared = require("./shared.js");
 var storage = require("./storage.js");
-var router = require("./routes.js");
 var utils = require("./utils.js");
 
 var controllers = {

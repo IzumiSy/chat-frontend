@@ -63,5 +63,11 @@ module.exports = {
     Vue.component("va-sidebar", _partials.sidebar);
     Vue.component("va-message-view", _partials.message_view);
     Vue.component("va-message-input", _partials.message_input);
+  },
+
+  setupViews: function() {
+    Vue.component("va-root-view", _pages.root);
+    Vue.component("va-entrance-view", _pages.entrance);
+    Vue.component("va-error-view", _pages.error);
   }
 };

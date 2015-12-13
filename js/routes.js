@@ -1,10 +1,12 @@
 var components = require("./components.js");
-var app = require("./app.js");
 var api = require("./api.js");
 
 // It is possible to map routings implicitly just by including
 // route.js without creating mapRoutings(...) function, but it would
 // be difficult to understand code stream in app.js if doing that.
+
+var routings = null;
+var events = null;
 
 var setupEvents = function(routings) {
   return {
@@ -28,15 +30,10 @@ var setupEvents = function(routings) {
   };
 };
 
-var functions = {
-  routings: null,
-  events: null,
-
-  mapRoutings: function() {
+module.exports = {
+  mapRoutings: function(app) {
     routings = new VueRouter();
     events = setupEvents(routings);
-
-    components.setupPartials();
 
     routings.map({
       "/": {
@@ -60,7 +57,5 @@ var functions = {
     });
 
     routings.start(app, "body");
-  },
+  }
 };
-
-module.exports = functions;
