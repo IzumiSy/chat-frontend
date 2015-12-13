@@ -29,9 +29,12 @@ var setupEvents = function(routings) {
 };
 
 var functions = {
+  routings: null,
+  events: null,
+
   mapRoutings: function() {
-    var routings = new VueRouter();
-    var events = setupEvents(routings);
+    routings = new VueRouter();
+    events = setupEvents(routings);
 
     components.setupPartials();
 
@@ -57,11 +60,6 @@ var functions = {
     });
 
     routings.start(app, "body");
-
-    routings.app.$on("route:entrance", events.entrance);
-    routings.app.$on("route:error", events.error);
-    routings.app.$on("route:root", events.root);
-    routings.app.$on("route:jump", events.jump);
   },
 };
 
