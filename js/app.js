@@ -19,9 +19,7 @@ var app = new Vue({
       // Show a message that says "Your browser cannot browse this page"
     }
 
-    shared.init();
+    shared.init(this);
     router.mapRoutings(this);
   }
 });
-
-module.exports = app;

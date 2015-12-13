@@ -5,7 +5,7 @@ var app = require("./app.js");
 // of Vue.js to create reactive object.
 
 var dataSharedService = {
-  init: function(name) {
+  init: function(app) {
     Vue.prototype._$userSharedServiceScope = {};
     Vue.util.defineReactive(app, "$userService",
       Vue.prototype._$userSharedServiceScope);
