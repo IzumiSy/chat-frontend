@@ -115,6 +115,7 @@ gulp.task("js", function() {
 gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
+    .pipe(plumber())
     .pipe(gulp.dest(distDir));
 });
 
@@ -125,6 +126,10 @@ gulp.task("browserify", function() {
     })
     .transform(stringify(['.html']))
     .bundle()
+    .on('error', function(err) {
+      console.log(err.toString());
+      this.emit("end");
+    })
     .pipe(source(appJS))
     .pipe(gulp.dest(distDir));
 });
@@ -155,12 +160,14 @@ gulp.task("venders-concat-css", function() {
 gulp.task("copy-vendor-icons", function() {
   console.log("[TASK] copy-icons processing...");
   return gulp.src(targets.venders.icons)
+    .pipe(plumber())
     .pipe(gulp.dest(assetsDir));
 });
 
 gulp.task("copy-assets", function() {
   console.log("[TASK] copy-assets processing...");
   return gulp.src(targets.assets)
+    .pipe(plumber())
     .pipe(rename({ prefix: "face-" }))
     .pipe(gulp.dest(assetsDir));
 });
