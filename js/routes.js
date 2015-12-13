@@ -6,30 +6,33 @@ var api = require("./api.js");
 // route.js without creating mapRoutings(...) function, but it would
 // be difficult to understand code stream in app.js if doing that.
 
-var routings = new VueRouter();
+var setupEvents = function(routings) {
+  return {
+    root: function() {
+      routings.go({ path: "/" });
+    },
 
-var events = {
-  root: function() {
-    routings.go({ path: "/" });
-  },
+    entrance: function() {
+      routings.go({ path: "/entrance" });
+    },
 
-  entrance: function() {
-    routings.go({ path: "/entrance" });
-  },
+    error: function() {
+      routings.go({ path: "/error" });
+    },
 
-  error: function() {
-    routings.go({ path: "/error" });
-  },
-
-  jump: function(args) {
-    if (args.path) {
-      routings.go({ path: args.path });
+    jump: function(args) {
+      if (args.path) {
+        routings.go({ path: args.path });
+      }
     }
-  }
+  };
 };
 
 var functions = {
   mapRoutings: function() {
+    var routings = new VueRouter();
+    var events = setupEvents(routings);
+
     components.setupPartials();
 
     routings.map({
