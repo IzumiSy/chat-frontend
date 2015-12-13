@@ -9,12 +9,14 @@ var plumber  = require("gulp-plumber");
 var jshint   = require("gulp-jshint")
 var concat   = require("gulp-concat");
 var rename   = require("gulp-rename");
+var util     = require("gulp-util");
 
 var del        = require("del");
 var sequence   = require("run-sequence");
 var stringify  = require("stringify");
 var browserify = require("browserify");
 var source     = require("vinyl-source-stream");
+
 
 var targets = {
   sass: [
@@ -127,7 +129,8 @@ gulp.task("browserify", function() {
     .transform(stringify(['.html']))
     .bundle()
     .on('error', function(err) {
-      console.log(err.toString());
+      msg = err.toString()
+      util.log(util.colors.red("(Browserify)"), msg);
       this.emit("end");
     })
     .pipe(source(appJS))

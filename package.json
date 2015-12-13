@@ -23,6 +23,7 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.0",
+    "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
     "jquery": "^2.1.4",
     "jshint": "^2.8.0",
