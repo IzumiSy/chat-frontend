@@ -4,6 +4,13 @@ $header-height:     50px;
 body {
   nav.navbar {
     border-radius: 0;
+
+    .navbar-header {
+      #brand-name {
+        border: 0;
+        cursor: default;
+      }
+    }
   }
 
   .container-fluid {
