@@ -51,8 +51,8 @@ var messageInputControllers = {
 
 var headerControllers = {
   logout: function() {
-    // Remove token data from session storage
-    // and redirect to entrance view
+    storage.remove("token");
+    shared.jumpers.entrance();
   }
 };
 
