@@ -11,6 +11,15 @@ body {
         cursor: default;
       }
     }
+
+    .navbar.navbar-collapse.collapse {
+      margin-bottom: 0px;
+
+      ul li a.nav-button {
+        border: 0 !important;
+        cursor: pointer;
+      }
+    }
   }
 
   .container-fluid {
