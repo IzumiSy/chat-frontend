@@ -1,23 +1,25 @@
 var functions = {
+  cacheData: {},
+
   isAvailable: function() {
     return !window.sessionStorage;
   },
 
   set: function(key, value) {
     if (window.sessionStorage) {
-      window.sessionStorage.setItem(key, value);
+      return window.sessionStorage.setItem(key, value);
     }
   },
 
   get: function(key) {
     if (window.sessionStorage) {
-      window.sessionStorage.getItem(key);
+      return window.sessionStorage.getItem(key);
     }
   },
 
   remove: function(key) {
     if (window.sessionStorage) {
-      window.sessionStorage.removeItem(key);
+      return window.sessionStorage.removeItem(key);
     }
   }
 };
