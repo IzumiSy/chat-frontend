@@ -2,12 +2,13 @@ var api = require("./api.js");
 var shared = require("./shared.js");
 var storage = require("./storage.js");
 var utils = require("./utils.js");
+var shared = require("./shared.js");
 
 var controllers = {
   root: {
     created: function() {
       if (!utils.checkLogin()) {
-        // Jump to the entrance view
+        shared.jumpers.entrance();
       }
     }
   },

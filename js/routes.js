@@ -1,5 +1,6 @@
 var components = require("./components.js");
 var api = require("./api.js");
+var shared = require("./shared.js");
 
 // It is possible to map routings implicitly just by including
 // route.js without creating mapRoutings(...) function, but it would
@@ -8,32 +9,29 @@ var api = require("./api.js");
 var routings = null;
 var events = null;
 
-var setupEvents = function(routings) {
-  return {
-    root: function() {
-      routings.go({ path: "/" });
-    },
+var jumpers = {
+  root: function() {
+    routings.go({ path: "/" });
+  },
 
-    entrance: function() {
-      routings.go({ path: "/entrance" });
-    },
+  entrance: function() {
+    routings.go({ path: "/entrance" });
+  },
 
-    error: function() {
-      routings.go({ path: "/error" });
-    },
+  error: function() {
+    routings.go({ path: "/error" });
+  },
 
-    jump: function(args) {
-      if (args.path) {
-        routings.go({ path: args.path });
-      }
+  jump: function(args) {
+    if (args.path) {
+      routings.go({ path: args.path });
     }
-  };
+  }
 };
 
 module.exports = {
   mapRoutings: function(app) {
     routings = new VueRouter();
-    events = setupEvents(routings);
 
     routings.map({
       "/": {
@@ -51,10 +49,15 @@ module.exports = {
     routings.beforeEach(function() {
       api.pingRequest(function(data, isSucceed) {
         if (!isSucceed) {
-          events.error();
+          routings.go({ path: "/error" });
         }
       });
     });
+
+    // Im not really sure about it, but shared object
+    // gets clear after routings.start(...), so jumpers
+    // have to be set just at here. Need more investigation.
+    shared.jumpers = jumpers;
 
     routings.start(app, "body");
   }
