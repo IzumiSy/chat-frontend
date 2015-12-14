@@ -15,7 +15,7 @@ var controllers = {
 
   error: {
     reload: function() {
-      // Jump to the root view
+      shared.jumpers.root();
     }
   },
 
