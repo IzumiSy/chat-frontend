@@ -29,9 +29,9 @@ var controllers = {
       api.createNewUser(this.username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
-          // Jump to the root page
+          shared.jumpers.root();
         } else {
-          // Shows an error message
+          shared.jumpers.error();
         }
       });
     },
