@@ -1,8 +1,10 @@
 var sharedStructure = function() {
-  var data = {}
+  var data = {};
+  var jumpers = {};
 
   return {
-    data: data
+    data: data,
+    jumpers: jumpers
   };
 };
 
