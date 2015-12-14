@@ -55,6 +55,10 @@ var targets = {
 
     icons: [
       "./node_modules/flat-ui/images/icons/png/*.png"
+    ],
+
+    fonts: [
+      "./node_modules/flat-ui/fonts/**/*",
     ]
   },
 
@@ -63,6 +67,7 @@ var targets = {
 
 var distDir = "./dist/";
 var assetsDir = "./dist/assets/";
+var fontsDir = "./dist/fonts/";
 var appJS = "app.js";
 var vendersJS = "venders.js"
 var vendersCSS = "venders.css"
@@ -83,8 +88,8 @@ gulp.task("default", function() {
       open: true
      }));
   sequence("sass", "jade", "js", "venders-concat-js",
-           "venders-concat-css", "copy-vendor-icons",
-           "copy-assets");
+           "venders-concat-css", "copy-assets",
+           "copy-vendor-icons", "copy-vender-fonts");
 });
 
 gulp.task("sass", function() {
@@ -165,6 +170,13 @@ gulp.task("copy-vendor-icons", function() {
   return gulp.src(targets.venders.icons)
     .pipe(plumber())
     .pipe(gulp.dest(assetsDir));
+});
+
+gulp.task("copy-vender-fonts", function() {
+  console.log("[TASK] copy-vender-fonts processing...");
+  return gulp.src(targets.venders.fonts)
+    .pipe(plumber())
+    .pipe(gulp.dest(fontsDir));
 });
 
 gulp.task("copy-assets", function() {
