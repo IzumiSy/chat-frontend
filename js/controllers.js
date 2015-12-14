@@ -43,17 +43,27 @@ var entranceControllers = {
   }
 };
 
+var messageInputControllers = {
+  sendMessage: function() {
+    // send message
+  }
+};
+
+var headerControllers = {
+  logout: function() {
+    // Remove token data from session storage
+    // and redirect to entrance view
+  }
+};
+
 var controllers = {
   root: rootControllers,
   error: errorControllers,
   entrance: entranceControllers,
 
   partials: {
-    messageInput: {
-      sendMessage: function() {
-        // send message
-      }
-    }
+    messageInput: messageInputControllers,
+    header: headerControllers
   }
 };
 

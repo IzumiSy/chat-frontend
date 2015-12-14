@@ -5,7 +5,10 @@ var controllers = require("./controllers.js");
 // --------------------
 var _partials = {
   header: {
-    template: require("./components/_header.html")
+    template: require("./components/_header.html"),
+    methods: {
+      logout: controllers.partials.header.logout
+    }
   },
 
   sidebar: {
