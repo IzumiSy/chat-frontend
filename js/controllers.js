@@ -39,7 +39,7 @@ var controllers = {
     created: function() {
       var token = storage.get("token");
       if (token) {
-        // Jump to the root page
+        shared.jumpers.root();
       }
     }
   },
