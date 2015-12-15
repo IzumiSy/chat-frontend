@@ -33,6 +33,7 @@ module.exports = {
   mapRoutings: function(app) {
     routings = new VueRouter();
 
+    // Map all routings
     routings.map({
       "/": {
         component: components.pages.root
@@ -43,6 +44,11 @@ module.exports = {
       "/error": {
         component: components.pages.error
       }
+    });
+
+    // Handles non-mapped routing
+    routings.redirect({
+      '*': '/'
     });
 
     // Always run ping check before transitions
