@@ -11,6 +11,7 @@
     "url": "https://github.com/IzumiSy/chat-frontend/issues"
   },
   "dependencies": {
+    "assert": "^1.3.0",
     "bootstrap": "^3.3.5",
     "browserify": "^12.0.1",
     "bucks": "^0.8.4",
