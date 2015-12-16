@@ -50,7 +50,8 @@ var targets = {
       "./node_modules/vue/dist/vue.js",
       "./node_modules/vue-resource/dist/vue-resource.js",
       "./node_modules/vue-router/dist/vue-router.js",
-      "./node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js"
+      "./node_modules/nanoscroller/bin/javascripts/jquery.nanoscroller.js",
+      "./node_modules/bucks/bucks.js"
     ],
 
     icons: [
