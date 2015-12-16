@@ -41,7 +41,11 @@ var entranceControllers = {
       if (res === true) {
         // TODO
         // api.userRoomEnter(...)
-        // shared.jumpers.root();
+        // return false when getting error or true in success
+      }
+    }).then(function(res, next) {
+      if (res === true) {
+        // TODO shared.jumpers.root();
       }
     }).end();
   },
