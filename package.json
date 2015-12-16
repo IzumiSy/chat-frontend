@@ -26,6 +26,7 @@
     "gulp-sass": "^2.1.0",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",
+    "jasmine": "^2.4.1",
     "jquery": "^2.1.4",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
