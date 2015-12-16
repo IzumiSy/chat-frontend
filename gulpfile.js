@@ -81,8 +81,6 @@ var dists = {
 gulp.watch(targets.sass, ["sass"]);
 gulp.watch(targets.jade, ["html"]);
 gulp.watch(targets.js, ["js"]);
-gulp.watch(targets.venders.js, ["venders-concat-js"]);
-gulp.watch(targets.venders.css, ["venders-concat-css"]);
 gulp.watch(targets.assets, ["copy-assets"]);
 
 gulp.task("default", function() {
