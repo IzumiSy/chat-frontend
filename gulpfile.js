@@ -66,12 +66,17 @@ var targets = {
   assets: "./assets/*.png"
 };
 
-var distDir = "./dist/";
-var assetsDir = "./dist/assets/";
-var fontsDir = "./dist/fonts/";
-var appJS = "app.js";
-var vendersJS = "venders.js"
-var vendersCSS = "venders.css"
+var dists = {
+  app:  "app.js",
+  venders: {
+    js: "venders.js",
+    css: "venders.css"
+  },
+
+  dest: "./dist/",
+  assets: "./dist/assets/",
+  fonts: "./dist/fonts/",
+}
 
 gulp.watch(targets.sass, ["sass"]);
 gulp.watch(targets.jade, ["html"]);
@@ -81,10 +86,10 @@ gulp.watch(targets.venders.css, ["venders-concat-css"]);
 gulp.watch(targets.assets, ["copy-assets"]);
 
 gulp.task("default", function() {
-  gulp.src(distDir)
+  gulp.src(dists.dest)
     .pipe(plumber())
     .pipe(server({
-      root: distDir,
+      root: dists.dest,
       livereload: true,
       open: true
      }));
@@ -99,7 +104,7 @@ gulp.task("sass", function() {
     .pipe(plumber())
     .pipe(sass())
     .pipe(header('@charset "utf-8";\n'))
-    .pipe(gulp.dest(distDir))
+    .pipe(gulp.dest(dists.dest))
 });
 
 gulp.task("html", function() {
@@ -113,7 +118,7 @@ gulp.task("jade", function() {
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest(distDir));
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("js", function() {
@@ -124,13 +129,13 @@ gulp.task("copy-js", function() {
   console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
     .pipe(plumber())
-    .pipe(gulp.dest(distDir));
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("browserify", function() {
   console.log("[TASK] browserify processing...");
   return browserify({
-      entries: [distDir + appJS]
+      entries: [dists.dest + dists.app]
     })
     .transform(stringify(['.html']))
     .bundle()
@@ -139,8 +144,8 @@ gulp.task("browserify", function() {
       util.log(util.colors.red("(Browserify)"), msg);
       this.emit("end");
     })
-    .pipe(source(appJS))
-    .pipe(gulp.dest(distDir));
+    .pipe(source(dists.app))
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("jshint", function() {
@@ -154,30 +159,30 @@ gulp.task("venders-concat-js", function() {
   console.log("[TASK] venders-concat-js processing...");
   return gulp.src(targets.venders.js)
     .pipe(plumber())
-    .pipe(concat(vendersJS))
-    .pipe(gulp.dest(distDir));
+    .pipe(concat(dists.venders.js))
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("venders-concat-css", function() {
   console.log("[TASK] venders-concat-css processing...");
   return gulp.src(targets.venders.css)
     .pipe(plumber())
-    .pipe(concat(vendersCSS))
-    .pipe(gulp.dest(distDir));
+    .pipe(concat(dists.venders.css))
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("copy-vendor-icons", function() {
   console.log("[TASK] copy-icons processing...");
   return gulp.src(targets.venders.icons)
     .pipe(plumber())
-    .pipe(gulp.dest(assetsDir));
+    .pipe(gulp.dest(dists.assets));
 });
 
 gulp.task("copy-vender-fonts", function() {
   console.log("[TASK] copy-vender-fonts processing...");
   return gulp.src(targets.venders.fonts)
     .pipe(plumber())
-    .pipe(gulp.dest(fontsDir));
+    .pipe(gulp.dest(dists.fonts));
 });
 
 gulp.task("copy-assets", function() {
@@ -185,10 +190,10 @@ gulp.task("copy-assets", function() {
   return gulp.src(targets.assets)
     .pipe(plumber())
     .pipe(rename({ prefix: "face-" }))
-    .pipe(gulp.dest(assetsDir));
+    .pipe(gulp.dest(dists.assets));
 });
 
 gulp.task("clean", function() {
-  del([distDir + "*.*", distDir + "/**/*"]);
+  del([dists.dest + "*.*", dists.dest + "/**/*"]);
 });
 
