@@ -39,6 +39,7 @@ var entranceControllers = {
       });
     }).then(function(res, next) {
       if (res === true) {
+        // TODO
         // api.userRoomEnter(...)
         // shared.jumpers.root();
       }
@@ -60,14 +61,22 @@ var entranceControllers = {
 
 var messageInputControllers = {
   sendMessage: function() {
-    // send message
+    // TODO send message
   }
 };
 
 var headerControllers = {
   logout: function() {
-    storage.remove("token");
-    shared.jumpers.entrance();
+    (new Bucks()).then(function(res, next) {
+      // TODO
+      // api.userRoomLeave(...)
+      // return false when getting error
+      return next(null, true);
+    }).then(function(res, next) {
+      if (res === true) {
+        shared.jumpers.entrance();
+      }
+    }).end();
   }
 };
 
