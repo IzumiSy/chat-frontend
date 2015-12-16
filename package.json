@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "browserify": "^12.0.1",
+    "bucks": "^0.8.4",
     "flat-ui": "^2.1.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
