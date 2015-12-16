@@ -19,7 +19,11 @@ module.exports = {
   api: {
     ping:      resource(API_HOST + "/api/ping"),
     newUser:   resource(API_HOST + "/api/user/new"),
-    checkName: resource(API_HOST + "/api/user/usable/:name")
+    checkName: resource(API_HOST + "/api/user/usable/:name"),
+
+    allRooms:  resource(API_HOST + "/api/room"),
+    roomEnter: resource(API_HOST + "/api/room/enter"),
+    roomLeave: resource(API_HOST + "/api/room/leave")
   },
 
   pingRequest: function(callback) {
@@ -44,5 +48,17 @@ module.exports = {
     }).error(function(data, stat) {
       callback(data, false);
     });
+  },
+
+  getAllRooms: function(callback) {
+    // TODO implement this API call
+  },
+
+  userRoomEnter: function(userId, roomId, callback) {
+    // TODO implement this API call
+  },
+
+  userRoomLeave: function(userId, roomId, callback) {
+    // TODO implement this API call
   }
 };
