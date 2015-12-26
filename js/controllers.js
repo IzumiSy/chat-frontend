@@ -21,6 +21,7 @@ var errorControllers = {
 var entranceControllers = {
   enterRobby: function() {
     var username = this.username;
+    var isAvailable = false;
 
     if (!username) {
       // Shows an error message
@@ -28,6 +29,14 @@ var entranceControllers = {
     }
 
     (new Bucks()).then(function(res, next) {
+      api.checkNameAvailability(username, function(data, isSuccess) {
+        if (data && data.status === true) {
+          isAvailable = true;
+          return next(null, true);
+        }
+      });
+    }).then(function(res, next) {
+      if (!res) return next(null, false);
       api.createNewUser(username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
@@ -38,15 +47,13 @@ var entranceControllers = {
         }
       });
     }).then(function(res, next) {
-      if (res === true) {
-        // TODO
-        // api.userRoomEnter(...)
-        // return false when getting error or true in success
-      }
+      if (!res) return next(null, false);
+      // TODO
+      // api.userRoomEnter(...)
+      // return false when getting error or true in success
     }).then(function(res, next) {
-      if (res === true) {
-        // TODO shared.jumpers.root();
-      }
+      if (!res) return next(null, false);
+      // TODO shared.jumpers.root();
     }).end();
   },
 

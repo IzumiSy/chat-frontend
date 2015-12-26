@@ -19,7 +19,7 @@ module.exports = {
   api: {
     ping:      resource(API_HOST + "/api/ping"),
     newUser:   resource(API_HOST + "/api/user/new"),
-    checkName: resource(API_HOST + "/api/user/usable/:name"),
+    checkName: resource(API_HOST + "/api/user/usable"),
 
     allRooms:  resource(API_HOST + "/api/room"),
     roomEnter: resource(API_HOST + "/api/room/enter"),
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   checkNameAvailability: function(name, callback) {
-    this.api.checkName.get({ name: name }, function(data, stat) {
+    this.api.checkName.save({ name: name }, function(data, stat) {
       callback(data, true);
     }).error(function(data, stat) {
       callback(data, false);
