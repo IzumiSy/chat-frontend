@@ -9,6 +9,10 @@ var rootControllers = {
     if (!utils.checkLogin()) {
       shared.jumpers.entrance();
     }
+
+    api.getAllRooms(function(data, isSucceed) {
+      // TODO implement store room data
+    });
   }
 };
 
@@ -74,10 +78,6 @@ var entranceControllers = {
       shared.jumpers.root();
       return;
     }
-
-    api.getAllRooms(function(data, isSucceed) {
-      // TODO implement store room data
-    });
   }
 };
 

@@ -1,3 +1,5 @@
+var storage = require("./storage.js");
+
 var PRODUCTION_SERVER = 'http://chat-server-1000.herokuapp.com';
 var DEVELOPMENT_SERVER = 'http://localhost:3000';
 
@@ -51,7 +53,12 @@ module.exports = {
   },
 
   getAllRooms: function(callback) {
-    // TODO implement this API call
+    var token = storage.get("token");
+    this.api.allRooms.get({ token: token }, function(data, stat) {
+      callback(data, true);
+    }).error(function(data, stat) {
+      callback(data, false);
+    });
   },
 
   userRoomEnter: function(userId, roomId, callback) {
