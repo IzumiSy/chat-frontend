@@ -34,6 +34,18 @@ body {
         position: relative;
         padding: 30px;
         padding-top: 0;
+        padding-bottom: 0;
+
+        p.message {
+          font-size: 15px;
+          height: 35px;
+          text-align: center;
+          padding-top: 5px;
+
+          &.error {
+            color: red;
+          }
+        }
 
         .btn.enter-button {
           width: 100%;

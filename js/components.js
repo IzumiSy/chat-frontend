@@ -46,7 +46,9 @@ var _pages = {
     template: require("./entrance.html"),
     data: function() {
       return {
-        username: null
+        username: null,
+        message:  null,
+        error:    false
       };
     },
     methods: {

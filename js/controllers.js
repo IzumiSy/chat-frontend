@@ -22,17 +22,26 @@ var entranceControllers = {
   enterRobby: function() {
     var username = this.username;
     var isAvailable = false;
+    var _this = this;
 
     if (!username) {
-      // Shows an error message
+      this.error = true;
+      this.message = "ログインネームを入力してください";
       return;
     }
 
     (new Bucks()).then(function(res, next) {
+      _this.message = "";
+      _this.error = false;
       api.checkNameAvailability(username, function(data, isSuccess) {
         if (data && data.status === true) {
           isAvailable = true;
+          _this.message = "ログイン処理中...";
           return next(null, true);
+        } else {
+          _this.error = true;
+          _this.message = "ログインネームがすでに使われています";
+          return next(null, false);
         }
       });
     }).then(function(res, next) {
@@ -51,9 +60,11 @@ var entranceControllers = {
       // TODO
       // api.userRoomEnter(...)
       // return false when getting error or true in success
+      return next(null, true);
     }).then(function(res, next) {
       if (!res) return next(null, false);
-      // TODO shared.jumpers.root();
+      shared.jumpers.root();
+      return next(null, true);
     }).end();
   },
 
