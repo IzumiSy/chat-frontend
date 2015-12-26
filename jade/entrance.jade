@@ -10,4 +10,5 @@
     .form-group.enter
       a.btn.btn-primary.enter-button(v-on:click="enterRobby")
         | チャットロビーへ入る
-      p.message(v-bind:class="{ 'error': error }") {{ message }}
+      p.message(v-bind:class="{ 'error': error }")
+        | {{ message }}
