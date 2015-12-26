@@ -78,6 +78,7 @@ var headerControllers = {
       return next(null, true);
     }).then(function(res, next) {
       if (res === true) {
+        storage.remove("token");
         shared.jumpers.entrance();
       }
     }).end();
