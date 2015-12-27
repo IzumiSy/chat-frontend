@@ -27,18 +27,17 @@ var rootControllers = {
         if (data && data.length) {
           _this.rooms = data
           lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby" }).id;
-          return next();
+          return next(null, true);
         } else {
-          throw new Error("Exception at getAllRooms");
+          console.error("Error at api.getAllRooms");
+          return next(null, false);
         }
       });
     }).then(function(res, next) {
+      if (!res) return next(null, false);
       // var param = {};
       // api.userRoomEnter(param, function() { });
       return next(null, true);
-    }).error(function(msg, next) {
-      console.error(msg);
-      return next();
     }).end();
   }
 };
