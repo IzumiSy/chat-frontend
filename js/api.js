@@ -61,11 +61,19 @@ module.exports = {
     });
   },
 
-  userRoomEnter: function(userId, roomId, callback) {
-    // TODO implement this API call
+  userRoomEnter: function(params, callback) {
+    this.api.roomEnter.post(params, function(data, stat) {
+      callback(data, true);
+    }).error(function(data, stat) {
+      callback(data, false);
+    });
   },
 
-  userRoomLeave: function(userId, roomId, callback) {
-    // TODO implement this API call
+  userRoomLeave: function(params, callback) {
+    this.api.roomLeave.delete(params, function(data, stat) {
+      callback(data, true);
+    }).error(function(data, stat) {
+      callback(data, false);
+    });
   }
 };
