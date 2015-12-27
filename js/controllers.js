@@ -48,23 +48,31 @@ var entranceControllers = {
     var isAvailable = false;
     var _this = this;
 
+    var error = function(msg) {
+      if (msg == null) {
+        _this.error = false;
+        _this.message = "";
+      } else {
+        _this.error = true
+        _this.message = msg;
+      }
+    };
+
     if (!username) {
-      this.error = true;
-      this.message = "ログインネームを入力してください";
+      error("ログインネームを入力してください");
       return;
     }
 
     (new Bucks()).then(function(res, next) {
-      _this.message = "";
-      _this.error = false;
+      error(null);
+      _this.message = "名前が使えるか調べています...";
       api.checkNameAvailability(username, function(data, isSuccess) {
         if (data && data.status === true) {
           isAvailable = true;
           _this.message = "ログイン処理中...";
           return next(null, true);
         } else {
-          _this.error = true;
-          _this.message = "ログインネームがすでに使われています";
+          error("ログインネームがすでに使われています");
           return next(null, false);
         }
       });
@@ -75,7 +83,7 @@ var entranceControllers = {
           storage.set("token", data.token);
           return next(null, true);
         } else {
-          shared.jumpers.error();
+          error("入室に失敗しました");
           return next(null, false);
         }
       });
