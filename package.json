@@ -33,6 +33,7 @@
     "jshint-stylish": "^2.1.0",
     "nanoscroller": "^0.8.7",
     "stringify": "^3.1.0",
+    "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^1.0.8",
     "vue-resource": "^0.1.17",
