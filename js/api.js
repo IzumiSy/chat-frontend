@@ -61,8 +61,10 @@ module.exports = {
     });
   },
 
-  userRoomEnter: function(params, callback) {
-    this.api.roomEnter.post(params, function(data, stat) {
+  userRoomEnter: function(roomId, callback) {
+    var token = storage.get("token");
+    var params = { token: token, room_id: roomId };
+    this.api.roomEnter.save(params, function(data, stat) {
       callback(data, true);
     }).error(function(data, stat) {
       callback(data, false);

@@ -23,21 +23,26 @@ var rootControllers = {
 
     // Always an user enters Lobby at the first time when logging in.
     (new Bucks()).then(function(res, next) {
-      api.getAllRooms(function(data, isSucceed) {
-        if (data && data.length) {
-          _this.rooms = data
-          lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby" }).id;
-          return next(null, true);
-        } else {
-          console.error("Error at api.getAllRooms");
+      api.getAllRooms(function(data, isSuccess) {
+        if (!isSuccess || !data) {
+          console.warn("Error at api.getAllRooms");
           return next(null, false);
         }
+        _this.rooms = data;
+        lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby"; }).id;
+        return next(null, true);
       });
     }).then(function(res, next) {
       if (!res) return next(null, false);
-      // var param = {};
-      // api.userRoomEnter(param, function() { });
-      return next(null, true);
+      api.userRoomEnter(lobbyId, function(data, isSuccess) {
+        if (isSuccess) {
+          return next(null, true);
+        } else {
+          console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");
+          return next(null, false);
+        }
+      });
+
     }).end();
   }
 };
@@ -49,11 +54,11 @@ var entranceControllers = {
     var _this = this;
 
     var error = function(msg) {
-      if (msg == null) {
+      if (msg === null) {
         _this.error = false;
         _this.message = "";
       } else {
-        _this.error = true
+        _this.error = true;
         _this.message = msg;
       }
     };
@@ -81,16 +86,13 @@ var entranceControllers = {
       api.createNewUser(username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
+          shared.jumpers.root();
           return next(null, true);
         } else {
           error("入室に失敗しました");
           return next(null, false);
         }
       });
-    }).then(function(res, next) {
-      if (!res) return next(null, false);
-      shared.jumpers.root();
-      return next(null, true);
     }).end();
   },
 

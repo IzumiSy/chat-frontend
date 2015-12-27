@@ -40,7 +40,9 @@ var _pages = {
     },
     template: require("./main.html"),
     data: function() {
-      rooms: []
+      return {
+        rooms: []
+      };
     },
     created: controllers.root.created
   },
