@@ -6,6 +6,12 @@ var storage = require("./storage.js");
 var utils = require("./utils.js");
 var shared = require("./shared.js");
 
+var errorControllers = {
+  reload: function() {
+    shared.jumpers.root();
+  }
+};
+
 var rootControllers = {
   created: function() {
     var _this = this;
@@ -34,12 +40,6 @@ var rootControllers = {
       console.error(msg);
       return next();
     }).end();
-  }
-};
-
-var errorControllers = {
-  reload: function() {
-    shared.jumpers.root();
   }
 };
 
@@ -110,10 +110,10 @@ var headerControllers = {
       // return false when getting error
       return next(null, true);
     }).then(function(res, next) {
-      if (res === true) {
-        storage.remove("token");
-        shared.jumpers.entrance();
-      }
+      if (!res) return next(null, false);
+      storage.remove("token");
+      shared.jumpers.entrance();
+      return next(null, true);
     }).end();
   }
 };
