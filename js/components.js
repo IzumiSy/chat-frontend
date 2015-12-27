@@ -39,6 +39,9 @@ var _pages = {
       "va-message-input": _partials.message_input
     },
     template: require("./main.html"),
+    data: function() {
+      rooms: []
+    },
     created: controllers.root.created
   },
 

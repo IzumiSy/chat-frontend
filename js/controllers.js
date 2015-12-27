@@ -1,3 +1,5 @@
+var _ = require("underscore");
+
 var api = require("./api.js");
 var shared = require("./shared.js");
 var storage = require("./storage.js");
@@ -6,13 +8,32 @@ var shared = require("./shared.js");
 
 var rootControllers = {
   created: function() {
+    var _this = this;
+    var lobbyId = null;
+
     if (!utils.checkLogin()) {
       shared.jumpers.entrance();
     }
 
-    api.getAllRooms(function(data, isSucceed) {
-      // TODO implement store room data
-    });
+    // Always an user enters Lobby at the first time when logging in.
+    (new Bucks()).then(function(res, next) {
+      api.getAllRooms(function(data, isSucceed) {
+        if (data && data.length) {
+          _this.rooms = data
+          lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby" }).id;
+          return next();
+        } else {
+          throw new Error("Exception at getAllRooms");
+        }
+      });
+    }).then(function(res, next) {
+      // var param = {};
+      // api.userRoomEnter(param, function() { });
+      return next(null, true);
+    }).error(function(msg, next) {
+      console.error(msg);
+      return next();
+    }).end();
   }
 };
 
@@ -59,12 +80,6 @@ var entranceControllers = {
           return next(null, false);
         }
       });
-    }).then(function(res, next) {
-      if (!res) return next(null, false);
-      // TODO
-      // api.userRoomEnter(...)
-      // return false when getting error or true in success
-      return next(null, true);
     }).then(function(res, next) {
       if (!res) return next(null, false);
       shared.jumpers.root();
