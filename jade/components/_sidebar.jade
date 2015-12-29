@@ -1,6 +1,6 @@
 .profile-section
 ul.room-list
-  li.room-item(v-for="room in rooms")
+  li.room-item(v-for="room in rooms" v-on:click="onRoomClicked(room)")
     span
       | {{ room.name }}
     span.badge

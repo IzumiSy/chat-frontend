@@ -18,7 +18,10 @@ var _partials = {
         rooms: []
       };
     },
-    created: controllers.partials.sidebar.created
+    created: controllers.partials.sidebar.created,
+    methods: {
+      onRoomClicked: controllers.partials.sidebar.onRoomClicked
+    }
   },
 
   message_view: {
