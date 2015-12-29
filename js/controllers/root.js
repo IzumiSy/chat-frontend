@@ -1,6 +1,7 @@
 var _ = require("underscore");
 var api = require("../api.js");
 var utils = require("../utils.js");
+var shared = require("../shared.js");
 
 var rootController = {
   created: function() {
