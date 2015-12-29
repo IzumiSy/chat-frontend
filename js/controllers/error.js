@@ -2,7 +2,7 @@ var shared = require("../shared.js");
 
 var errorController = {
   reload: function() {
-    shared.jumpers.root();
+    shared.jumpers.entrance();
   }
 };
 
