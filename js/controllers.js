@@ -6,13 +6,13 @@ var storage = require("./storage.js");
 var utils = require("./utils.js");
 var shared = require("./shared.js");
 
-var errorControllers = {
+var errorController = {
   reload: function() {
     shared.jumpers.root();
   }
 };
 
-var rootControllers = {
+var rootController = {
   created: function() {
     var _this = this;
     var lobbyId = null;
@@ -29,6 +29,7 @@ var rootControllers = {
           return next(null, false);
         }
         _this.rooms = data;
+        _this.$broadcast("app:sidebar:updateRooms", data);
         lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby"; }).id;
         return next(null, true);
       });
@@ -47,7 +48,7 @@ var rootControllers = {
   }
 };
 
-var entranceControllers = {
+var entranceController = {
   enterRobby: function() {
     var username = this.username;
     var isAvailable = false;
@@ -105,13 +106,21 @@ var entranceControllers = {
   }
 };
 
-var messageInputControllers = {
+var messageInputController = {
   sendMessage: function() {
     // TODO send message
   }
 };
 
-var headerControllers = {
+var sidebarController = {
+  created: function() {
+    this.$on("app:sidebar:updateRooms", function(data) {
+      this.$set("rooms", data);
+    });
+  }
+};
+
+var headerController = {
   logout: function() {
     (new Bucks()).then(function(res, next) {
       // TODO
@@ -128,13 +137,14 @@ var headerControllers = {
 };
 
 var controllers = {
-  root: rootControllers,
-  error: errorControllers,
-  entrance: entranceControllers,
+  root: rootController,
+  error: errorController,
+  entrance: entranceController,
 
   partials: {
-    messageInput: messageInputControllers,
-    header: headerControllers
+    messageInput: messageInputController,
+    header: headerController,
+    sidebar: sidebarController
   }
 };
 

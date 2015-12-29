@@ -12,7 +12,13 @@ var _partials = {
   },
 
   sidebar: {
-    template: require("./components/_sidebar.html")
+    template: require("./components/_sidebar.html"),
+    data: function() {
+      return {
+        rooms: []
+      };
+    },
+    created: controllers.partials.sidebar.created
   },
 
   message_view: {
@@ -38,12 +44,12 @@ var _pages = {
       "va-message-view": _partials.message_view,
       "va-message-input": _partials.message_input
     },
-    template: require("./main.html"),
     data: function() {
       return {
         rooms: []
       };
     },
+    template: require("./main.html"),
     created: controllers.root.created
   },
 
