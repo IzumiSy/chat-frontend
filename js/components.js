@@ -15,13 +15,13 @@ var _partials = {
     template: require("./components/_sidebar.html"),
     data: function() {
       return {
-        rooms: []
+        rooms: [],
+        currentRoomId: null
       };
     },
     created: controllers.partials.sidebar.created,
     methods: {
-      onRoomClicked: controllers.partials.sidebar.onRoomClicked,
-      isCurrentRoom: controllers.partials.sidebar.isCurrentRoom
+      onRoomClicked: controllers.partials.sidebar.onRoomClicked
     }
   },
 
