@@ -13,6 +13,7 @@ var headerController = {
       });
     }).then(function(res, next) {
       storage.remove("token");
+      storage.remove("currentRoomId");
       shared.jumpers.entrance();
       return next();
     }).end();
