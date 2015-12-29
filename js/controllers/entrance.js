@@ -27,7 +27,7 @@ var entranceController = {
       error(null);
       _this.message = "ログインネームが使えるか調べています...";
       api.checkNameAvailability(username, function(data, isSuccess) {
-        if (data && data.status === true) {
+        if (isSuccess && data && data.status === true) {
           isAvailable = true;
           _this.message = "入室処理中...";
           return next(null, true);
