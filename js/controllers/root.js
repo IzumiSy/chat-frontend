@@ -15,9 +15,9 @@ var rootController = {
     var lobbyId = null;
 
     // Updates the number of users in the room on sidebar component
-    var broadcastUsersUpdate = function(roomId, data) {
+    var broadcastUsersCountUpdate = function(roomId, data) {
       var _data = { room_id: roomId, users_count: data.users_count };
-      _this.$broadcast("app:sidebar:usersUpdate", _data);
+      _this.$broadcast("app:sidebar:usersCountUpdate", _data);
     };
 
     if (!shared.data.user) {
@@ -51,7 +51,7 @@ var rootController = {
       var roomId = currentRoomId ? currentRoomId : lobbyId;
       api.userRoomEnter(roomId, function(data, isSuccess) {
         if (isSuccess) {
-          broadcastUsersUpdate(roomId, data);
+          broadcastUsersCountUpdate(roomId, data);
           storage.set("currentRoomId", roomId);
           return next(null, true);
         } else {
@@ -66,7 +66,7 @@ var rootController = {
       // here leads him/her to the Lobby room
       api.userRoomEnter(lobbyId, function(data, isSuccess) {
         if (isSuccess) {
-          broadcastUsersUpdate(lobbyId, data);
+          broadcastUsersCountUpdate(lobbyId, data);
           storage.set("currentRoomId", lobbyId);
         } else {
           console.warn("Failed to enter Lobby channel");
