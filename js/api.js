@@ -19,9 +19,12 @@ var resource = function(url) {
 
 module.exports = {
   api: {
-    ping:      resource(API_HOST + "/api/ping"),
+    ping: resource(API_HOST + "/api/ping"),
+
     newUser:   resource(API_HOST + "/api/user/new"),
     checkName: resource(API_HOST + "/api/user/usable"),
+    userSelf:  resource(API_HOST + "/api/user"),
+    getUser:   resource(API_HOST + "/api/user{/id}"),
 
     allRooms:  resource(API_HOST + "/api/room"),
     roomEnter: resource(API_HOST + "/api/room/enter"),
@@ -46,6 +49,14 @@ module.exports = {
 
   checkNameAvailability: function(name, callback) {
     this.api.checkName.save({ name: name }).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
+    });
+  },
+
+  getSelfData: function(token, callback) {
+    this.api.userSelf.get({ token: token }, function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
