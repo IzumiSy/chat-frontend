@@ -71,8 +71,10 @@ module.exports = {
     });
   },
 
-  userRoomLeave: function(params, callback) {
-    this.api.roomLeave.delete(params).then(function(response) {
+  userRoomLeave: function(roomId, callback) {
+    var token = storage.get("token");
+    var params = { token: token, room_id: roomId };
+    this.api.roomLeave.save(params).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);

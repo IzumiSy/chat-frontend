@@ -4,16 +4,17 @@ var storage = require("../storage.js");
 
 var headerController = {
   logout: function() {
+    var currentRoomId = storage.get("currentRoomId");
+
     (new Bucks()).then(function(res, next) {
-      // TODO
-      // api.userRoomLeave(...)
-      // return false when getting error
-      return next(null, true);
+      // TODO Need any error handling here?
+      api.userRoomLeave(currentRoomId, function(data, isSuccess) {
+        return next();
+      });
     }).then(function(res, next) {
-      if (!res) return next(null, false);
       storage.remove("token");
       shared.jumpers.entrance();
-      return next(null, true);
+      return next();
     }).end();
   }
 };

@@ -2,6 +2,7 @@ var _ = require("underscore");
 var api = require("../api.js");
 var utils = require("../utils.js");
 var shared = require("../shared.js");
+var storage = require("../storage.js");
 
 var rootController = {
   created: function() {
@@ -10,6 +11,10 @@ var rootController = {
 
     if (!utils.checkLogin()) {
       shared.jumpers.entrance();
+    }
+
+    if (!shared.data.user) {
+      // fetch user data again
     }
 
     // Always an user enters Lobby at the first time when logging in.
@@ -26,10 +31,13 @@ var rootController = {
       });
     }).then(function(res, next) {
       if (!res) return next(null, false);
-      api.userRoomEnter(lobbyId, function(data, isSuccess) {
+      var currentRoomId = storage.get("currentRoomId");
+      var roomId = currentRoomId ? currentRoomId : lobbyId;
+      api.userRoomEnter(roomId, function(data, isSuccess) {
         if (isSuccess) {
-          var _data = { room_id: lobbyId, users_count: data.users_count };
+          var _data = { room_id: roomId, users_count: data.users_count };
           _this.$broadcast("app:sidebar:usersUpdate", _data);
+          storage.set("currentRoomId", roomId);
           return next(null, true);
         } else {
           console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");

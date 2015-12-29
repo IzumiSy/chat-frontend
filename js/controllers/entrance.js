@@ -41,6 +41,7 @@ var entranceController = {
       api.createNewUser(username, function(data, isSucceed) {
         if (isSucceed) {
           storage.set("token", data.token);
+          shared.data.user = data;
           shared.jumpers.root();
           return next(null, true);
         } else {
