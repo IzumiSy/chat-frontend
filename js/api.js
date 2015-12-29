@@ -29,53 +29,53 @@ module.exports = {
   },
 
   pingRequest: function(callback) {
-    this.api.ping.get({}, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.ping.get().then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   },
 
   createNewUser: function(name, callback) {
-    this.api.newUser.save({ name: name }, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.newUser.save({ name: name }).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   },
 
   checkNameAvailability: function(name, callback) {
-    this.api.checkName.save({ name: name }, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.checkName.save({ name: name }).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   },
 
   getAllRooms: function(callback) {
     var token = storage.get("token");
-    this.api.allRooms.get({ token: token }, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.allRooms.get({ token: token }).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   },
 
   userRoomEnter: function(roomId, callback) {
     var token = storage.get("token");
     var params = { token: token, room_id: roomId };
-    this.api.roomEnter.save(params, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.roomEnter.save(params).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   },
 
   userRoomLeave: function(params, callback) {
-    this.api.roomLeave.delete(params, function(data, stat) {
-      callback(data, true);
-    }).error(function(data, stat) {
-      callback(data, false);
+    this.api.roomLeave.delete(params).then(function(response) {
+      callback(response.data, true);
+    }, function(response) {
+      callback(response.data, false);
     });
   }
 };
