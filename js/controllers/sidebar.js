@@ -20,8 +20,8 @@ var sidebarController = {
     storage.set("currentRoomId", nextRoomId);
     _this.currentRoomId = nextRoomId;
 
-    // TODO Need any error handling here?
-    api.userRoomLeave(currentRoomId);
+    // userRoomLeave doesnt have to be called here.
+    // because userRoomEnter updates current room data to the new one.
     api.userRoomEnter(nextRoomId, function(data, isSuccess) {
       if (!isSuccess) {
         console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");
