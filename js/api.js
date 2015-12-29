@@ -56,7 +56,7 @@ module.exports = {
   },
 
   getSelfData: function(token, callback) {
-    this.api.userSelf.get({ token: token }, function(response) {
+    this.api.userSelf.get({ token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
