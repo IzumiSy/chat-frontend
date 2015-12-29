@@ -12,6 +12,10 @@
         float: right;
       }
 
+      &.current {
+        background-color: #384F66;
+      }
+
       &:hover {
         background-color: #384F66;
       }

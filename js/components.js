@@ -20,7 +20,8 @@ var _partials = {
     },
     created: controllers.partials.sidebar.created,
     methods: {
-      onRoomClicked: controllers.partials.sidebar.onRoomClicked
+      onRoomClicked: controllers.partials.sidebar.onRoomClicked,
+      isCurrentRoom: controllers.partials.sidebar.isCurrentRoom
     }
   },
 

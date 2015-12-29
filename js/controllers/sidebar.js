@@ -1,4 +1,5 @@
 var _ = require("underscore");
+var storage = require("../storage.js");
 
 var sidebarController = {
   created: function() {
@@ -15,6 +16,12 @@ var sidebarController = {
 
   onRoomClicked: function(room) {
     // TODO change room to the clicked one
+  },
+
+  isCurrentRoom: function(room) {
+    roomId = room.id
+    currentRoomId = storage.get("currentRoomId");
+    return roomId == currentRoomId;
   }
 };
 
