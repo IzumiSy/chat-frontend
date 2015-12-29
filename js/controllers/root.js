@@ -34,7 +34,6 @@ var rootController = {
           return next(null, false);
         }
       });
-
     }).end();
   }
 };
