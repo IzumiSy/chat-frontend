@@ -6,21 +6,35 @@ var storage = require("../storage.js");
 
 var rootController = {
   created: function() {
+    if (!utils.checkLogin()) {
+      shared.jumpers.entrance();
+      return;
+    }
+
     var _this = this;
     var lobbyId = null;
 
-    if (!utils.checkLogin()) {
-      shared.jumpers.entrance();
-    }
+    // Updates the number of users in the room on sidebar component
+    var broadcastUsersUpdate = function(roomId, data) {
+      var _data = { room_id: roomId, users_count: data.users_count };
+      _this.$broadcast("app:sidebar:usersUpdate", _data);
+    };
 
     if (!shared.data.user) {
-      // fetch user data again
+      var token = storage.get("token");
+      api.getSelfData(token, function(data, isSuccess) {
+        if (isSuccess) {
+          shared.data.user = data;
+        } else {
+          // TODO Needed to redirecto to error page?
+          console.warn("Error at getSelfData");
+        }
+      });
     }
 
-    // Always an user enters Lobby at the first time when logging in.
     (new Bucks()).then(function(res, next) {
       api.getAllRooms(function(data, isSuccess) {
-        if (!isSuccess || !data) {
+        if (!isSuccess || !data || !data.length) {
           console.warn("Error at api.getAllRooms");
           return next(null, false);
         }
@@ -31,18 +45,34 @@ var rootController = {
       });
     }).then(function(res, next) {
       if (!res) return next(null, false);
+
+      // Tries to enter the room from the roomId recorded in localStorage
       var currentRoomId = storage.get("currentRoomId");
       var roomId = currentRoomId ? currentRoomId : lobbyId;
       api.userRoomEnter(roomId, function(data, isSuccess) {
         if (isSuccess) {
-          var _data = { room_id: roomId, users_count: data.users_count };
-          _this.$broadcast("app:sidebar:usersUpdate", _data);
+          broadcastUsersUpdate(roomId, data);
           storage.set("currentRoomId", roomId);
           return next(null, true);
         } else {
           console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");
           return next(null, false);
         }
+      });
+    }).then(function(res, next) {
+      if (res) return next();
+
+      // If the user failed to enter the previous room
+      // here leads him/her to the Lobby room
+      api.userRoomEnter(lobbyId, function(data, isSuccess) {
+        if (isSuccess) {
+          broadcastUsersUpdate(lobbyId, data);
+          storage.set("currentRoomId", lobbyId);
+        } else {
+          console.warn("Failed to enter Lobby channel");
+          shared.jumpers.error();
+        }
+        return next();
       });
     }).end();
   }
