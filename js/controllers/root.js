@@ -28,6 +28,8 @@ var rootController = {
       if (!res) return next(null, false);
       api.userRoomEnter(lobbyId, function(data, isSuccess) {
         if (isSuccess) {
+          var _data = { room_id: lobbyId, users_count: data.users_count };
+          _this.$broadcast("app:sidebar:usersUpdate", _data);
           return next(null, true);
         } else {
           console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");
