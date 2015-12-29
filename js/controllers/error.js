@@ -1,4 +1,4 @@
-var shared = require("../shard.js");
+var shared = require("../shared.js");
 
 var errorController = {
   reload: function() {
