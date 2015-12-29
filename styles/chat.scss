@@ -1,0 +1,15 @@
+.sidebar {
+  ul.room-list {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    > li.room-item {
+      color: white;
+      padding: 5px 15px 5px 15px;
+
+      &:hover {
+        background-color: #384F66;
+      }
+    }
+  }
+}

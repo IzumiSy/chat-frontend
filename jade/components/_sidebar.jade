@@ -1,3 +1,4 @@
 .profile-section
 ul.room-list
-  // li.room-item
+  li.room-item(v-for="room in rooms")
+    {{ room.name }}
