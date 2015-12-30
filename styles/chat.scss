@@ -1,0 +1,55 @@
+@import "variables";
+
+@media (max-width: 1200px) {
+  .main-view {
+    margin-left: 300px;
+  }
+}
+
+@media (min-width: 1790px) {
+  .main-view {
+    margin-left: 0;
+    padding-left: 455px;
+    width: 100%;
+  }
+}
+
+.main-view {
+  position: absolute;
+  top: $header-height;
+  bottom: 0px;
+  left: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  > .main-row-container {
+    height: 100%;
+    padding-bottom: $input-form-height;
+
+    > .message-view-wrapper {
+      height: 100%;
+    }
+
+    > .message-input-wrapper {
+      height: $input-form-height;
+      margin-bottom: 0;
+      padding: 0;
+    }
+  }
+
+  .message-view {
+
+  }
+
+  .message-input {
+     padding: 10px;
+
+    .input-form-wrapper {
+      width: 100%;
+    }
+
+    .say-button {
+      width: 100%;
+    }
+  }
+}
