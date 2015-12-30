@@ -2,14 +2,14 @@
 
 @media (max-width: 1200px) {
   .main-view {
-    margin-left: 300px;
+    margin-left: $sidebar-min-width;
   }
 }
 
 @media (min-width: 1790px) {
   .main-view {
     margin-left: 0;
-    padding-left: 455px;
+    padding-left: ($sidebar-max-width + 5px);
     width: 100%;
   }
 }
