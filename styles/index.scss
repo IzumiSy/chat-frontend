@@ -32,7 +32,30 @@ body {
 
       .profile-section {
         margin-top: 15px;
+        padding-top: 10px;
         height: 200px;
+
+        > .picture {
+          text-align: center;
+
+          > img.profile-picture {
+            width: 150px;
+            height: 150px;
+          }
+        }
+
+        > .name {
+          color: white;
+          margin-left: 25%;
+          margin-right: 25%;
+
+          > .profile-name {
+            font-weight: bold;
+            width: 100%;
+            font-size: 20px;
+            margin-top: 10px;
+          }
+        }
       }
 
       ul {
@@ -40,6 +63,10 @@ body {
         padding-right: 10px;
         list-style-type: none;
         cursor: default;
+
+        &.room-list {
+          margin-top: 10px !important;
+        }
 
         li {
           color: white;
