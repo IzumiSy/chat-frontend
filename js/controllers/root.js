@@ -6,14 +6,18 @@ var storage = require("../storage.js");
 
 var fetchUsersAndMessages = function(_this, roomId) {
   api.getRoomUsers(roomId, function(data, isSuccess) {
-    if (isSuccess) {
-      // TODO Display all users in the room in sidebar
+    if (isSuccess && data) {
+      _this.$broadcast("app:sidebar:updateUsers", data);
+    } else {
+      console.warn("Error at api.getRoomUsers");
     }
   });
 
   api.getRoomMessages(roomId, function(data, isSuccess) {
-    if (isSuccess) {
+    if (isSuccess && data) {
       // TODO Display all messages in the center view
+    } else {
+      console.warn("Error at api.getRoomMessages");
     }
   });
 };

@@ -9,3 +9,8 @@ ul.room-list
       | {{ room.name }}
     span.badge
       | {{ room.users_count }}
+ul.user-list
+  li.user-item(v-for="user in users")
+    span.fui-user
+    span.name
+      | {{ user.name }}

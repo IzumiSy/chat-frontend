@@ -35,12 +35,37 @@ body {
         height: 200px;
       }
 
-      ul.room-list {
+      ul {
+        padding-left: 10px;
+        padding-right: 10px;
         list-style-type: none;
-      }
 
-      li.room-item {
+        li {
+          color: white;
+          padding: 5px 15px 5px 15px;
+        }
 
+        > .room-item {
+          > .badge {
+            margin-top: 5px;
+            float: right;
+          }
+
+          &.current {
+            background-color: #4E6277;
+          }
+
+          &:hover {
+            background-color: #384F66;
+          }
+        }
+
+        > .user-item {
+          .fui-user {
+            font-size: 15px;
+            margin-right: 5px;
+          }
+        }
       }
     }
 

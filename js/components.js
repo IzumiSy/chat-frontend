@@ -16,6 +16,7 @@ var _partials = {
     data: function() {
       return {
         rooms: [],
+        users: [],
         currentRoomId: null
       };
     },
