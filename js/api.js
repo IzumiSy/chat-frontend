@@ -24,11 +24,11 @@ module.exports = {
     newUser:   resource(API_HOST + "/api/user/new"),
     checkName: resource(API_HOST + "/api/user/usable"),
     userSelf:  resource(API_HOST + "/api/user"),
-    getUser:   resource(API_HOST + "/api/user{/id}"),
+    getUser:   resource(API_HOST + "/api/user/:id"),
 
     allRooms:  resource(API_HOST + "/api/room"),
-    getMsgs:   resource(API_HOST + "/api/room{/id}/messages"),
-    getUsers:  resource(API_HOST + "/api/room{/id}/users"),
+    getMsgs:   resource(API_HOST + "/api/room/:id/messages"),
+    getUsers:  resource(API_HOST + "/api/room/:id/users"),
     roomEnter: resource(API_HOST + "/api/room/enter"),
     roomLeave: resource(API_HOST + "/api/room/leave")
   },
