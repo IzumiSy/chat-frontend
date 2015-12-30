@@ -57,7 +57,8 @@ module.exports = {
     });
   },
 
-  getSelfData: function(token, callback) {
+  getSelfData: function(callback) {
+    var token = storage.get("token");
     this.api.userSelf.get({ token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
@@ -75,7 +76,8 @@ module.exports = {
   },
 
   getRoomUsers: function(roomId, callback) {
-    this.api.getUsers.get({ id: roomId }).then(function(response) {
+    var token = storage.get("token");
+    this.api.getUsers.get({ id: roomId }, { token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
@@ -83,7 +85,8 @@ module.exports = {
   },
 
   getRoomMessages: function(roomId, callback) {
-    this.api.getMsgs.get({ id: roomId }).then(function(response) {
+    var token = storage.get("token");
+    this.api.getMsgs.get({ id: roomId }, { token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
