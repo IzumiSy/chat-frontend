@@ -22,7 +22,8 @@ var _partials = {
     },
     created: controllers.partials.sidebar.created,
     methods: {
-      onRoomClicked: controllers.partials.sidebar.onRoomClicked
+      onRoomClicked: controllers.partials.sidebar.onRoomClicked,
+      onUserClicked: controllers.partials.sidebar.onUserClicked
     }
   },
 

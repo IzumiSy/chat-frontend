@@ -10,7 +10,10 @@ ul.room-list
     span.badge
       | {{ room.users_count }}
 ul.user-list
-  li.user-item(v-for="user in users")
+  li.user-item(
+    v-for="user in users"
+    v-on:click="onUserClicked(user)"
+  )
     span.fui-user
     span.name
       | {{ user.name }}

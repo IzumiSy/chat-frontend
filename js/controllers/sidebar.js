@@ -40,6 +40,10 @@ var sidebarController = {
         console.warn("Error at api.getRoomUsers: Id(" + nextRoomId + ")");
       }
     });
+  },
+
+  onUserClicked: function(user) {
+
   }
 };
 
