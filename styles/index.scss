@@ -39,6 +39,7 @@ body {
         padding-left: 10px;
         padding-right: 10px;
         list-style-type: none;
+        cursor: default;
 
         li {
           color: white;
@@ -64,6 +65,10 @@ body {
           .fui-user {
             font-size: 15px;
             margin-right: 5px;
+          }
+
+          &:hover {
+            background-color: #384F66;
           }
         }
       }
