@@ -29,6 +29,8 @@ body {
       bottom: 0;
       left: 0;
       background-color: #2c3e50;
+      min-width: 300px;
+      max-width: 450px;
 
       .profile-section {
         margin-top: 15px;
@@ -101,6 +103,20 @@ body {
       }
     }
 
+    @media (max-width: 1200px) {
+      .main-view {
+        margin-left: 300px;
+      }
+    }
+
+    @media (min-width: 1790px) {
+      .main-view {
+        margin-left: 0;
+        padding-left: 455px;
+        width: 100%;
+      }
+    }
+
     .main-view {
       position: absolute;
       top: $header-height;
@@ -120,6 +136,7 @@ body {
         > .message-input-wrapper {
           height: $input-form-height;
           margin-bottom: 0;
+          padding: 0;
         }
       }
 
