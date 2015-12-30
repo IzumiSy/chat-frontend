@@ -4,6 +4,44 @@ var utils = require("../utils.js");
 var shared = require("../shared.js");
 var storage = require("../storage.js");
 
+var fetchUsersAndMessages = function(_this, roomId) {
+  api.getRoomUsers(roomId, function(data, isSuccess) {
+    if (isSuccess) {
+      // TODO Display all users in the room in sidebar
+    }
+  });
+
+  api.getRoomMessages(roomId, function(data, isSuccess) {
+    if (isSuccess) {
+      // TODO Display all messages in the center view
+    }
+  });
+};
+
+var prefetchSelfData = function() {
+  api.getSelfData(function(data, isSuccess) {
+    if (isSuccess) {
+      shared.data.user = data;
+    } else {
+      // TODO Needed to redirecto to error page?
+      console.warn("Error at getSelfData");
+    }
+  });
+};
+
+var enterRoom = function(_this, bucksNext, roomId) {
+  api.userRoomEnter(roomId, function(data, isSuccess) {
+    if (isSuccess) {
+      _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
+      storage.set("currentRoomId", roomId);
+      return bucksNext(null, true);
+    } else {
+      console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
+      return bucksNext(null, false);
+    }
+  });
+};
+
 var rootController = {
   created: function() {
     if (!utils.checkLogin()) {
@@ -13,17 +51,14 @@ var rootController = {
 
     var _this = this;
     var lobbyId = null;
+    var currentRoomId = storage.get("currentRoomId");
 
     if (!shared.data.user) {
-      var token = storage.get("token");
-      api.getSelfData(token, function(data, isSuccess) {
-        if (isSuccess) {
-          shared.data.user = data;
-        } else {
-          // TODO Needed to redirecto to error page?
-          console.warn("Error at getSelfData");
-        }
-      });
+      prefetchSelfData();
+    }
+
+    if (currentRoomId) {
+      fetchUsersAndMessages(_this, currentRoomId);
     }
 
     (new Bucks()).then(function(res, next) {
@@ -39,35 +74,18 @@ var rootController = {
       });
     }).then(function(res, next) {
       if (!res) return next(null, false);
-
-      // Tries to enter the room from the roomId recorded in localStorage
       var currentRoomId = storage.get("currentRoomId");
       var roomId = currentRoomId ? currentRoomId : lobbyId;
-      api.userRoomEnter(roomId, function(data, isSuccess) {
-        if (isSuccess) {
-          _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-          storage.set("currentRoomId", roomId);
-          return next(null, true);
-        } else {
-          console.warn("Error at api.userRoomEnter: Id(" + lobbyId + ")");
-          return next(null, false);
-        }
-      });
+      enterRoom(_this, next, roomId);
     }).then(function(res, next) {
       if (res) return next();
-
-      // If the user failed to enter the previous room
-      // here leads him/her to the Lobby room
-      api.userRoomEnter(lobbyId, function(data, isSuccess) {
-        if (isSuccess) {
-          _this.$broadcast("app:sidebar:setCurrentRoom", lobbyId);
-          storage.set("currentRoomId", lobbyId);
-        } else {
-          console.warn("Failed to enter Lobby channel");
-          shared.jumpers.error();
-        }
-        return next();
-      });
+      enterRoom(_this, next, lobbyId);
+    }).then(function(res, next) {
+      if (!currentRoomId) {
+        currentRoomId = storage.get("currentRoomId");
+        fetchUsersAndMessages(_this, currentRoomId);
+      }
+      return next();
     }).end();
   }
 };
