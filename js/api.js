@@ -29,8 +29,8 @@ module.exports = {
     allRooms:  resource(API_HOST + "/api/room"),
     getMsgs:   resource(API_HOST + "/api/room/:id/messages"),
     getUsers:  resource(API_HOST + "/api/room/:id/users"),
-    roomEnter: resource(API_HOST + "/api/room/enter"),
-    roomLeave: resource(API_HOST + "/api/room/leave")
+    roomEnter: resource(API_HOST + "/api/room/:id/enter"),
+    roomLeave: resource(API_HOST + "/api/room/:id/leave")
   },
 
   pingRequest: function(callback) {
@@ -95,8 +95,7 @@ module.exports = {
 
   userRoomEnter: function(roomId, callback) {
     var token = storage.get("token");
-    var params = { token: token, room_id: roomId };
-    this.api.roomEnter.save(params).then(function(response) {
+    this.api.roomEnter.save({ id: roomId }, { token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
@@ -105,8 +104,7 @@ module.exports = {
 
   userRoomLeave: function(roomId, callback) {
     var token = storage.get("token");
-    var params = { token: token, room_id: roomId };
-    this.api.roomLeave.save(params).then(function(response) {
+    this.api.roomLeave.save({ id: roomId }, { token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
