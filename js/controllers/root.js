@@ -77,7 +77,7 @@ var rootController = {
         }
         _this.rooms = data;
         _this.$broadcast("app:sidebar:updateRooms", data);
-        lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby"; }).id;
+        lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby"; })._id;
         return next(null, true);
       });
     }).then(function(res, next) {
