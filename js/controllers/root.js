@@ -67,9 +67,13 @@ var rootController = {
 
     (new Bucks()).then(function(res, next) {
       api.getAllRooms(function(data, isSuccess) {
-        if (!isSuccess || !data || !data.length) {
+        if (!isSuccess || !data) {
           console.warn("Error at api.getAllRooms");
           return next(null, false);
+        } else if (!data.length) {
+          console.warn("Lobby room not found");
+          shared.jumpers.error();
+          return;
         }
         _this.rooms = data;
         _this.$broadcast("app:sidebar:updateRooms", data);
