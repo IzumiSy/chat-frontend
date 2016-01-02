@@ -7,11 +7,11 @@ var headerController = {
     var currentRoomId = storage.get("currentRoomId");
 
     // TODO Need any error handling here?
-    api.userRoomLeave(currentRoomId, function() {
-      storage.remove("token");
-      storage.remove("currentRoomId");
-      shared.jumpers.entrance();
-    });
+    api.userRoomLeave(currentRoomId, function() {});
+
+    storage.remove("token");
+    storage.remove("currentRoomId");
+    shared.jumpers.entrance();
   }
 };
 
