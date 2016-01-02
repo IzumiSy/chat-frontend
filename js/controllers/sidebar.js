@@ -1,5 +1,6 @@
 var _ = require("underscore");
 var storage = require("../storage.js");
+var shared = require("../shared.js");
 var api = require("../api.js");
 
 var sidebarController = {
@@ -14,6 +15,8 @@ var sidebarController = {
     this.$on("app:sidebar:updateUsers", function(data) {
       this.$set("users", data);
     });
+
+    this.$set("currentUser", shared.data.user);
   },
 
   onRoomClicked: function(room) {
