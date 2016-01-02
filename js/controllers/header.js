@@ -11,7 +11,7 @@ var headerController = {
     shared.jumpers.entrance();
 
     // TODO Need any error handling here?
-    api.userRoomLeave(currentRoomId);
+    api.userRoomLeave(currentRoomId, function() {});
   }
 };
 
