@@ -8,8 +8,8 @@
 
 @media (min-width: 1000px) {
   .main-view {
-    margin-left: 0;
-    padding-left: $sidebar-max-width + 15px;
+    padding-right: $sidebar-max-width + (15px + 30px);
+    margin-left: $sidebar-max-width + 15px;
     width: 100%;
   }
 }
