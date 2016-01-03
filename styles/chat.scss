@@ -8,8 +8,8 @@
 
 @media (min-width: 1000px) {
   .main-view {
-    padding-right: $sidebar-max-width + (15px + 30px);
-    margin-left: $sidebar-max-width + 15px;
+    padding-right: $sidebar-max-width + 20px;
+    margin-left: $sidebar-max-width;
     width: 100%;
   }
 }
@@ -23,6 +23,10 @@
   > .main-row-container {
     height: 100%;
     padding-bottom: $input-form-height;
+
+    .input-form-column {
+      padding-right: 0;
+    }
 
     > .message-view-wrapper {
       height: 100%;
