@@ -13,7 +13,7 @@
   .profile-section {
     margin-top: 15px;
     padding-top: 10px;
-    height: 200px;
+    height: $profile-section-height;
 
     > .picture {
       text-align: center;
@@ -42,6 +42,7 @@
   }
 
   ul {
+    font-size: $sidebar-list-font-size;
     padding-left: 10px;
     padding-right: 10px;
     list-style-type: none;
@@ -66,7 +67,7 @@
 
     > .room-item {
       > .badge {
-        margin-top: 5px;
+        margin-top: 2px;
         float: right;
       }
     }
@@ -75,7 +76,6 @@
       @include truncate;
 
       .fui-user {
-        font-size: 15px;
         margin-right: 5px;
       }
     }
