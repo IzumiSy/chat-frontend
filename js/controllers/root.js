@@ -1,7 +1,6 @@
 var api = require("../api.js");
 var utils = require("../utils.js");
 var shared = require("../shared.js");
-var storage = require("../storage.js");
 
 var fetchUsersAndMessages = function(_this, roomId) {
   api.getRoomUsers(roomId, function(data, isSuccess) {
@@ -26,7 +25,7 @@ var enterRoom = function(_this, bucksNext, roomId) {
   api.userRoomEnter(roomId, function(data, isSuccess) {
     if (isSuccess) {
       _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-      storage.set("currentRoomId", roomId);
+      shared.data.currentRoomId = roomId;
       return bucksNext(null, true);
     } else {
       console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
@@ -59,8 +58,7 @@ var rootController = {
       enterRoom(_this, next, lobbyId);
     }).then(function(res, next) {
       if (!res) return next();
-      currentRoomId = storage.get("currentRoomId");
-      fetchUsersAndMessages(_this, currentRoomId);
+      fetchUsersAndMessages(_this, shared.data.currentRoomId);
       return next();
     }).end();
   }

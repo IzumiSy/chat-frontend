@@ -2,14 +2,12 @@ var api = require("../api.js");
 var shared = require("../shared.js");
 var storage = require("../storage.js");
 
+// TODO Need any error handling here?
 var leaveTransaction = function() {
-  var currentRoomId = storage.get("currentRoomId");
-
-  // TODO Need any error handling here?
+  var currentRoomId =
+    shared.data.currentRoomId ? shared.data.currentRoomId : "all";
   api.userRoomLeave(currentRoomId, function() {});
-
   storage.remove("token");
-  storage.remove("currentRoomId");
   shared.jumpers.entrance();
 };
 

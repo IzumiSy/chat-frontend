@@ -1,5 +1,4 @@
 var _ = require("underscore");
-var storage = require("../storage.js");
 var shared = require("../shared.js");
 var api = require("../api.js");
 
@@ -20,11 +19,11 @@ var sidebarController = {
   },
 
   onRoomClicked: function(room) {
-    var currentRoomId = storage.get("currentRoomId");
+    var currentRoomId = shared.data.currentRoomId;
     var nextRoomId = room._id;
     var _this = this;
 
-    storage.set("currentRoomId", nextRoomId);
+    shared.data.currentRoomId = nextRoomId;
     _this.$set("currentRoomId", nextRoomId);
     _this.$set("users", []);
 
