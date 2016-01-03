@@ -38,7 +38,7 @@ var enterRoom = function(_this, bucksNext, roomId) {
 var rootController = {
   ready: function() {
     if (!utils.checkLogin() || !shared.data.user) {
-      _this.$broadcast("logout");
+      this.$broadcast("logout");
       return;
     }
 
