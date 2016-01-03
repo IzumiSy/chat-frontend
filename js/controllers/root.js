@@ -22,6 +22,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
   });
 };
 
+/*
 var prefetchSelfData = function() {
   api.getSelfData(function(data, isSuccess) {
     if (isSuccess) {
@@ -32,6 +33,7 @@ var prefetchSelfData = function() {
     }
   });
 };
+*/
 
 var enterRoom = function(_this, bucksNext, roomId) {
   api.userRoomEnter(roomId, function(data, isSuccess) {
@@ -47,7 +49,7 @@ var enterRoom = function(_this, bucksNext, roomId) {
 };
 
 var rootController = {
-  created: function() {
+  ready: function() {
     if (!utils.checkLogin()) {
       shared.jumpers.entrance();
       return;
@@ -58,7 +60,8 @@ var rootController = {
     var currentRoomId = storage.get("currentRoomId");
 
     if (!shared.data.user) {
-      prefetchSelfData();
+      _this.$broadcast("logout");
+      return;
     }
 
     if (currentRoomId) {

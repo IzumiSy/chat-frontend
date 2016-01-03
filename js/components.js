@@ -6,6 +6,7 @@ var controllers = require("./controllers.js");
 var _partials = {
   header: {
     template: require("./components/_header.html"),
+    created: controllers.partials.header.created,
     methods: {
       logout: controllers.partials.header.logout
     }
@@ -57,7 +58,7 @@ var _pages = {
       };
     },
     template: require("./main.html"),
-    created: controllers.root.created
+    ready: controllers.root.ready
   },
 
   entrance: {
