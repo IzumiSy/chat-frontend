@@ -1,15 +1,15 @@
 @import "variables";
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   .main-view {
     margin-left: $sidebar-min-width;
   }
 }
 
-@media (min-width: 1790px) {
+@media (min-width: 1000px) {
   .main-view {
     margin-left: 0;
-    padding-left: ($sidebar-max-width + 5px);
+    padding-left: $sidebar-max-width + 15px;
     width: 100%;
   }
 }
@@ -19,8 +19,6 @@
   top: $header-height;
   bottom: 0px;
   left: 0px;
-  padding-top: 10px;
-  padding-bottom: 10px;
 
   > .main-row-container {
     height: 100%;
@@ -42,10 +40,19 @@
   }
 
   .message-input {
-     padding: 10px;
+    margin-top: 10px;
 
     .input-form-wrapper {
       width: 100%;
+
+      input {
+        height: 35px;
+      }
+    }
+
+    a.btn {
+      height: 35px;
+      padding: 6px 12px;
     }
 
     .say-button {
