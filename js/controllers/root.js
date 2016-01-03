@@ -1,4 +1,3 @@
-var _ = require("underscore");
 var api = require("../api.js");
 var utils = require("../utils.js");
 var shared = require("../shared.js");
@@ -8,6 +7,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
   api.getRoomUsers(roomId, function(data, isSuccess) {
     if (isSuccess && data) {
       _this.$broadcast("app:sidebar:updateUsers", data);
+      shared.data.currentRoomUsers = data;
     } else {
       console.warn("Error at api.getRoomUsers");
     }
@@ -43,41 +43,24 @@ var rootController = {
     }
 
     var _this = this;
-    var lobbyId = null;
-    var currentRoomId = storage.get("currentRoomId");
+    var lobbyId = shared.data.lobbyId;
+    var rooms = shared.data.rooms;
 
-    if (currentRoomId) {
-      fetchUsersAndMessages(_this, currentRoomId);
+    // TODO Here should be rewritten to be more user-friendly
+    if (!lobbyId || !rooms.length) {
+      console.warn("Internal error seems to have occurred.");
+      shared.jumpers.error();
+      return;
     }
 
+    _this.$broadcast("app:sidebar:updateRooms", rooms);
+
     (new Bucks()).then(function(res, next) {
-      api.getAllRooms(function(data, isSuccess) {
-        if (!isSuccess || !data) {
-          console.warn("Error at api.getAllRooms");
-          return next(null, false);
-        } else if (!data.length) {
-          console.warn("Lobby room not found");
-          shared.jumpers.error();
-          return;
-        }
-        _this.rooms = data;
-        _this.$broadcast("app:sidebar:updateRooms", data);
-        lobbyId = _.find(_this.rooms, function(r) { return r.name == "Lobby"; })._id;
-        return next(null, true);
-      });
-    }).then(function(res, next) {
-      if (!res) return next(null, false);
-      var currentRoomId = storage.get("currentRoomId");
-      var roomId = currentRoomId ? currentRoomId : lobbyId;
-      enterRoom(_this, next, roomId);
-    }).then(function(res, next) {
-      if (res) return next();
       enterRoom(_this, next, lobbyId);
     }).then(function(res, next) {
-      if (!currentRoomId) {
-        currentRoomId = storage.get("currentRoomId");
-        fetchUsersAndMessages(_this, currentRoomId);
-      }
+      if (!res) return next();
+      currentRoomId = storage.get("currentRoomId");
+      fetchUsersAndMessages(_this, currentRoomId);
       return next();
     }).end();
   }
