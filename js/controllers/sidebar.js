@@ -21,11 +21,11 @@ var sidebarController = {
 
   onRoomClicked: function(room) {
     var currentRoomId = storage.get("currentRoomId");
-    var nextRoomId = room.id;
+    var nextRoomId = room._id;
     var _this = this;
 
     storage.set("currentRoomId", nextRoomId);
-    _this.currentRoomId = nextRoomId;
+    _this.$set("currentRoomId", nextRoomId);
     _this.$set("users", []);
 
     // userRoomLeave doesnt have to be called here.
