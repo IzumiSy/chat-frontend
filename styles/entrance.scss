@@ -12,22 +12,30 @@ body {
       background-color: #edeff1;
       border-radius: 6px;
       min-height: 300px;
+      max-height: 350px;
       min-width: 300px;
-      max-width: 550px;
+      max-width: 450px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 100px;
+      margin-top: 80px;
 
       img.logo {
         position: relative;
         margin-top: 30px;
-        margin: 30px 175px;
+        margin: 30px 150px;
+        height: 150px;
+        width: 150px;
       }
 
       .form-group.name {
         padding: 30px;
         padding-top: 10px;
         padding-bottom: 0;
+
+        > input {
+          height: 35px;
+          font-size: 12px;
+        }
       }
 
       .form-group.enter {
@@ -36,8 +44,13 @@ body {
         padding-top: 0;
         padding-bottom: 0;
 
+        > a.btn {
+          height: 35px;
+          font-size: 12px;
+        }
+
         p.message {
-          font-size: 15px;
+          font-size: 12px;
           height: 35px;
           text-align: center;
           padding-top: 5px;
