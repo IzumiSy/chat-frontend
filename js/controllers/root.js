@@ -22,19 +22,6 @@ var fetchUsersAndMessages = function(_this, roomId) {
   });
 };
 
-/*
-var prefetchSelfData = function() {
-  api.getSelfData(function(data, isSuccess) {
-    if (isSuccess) {
-      shared.data.user = data;
-    } else {
-      // TODO Needed to redirecto to error page?
-      console.warn("Error at getSelfData");
-    }
-  });
-};
-*/
-
 var enterRoom = function(_this, bucksNext, roomId) {
   api.userRoomEnter(roomId, function(data, isSuccess) {
     if (isSuccess) {
