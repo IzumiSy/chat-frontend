@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .sidebar {
   position: fixed;
@@ -68,6 +69,8 @@
     }
 
     > .user-item {
+      @include truncate;
+
       .fui-user {
         font-size: 15px;
         margin-right: 5px;
