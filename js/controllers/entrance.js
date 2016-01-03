@@ -56,7 +56,7 @@ var entranceController = {
     (new Bucks()).then(function(res, next) {
       api.pingRequest(function(data, isSucceed) {
         if (isSucceed) return next();
-        shared.jumpers.error()
+        shared.jumpers.error();
         return;
       });
     }).then(function(res, next) {
