@@ -51,15 +51,6 @@ module.exports = {
       '*': '/'
     });
 
-    // Always run ping check before transitions
-    routings.beforeEach(function() {
-      api.pingRequest(function(data, isSucceed) {
-        if (!isSucceed) {
-          routings.go({ path: "/error" });
-        }
-      });
-    });
-
     // Im not really sure about it, but shared object
     // gets clear after routings.start(...), so jumpers
     // have to be set just at here. Need more investigation.

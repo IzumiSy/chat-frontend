@@ -37,19 +37,14 @@ var enterRoom = function(_this, bucksNext, roomId) {
 
 var rootController = {
   ready: function() {
-    if (!utils.checkLogin()) {
-      shared.jumpers.entrance();
+    if (!utils.checkLogin() || !shared.data.user) {
+      _this.$broadcast("logout");
       return;
     }
 
     var _this = this;
     var lobbyId = null;
     var currentRoomId = storage.get("currentRoomId");
-
-    if (!shared.data.user) {
-      _this.$broadcast("logout");
-      return;
-    }
 
     if (currentRoomId) {
       fetchUsersAndMessages(_this, currentRoomId);

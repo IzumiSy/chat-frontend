@@ -53,11 +53,18 @@ var entranceController = {
   },
 
   created: function() {
-    var token = storage.get("token");
-    if (token) {
-      shared.jumpers.root();
-      return;
-    }
+    (new Bucks()).then(function(res, next) {
+      api.pingRequest(function(data, isSucceed) {
+        if (isSucceed) return next();
+        shared.jumpers.error()
+        return;
+      });
+    }).then(function(res, next) {
+      if (storage.get("token")) {
+        shared.jumpers.root();
+        return next();
+      }
+    }).end();
   }
 };
 
