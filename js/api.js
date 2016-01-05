@@ -29,7 +29,7 @@ module.exports = {
     allRooms:      resource(API_HOST + "/api/room"),
     getMsgs:       resource(API_HOST + "/api/room/:id/messages"),
     getUsers:      resource(API_HOST + "/api/room/:id/users"),
-    roomSubscribe: resource(API_HOST + "/api/room/:id/subscribe")
+    roomSubscribe: resource(API_HOST + "/api/room/:id/subscribe"),
     roomEnter:     resource(API_HOST + "/api/room/:id/enter"),
     roomLeave:     resource(API_HOST + "/api/room/:id/leave")
   },
