@@ -14,7 +14,7 @@ var app = new Vue({
   },
 
   created: function() {
-    if (!storage.isAvailable) {
+    if (!EventSource) {
       // Show a message that says "Your browser cannot browse this page"
     }
 

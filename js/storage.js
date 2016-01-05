@@ -1,6 +1,8 @@
 var functions = {
   cacheData: {},
 
+  // TODO If the browse does not support localStorage
+  // storage module wraps straging with shared.js module
   isAvailable: function() {
     return !window.sessionStorage;
   },
