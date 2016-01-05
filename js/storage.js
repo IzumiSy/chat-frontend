@@ -1,27 +1,42 @@
-var functions = {
-  cacheData: {},
+var shared = require("./shared.js");
 
-  // TODO If the browse does not support localStorage
-  // storage module wraps straging with shared.js module
+// If the browse does not support localStorage
+// storage module wraps straging with shared.js module
+var functions = {
   isAvailable: function() {
-    return !window.sessionStorage;
+    isStorageAvailable = !window.sessionStorage;
+    if (!isStorageAvailable) {
+      shared.data.storageData = [];
+    }
+    return isStorageAvailable;
   },
 
   set: function(key, value) {
+    var item;
     if (window.sessionStorage) {
-      return window.sessionStorage.setItem(key, value);
+      item = window.sessionStorage.setItem(key, value);
+    } else {
+      item = { key: key, value: value };
+      shared.data.storageData[key] = value;
     }
+    return item
   },
 
   get: function(key) {
+    var item;
     if (window.sessionStorage) {
-      return window.sessionStorage.getItem(key);
+      item = window.sessionStorage.getItem(key);
+    } else {
+      item = shared.data.storageData[key];
     }
+    return item;
   },
 
   remove: function(key) {
     if (window.sessionStorage) {
-      return window.sessionStorage.removeItem(key);
+      window.sessionStorage.removeItem(key);
+    } else {
+      delete shared.data.storageData[key]
     }
   }
 };
