@@ -19,7 +19,7 @@ var functions = {
       item = { key: key, value: value };
       shared.data.storageData[key] = value;
     }
-    return item
+    return item;
   },
 
   get: function(key) {
@@ -36,7 +36,7 @@ var functions = {
     if (window.sessionStorage) {
       window.sessionStorage.removeItem(key);
     } else {
-      delete shared.data.storageData[key]
+      delete shared.data.storageData[key];
     }
   }
 };
