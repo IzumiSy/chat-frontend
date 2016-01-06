@@ -26,11 +26,13 @@ module.exports = {
     userSelf:  resource(API_HOST + "/api/user"),
     getUser:   resource(API_HOST + "/api/user/:id"),
 
-    allRooms:      resource(API_HOST + "/api/room"),
-    getMsgs:       resource(API_HOST + "/api/room/:id/messages"),
-    getUsers:      resource(API_HOST + "/api/room/:id/users"),
-    roomEnter:     resource(API_HOST + "/api/room/:id/enter"),
-    roomLeave:     resource(API_HOST + "/api/room/:id/leave")
+    allRooms:  resource(API_HOST + "/api/room"),
+    getMsgs:   resource(API_HOST + "/api/room/:id/messages"),
+    getUsers:  resource(API_HOST + "/api/room/:id/users"),
+    roomEnter: resource(API_HOST + "/api/room/:id/enter"),
+    roomLeave: resource(API_HOST + "/api/room/:id/leave"),
+
+    sendMessage: resource(API_HOST + "/api/message/:id")
   },
 
   pingRequest: function(callback) {
@@ -108,6 +110,15 @@ module.exports = {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
+    });
+  },
+
+  sendMessage: function(roomId, callback) {
+    var token = storage.get("token");
+    this.api.sendMessage.save({ id: roomId }, { token: token }).then(function(response) {
+      callback(response);
+    }, function(response) {
+      callback(response);
     });
   },
 
