@@ -113,12 +113,13 @@ module.exports = {
     });
   },
 
-  sendMessage: function(roomId, callback) {
+  sendMessage: function(roomId, message, callback) {
     var token = storage.get("token");
-    this.api.sendMessage.save({ id: roomId }, { token: token }).then(function(response) {
-      callback(response);
+    var params = { content: message, token: token };
+    this.api.sendMessage.save({ id: roomId }, params).then(function(response) {
+      callback(response.data, true);
     }, function(response) {
-      callback(response);
+      callback(response.data, false);
     });
   },
 
