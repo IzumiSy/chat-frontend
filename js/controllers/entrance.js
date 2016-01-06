@@ -60,7 +60,9 @@ var entranceController = {
           return next(null, false);
         }
         shared.data.rooms = data;
-        shared.data.lobbyId = _.find(shared.data.rooms, function(r) { return r.name == "Lobby"; })._id;
+        shared.data.lobbyId = _.find(shared.data.rooms, function(r) {
+          return r.name == "Lobby";
+        })._id.$oid;
         shared.jumpers.root();
       });
       return next();

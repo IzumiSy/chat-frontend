@@ -20,7 +20,7 @@ var sidebarController = {
 
   onRoomClicked: function(room) {
     var currentRoomId = shared.data.currentRoomId;
-    var nextRoomId = room._id;
+    var nextRoomId = room._id.$oid;
     var _this = this;
 
     shared.data.currentRoomId = nextRoomId;
