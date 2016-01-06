@@ -30,7 +30,13 @@ var _partials = {
   },
 
   message_view: {
-    template: require("./components/_message_view.html")
+    template: require("./components/_message_view.html"),
+    data: function() {
+      return {
+        messages: []
+      };
+    },
+    created: controllers.partials.messageView.created
   },
 
   message_input: {

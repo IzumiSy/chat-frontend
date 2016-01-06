@@ -5,6 +5,7 @@ var controllers = {
 
   partials: {
     messageInput: require("./controllers/messageInput.js"),
+    messageView:  require("./controllers/messageView.js"),
     header:       require("./controllers/header.js"),
     sidebar:      require("./controllers/sidebar.js")
   }
