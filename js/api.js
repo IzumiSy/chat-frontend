@@ -29,7 +29,6 @@ module.exports = {
     allRooms:      resource(API_HOST + "/api/room"),
     getMsgs:       resource(API_HOST + "/api/room/:id/messages"),
     getUsers:      resource(API_HOST + "/api/room/:id/users"),
-    roomSubscribe: resource(API_HOST + "/api/room/:id/subscribe"),
     roomEnter:     resource(API_HOST + "/api/room/:id/enter"),
     roomLeave:     resource(API_HOST + "/api/room/:id/leave")
   },
@@ -88,15 +87,6 @@ module.exports = {
   getRoomMessages: function(roomId, callback) {
     var token = storage.get("token");
     this.api.getMsgs.get({ id: roomId }, { token: token }).then(function(response) {
-      callback(response.data, true);
-    }, function(response) {
-      callback(response.data, false);
-    });
-  },
-
-  roomSubscribe: function(roomId, callback) {
-    var token = storage.get("token");
-    this.api.roomSubscribe({ id: roomId }, { token: token }).then(function(response) {
       callback(response.data, true);
     }, function(response) {
       callback(response.data, false);
