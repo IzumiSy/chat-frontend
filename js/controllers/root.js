@@ -21,6 +21,10 @@ var fetchUsersAndMessages = function(_this, roomId) {
   });
 };
 
+var setupNewMessageListener = function(_this, roomId) {
+
+};
+
 var enterRoom = function(_this, bucksNext, roomId) {
   api.userRoomEnter(roomId, function(data, isSuccess) {
     if (isSuccess) {
@@ -59,6 +63,7 @@ var rootController = {
     }).then(function(res, next) {
       if (!res) return next();
       fetchUsersAndMessages(_this, shared.data.currentRoomId);
+      setupNewMessageListener(_this, shared.data.currentRoomId);
       return next();
     }).end();
   }

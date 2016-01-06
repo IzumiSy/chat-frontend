@@ -54,7 +54,8 @@ var _pages = {
     },
     data: function() {
       return {
-        rooms: []
+        rooms: [],
+        msgListener: null
       };
     },
     template: require("./main.html"),
