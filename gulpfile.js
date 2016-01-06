@@ -45,6 +45,7 @@ var targets = {
     ],
 
     js: [
+      "./rocket.io/rocketio.js",
       "./node_modules/jquery/dist/jquery.js",
       "./node_modules/bootstrap/dist/js/bootstrap.js",
       "./node_modules/vue/dist/vue.js",
