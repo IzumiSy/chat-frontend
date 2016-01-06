@@ -112,6 +112,8 @@ module.exports = {
   },
 
   connectRocketIO: function(roomId) {
-    return (new RocketIO({ roomId: roomId })).connect(API_HOST);
+    var token = storage.get("token");
+    var params = { roomId: roomId, token: token };
+    return (new RocketIO(params)).connect(API_HOST);
   }
 };
