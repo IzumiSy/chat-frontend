@@ -22,8 +22,8 @@ var fetchUsersAndMessages = function(_this, roomId) {
 };
 
 var setupNewMessageListener = function(_this, roomId) {
-  data.shared.rocketio = api.connectRocketIO(roomId);
-  data.shared.rocketio.on("newMessage", function(data) {
+  shared.data.rocketio = api.connectRocketIO(roomId);
+  shared.data.rocketio.on("newMessage", function(data) {
      // TODO brodcast new message to the main-view
   });
 };
