@@ -36,7 +36,9 @@ var _partials = {
   message_input: {
     template: require("./components/_message_input.html"),
     data: function() {
-      message: null
+      return {
+        message: null
+      };
     },
     methods: {
       sendMessage: controllers.partials.messageInput.sendMessage
