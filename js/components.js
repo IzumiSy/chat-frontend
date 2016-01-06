@@ -79,6 +79,7 @@ var _pages = {
 
   error: {
     template: require("./error.html"),
+    created: controllers.error.created,
     methods: {
       reload: controllers.error.reload
     }
