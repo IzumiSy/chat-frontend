@@ -111,7 +111,7 @@ module.exports = {
     });
   },
 
-  connectRocketIO: function() {
-    return (new RocketIO()).connect(API_HOST);
+  connectRocketIO: function(roomId) {
+    return (new RocketIO({ roomId: roomId })).connect(API_HOST);
   }
 };

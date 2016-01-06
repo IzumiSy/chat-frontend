@@ -22,7 +22,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
 };
 
 var setupNewMessageListener = function(_this, roomId) {
-  data.shared.rocketio = api.connectRocketIO();
+  data.shared.rocketio = api.connectRocketIO(roomId);
 };
 
 var enterRoom = function(_this, bucksNext, roomId) {
