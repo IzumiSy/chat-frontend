@@ -109,5 +109,9 @@ module.exports = {
     }, function(response) {
       callback(response.data, false);
     });
+  },
+
+  connectRocketIO: function() {
+    return (new RocketIO()).connect(API_HOST);
   }
 };
