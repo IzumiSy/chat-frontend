@@ -32,6 +32,7 @@
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
     "nanoscroller": "^0.8.7",
+    "rocketio-client": "0.0.4",
     "stringify": "^3.1.0",
     "underscore": "^1.8.3",
     "vinyl-source-stream": "^1.1.0",
