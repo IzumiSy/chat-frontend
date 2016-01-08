@@ -124,8 +124,6 @@ module.exports = {
   },
 
   connectRocketIO: function(roomId) {
-    var token = storage.get("token");
-    var params = { roomId: roomId, token: token };
-    return (new RocketIO(params)).connect(API_HOST);
+    return (new RocketIO({ channel: roomId })).connect(API_HOST);
   }
 };
