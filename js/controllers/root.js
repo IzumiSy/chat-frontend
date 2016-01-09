@@ -14,7 +14,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
 
   api.getRoomMessages(roomId, function(data, isSuccess) {
     if (isSuccess && data) {
-      // TODO Display all messages in the center view
+      _this.$broadcast("app:msgView:setMessage", data);
     } else {
       console.warn("Error at api.getRoomMessages");
     }
@@ -24,7 +24,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
 var setupNewMessageListener = function(_this, roomId) {
   shared.data.rocketio = api.connectRocketIO(roomId);
   shared.data.rocketio.on("newMessage", function(data) {
-     // TODO brodcast new message to the main-view
+    _this.$broadcast("app:msgView:addMessage", data);
   });
 };
 

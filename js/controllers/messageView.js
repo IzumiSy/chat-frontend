@@ -1,7 +1,7 @@
 var messageViewController = {
   created: function() {
     this.$once("app:msgView:setMessage", function(messages) {
-      // TODO set old messages
+      this.$set("messages", messages);
     });
 
     this.$on("app:msgView:addMessage", function(message) {
