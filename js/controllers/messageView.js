@@ -4,7 +4,7 @@ var messageViewController = {
       this.$set("messages", messages);
     });
 
-    this.$on("app:msgView:addMessage", function(message) {
+    this.$on("app:msgView:addMessage", function(data) {
       // TODO append a new messages to the messages on main-view
     });
   }
