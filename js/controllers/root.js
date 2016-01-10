@@ -25,10 +25,15 @@
   };
 
   var setupNewMessageListener = function(_this, roomId) {
-    shared.data.rocketio = api.connectRocketIO(roomId);
-    shared.data.rocketio.on("newMessage", function(data) {
-      _this.$broadcast("app:msgView:addMessage", data);
-    });
+    if (shared.data.rocketio.listeners.newMessage) {
+      shared.data.rocketio.instance.removeListener("newMessage");
+    }
+
+    shared.data.rocketio.instance = api.connectRocketIO(roomId);
+    shared.data.rocketio.listeners.newMessage =
+      shared.data.rocketio.instance.on("newMessage", function(data) {
+        _this.$broadcast("app:msgView:addMessage", data);
+      });
   };
 
   var enterRoom = function(_this, bucksNext, roomId) {

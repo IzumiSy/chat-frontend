@@ -2,8 +2,13 @@
   'use strict';
 
   var SharedStructure = function() {
-    var data = {};
     var jumpers = {};
+    var data = {
+      rocketio: {
+        instance: null,
+        listeners: {}
+      }
+    };
 
     return {
       data: data,
