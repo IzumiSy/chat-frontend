@@ -40,14 +40,18 @@
   }
 
   .message-view {
+    height: 100%;
+
     > ul.message-list {
+      height: 100%;
+      overflow-y: scroll;
       margin-bottom: 0;
       padding-left: 0;
       list-style-type: none;
     }
 
     li.message-item {
-      > .content {
+      > .message-content {
         font-size: 14px;
       }
     }
