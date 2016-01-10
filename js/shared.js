@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var sharedStructure = function() {
+  var SharedStructure = function() {
     var data = {};
     var jumpers = {};
 
@@ -11,5 +11,5 @@
     };
   };
 
-  module.exports = new sharedStructure();
+  module.exports = new SharedStructure();
 })();
