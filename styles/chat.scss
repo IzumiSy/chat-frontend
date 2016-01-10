@@ -1,12 +1,25 @@
 @import "variables";
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
   .main-view {
-    margin-left: $sidebar-min-width;
+    padding-left: $sidebar-min-width + 10px;
+  }
+
+  .message-input-wrapper {
+    width: 100%;
+    padding-left: $sidebar-min-width;
+
+    .input-form-column {
+      padding: 0;
+    }
   }
 }
 
-@media (max-width: 1000px) {
+@media (min-width: 768px) and (max-width: 999px) {
+  .main-view {
+    margin-left: 25%;
+  }
+
   .message-input-wrapper {
     padding-left: 25%;
   }
