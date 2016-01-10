@@ -1,13 +1,17 @@
-var messageViewController = {
-  created: function() {
-    this.$on("app:msgView:setMessages", function(messages) {
-      this.$set("messages", messages);
-    });
+(function() {
+  'use strict';
 
-    this.$on("app:msgView:addMessage", function(data) {
-      // TODO append a new messages to the messages on main-view
-    });
-  }
-};
+  var messageViewController = {
+    created: function() {
+      this.$on("app:msgView:setMessages", function(messages) {
+        this.$set("messages", messages);
+      });
 
-module.exports = messageViewController;
+      this.$on("app:msgView:addMessage", function(data) {
+        // TODO append a new messages to the messages on main-view
+      });
+    }
+  };
+
+  module.exports = messageViewController;
+})();

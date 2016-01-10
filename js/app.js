@@ -1,23 +1,27 @@
-var api = require("./api.js");
-var router = require("./routes.js");
-var components = require("./components.js");
-var storage = require("./storage.js");
+(function(){
+  'use strict';
 
-Vue.use(VueRouter);
-Vue.use(VueResource);
+  var api = require("./api.js");
+  var router = require("./routes.js");
+  var components = require("./components.js");
+  var storage = require("./storage.js");
 
-var app = new Vue({
-  components: {
-    "va-root-view": components.pages.root,
-    "va-entrance-view": components.pages.entrance,
-    "va-error-view": components.pages.error
-  },
+  Vue.use(VueRouter);
+  Vue.use(VueResource);
 
-  created: function() {
-    if (!EventSource) {
-      // Show a message that says "Your browser cannot browse this page"
+  var app = new Vue({
+    components: {
+      "va-root-view": components.pages.root,
+      "va-entrance-view": components.pages.entrance,
+      "va-error-view": components.pages.error
+    },
+
+    created: function() {
+      if (!EventSource) {
+        // Show a message that says "Your browser cannot browse this page"
+      }
+
+      router.mapRoutings(this);
     }
-
-    router.mapRoutings(this);
-  }
-});
+  });
+})();

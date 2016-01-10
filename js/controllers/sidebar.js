@@ -1,46 +1,50 @@
-var _ = require("underscore");
-var shared = require("../shared.js");
-var api = require("../api.js");
+(function() {
+  'use strict';
 
-var sidebarController = {
-  created: function() {
-    this.$once("app:sidebar:setCurrentRoom", function(roomId) {
-      this.$set("currentRoomId", roomId);
-    });
+  var _ = require("underscore");
+  var shared = require("../shared.js");
+  var api = require("../api.js");
 
-    this.$on("app:sidebar:updateRooms", function(data) {
-      this.$set("rooms", data);
-    });
-    this.$on("app:sidebar:updateUsers", function(data) {
-      this.$set("users", data);
-    });
+  var sidebarController = {
+    created: function() {
+      this.$once("app:sidebar:setCurrentRoom", function(roomId) {
+        this.$set("currentRoomId", roomId);
+      });
 
-    this.$set("currentUser", shared.data.user);
-  },
+      this.$on("app:sidebar:updateRooms", function(data) {
+        this.$set("rooms", data);
+      });
+      this.$on("app:sidebar:updateUsers", function(data) {
+        this.$set("users", data);
+      });
 
-  onRoomClicked: function(room) {
-    var currentRoomId = shared.data.currentRoomId;
-    var nextRoomId = room._id.$oid;
-    var _this = this;
+      this.$set("currentUser", shared.data.user);
+    },
 
-    shared.data.currentRoomId = nextRoomId;
-    _this.$set("currentRoomId", nextRoomId);
-    _this.$set("users", []);
+    onRoomClicked: function(room) {
+      var currentRoomId = shared.data.currentRoomId;
+      var nextRoomId = room._id.$oid;
+      var _this = this;
 
-    // userRoomLeave doesnt have to be called here.
-    // because userRoomEnter updates current room data to the new one.
-    api.userRoomEnter(nextRoomId, function(data, isSuccess) {
-      if (!isSuccess) {
-        console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
-      }
-    });
+      shared.data.currentRoomId = nextRoomId;
+      _this.$set("currentRoomId", nextRoomId);
+      _this.$set("users", []);
 
-    _this.$dispatch("app:root:fetchRoomData", nextRoomId);
-  },
+      // userRoomLeave doesnt have to be called here.
+      // because userRoomEnter updates current room data to the new one.
+      api.userRoomEnter(nextRoomId, function(data, isSuccess) {
+        if (!isSuccess) {
+          console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
+        }
+      });
 
-  onUserClicked: function(user) {
+      _this.$dispatch("app:root:fetchRoomData", nextRoomId);
+    },
 
-  }
-};
+    onUserClicked: function(user) {
 
-module.exports = sidebarController;
+    }
+  };
+
+  module.exports = sidebarController;
+})();

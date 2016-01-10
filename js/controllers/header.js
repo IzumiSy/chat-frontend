@@ -1,26 +1,30 @@
-var api = require("../api.js");
-var shared = require("../shared.js");
-var storage = require("../storage.js");
+(function() {
+  'use strict';
 
-// TODO Need any error handling here?
-var leaveTransaction = function() {
-  var currentRoomId =
-    shared.data.currentRoomId ? shared.data.currentRoomId : "all";
-  api.userRoomLeave(currentRoomId, function() {});
-  storage.remove("token");
-  shared.jumpers.entrance();
-};
+  var api = require("../api.js");
+  var shared = require("../shared.js");
+  var storage = require("../storage.js");
 
-var headerController = {
-  created: function() {
-    this.$on("logout", function(data) {
+  // TODO Need any error handling here?
+  var leaveTransaction = function() {
+    var currentRoomId =
+      shared.data.currentRoomId ? shared.data.currentRoomId : "all";
+    api.userRoomLeave(currentRoomId, function() {});
+    storage.remove("token");
+    shared.jumpers.entrance();
+  };
+
+  var headerController = {
+    created: function() {
+      this.$on("logout", function(data) {
+        leaveTransaction();
+      });
+    },
+
+    logout: function() {
       leaveTransaction();
-    });
-  },
+    }
+  };
 
-  logout: function() {
-    leaveTransaction();
-  }
-};
-
-module.exports = headerController;
+  module.exports = headerController;
+})();

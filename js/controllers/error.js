@@ -1,15 +1,18 @@
-var shared = require("../shared.js");
-var storage = require("../storage.js");
+(function() {
+  'use strict';
 
-var errorController = {
-  created: function() {
-    storage.remove("token");
-  },
+  var shared = require("../shared.js");
+  var storage = require("../storage.js");
 
-  reload: function() {
-    shared.jumpers.entrance();
-  }
-};
+  var errorController = {
+    created: function() {
+      storage.remove("token");
+    },
 
-module.exports = errorController;
+    reload: function() {
+      shared.jumpers.entrance();
+    }
+  };
 
+  module.exports = errorController;
+})();

@@ -1,25 +1,29 @@
-var api = require("../api.js");
-var shared = require("../shared.js");
+(function() {
+  'use strict';
 
-var messageInputController = {
-  sendMessage: function() {
-    var message = this.message;
-    var currentRoomId = shared.data.currentRoomId;
-    var _this = this;
+  var api = require("../api.js");
+  var shared = require("../shared.js");
 
-    if (!currentRoomId) {
-      console.warn("Error: currentRoomId is undefined or invalid.");
-      return;
-    }
+  var messageInputController = {
+    sendMessage: function() {
+      var message = this.message;
+      var currentRoomId = shared.data.currentRoomId;
+      var _this = this;
 
-    api.sendMessage(currentRoomId, message, function(data, isSuccess) {
-      if (!isSuccess) {
-        console.warn("Error at api.sendMessage(...)");
+      if (!currentRoomId) {
+        console.warn("Error: currentRoomId is undefined or invalid.");
         return;
       }
-      _this.$set("message", null);
-    });
-  }
-};
 
-module.exports = messageInputController;
+      api.sendMessage(currentRoomId, message, function(data, isSuccess) {
+        if (!isSuccess) {
+          console.warn("Error at api.sendMessage(...)");
+          return;
+        }
+        _this.$set("message", null);
+      });
+    }
+  };
+
+  module.exports = messageInputController;
+})();
