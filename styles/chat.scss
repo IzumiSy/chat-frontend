@@ -6,8 +6,7 @@
   }
 
   .message-input-wrapper {
-    width: 100%;
-    padding-left: $sidebar-min-width;
+    left: $sidebar-min-width;
 
     .input-form-column {
       padding: 0;
@@ -21,31 +20,32 @@
   }
 
   .message-input-wrapper {
-    padding-left: 25%;
+    position: absolute !important;
+    width: 100% !important;
   }
 }
 
 @media (min-width: 1000px) {
   .main-view {
-    padding-right: $sidebar-max-width + 20px;
     margin-left: $sidebar-max-width;
-    width: 100%;
   }
 
   .message-input-wrapper {
-    padding-left: $sidebar-max-width;
+    left: $sidebar-max-width;
   }
 }
 
 .main-view {
-  position: absolute;
+  position: fixed;
+  width: inherit;
   top: $header-height;
   bottom: 0px;
   left: 0px;
+  right: 0;
 
   > .main-row-container {
     height: 100%;
-    padding-bottom: $input-form-height;
+    padding-bottom: $input-form-height + 10px;
 
     .input-form-column {
       padding-right: 0;
@@ -53,14 +53,18 @@
 
     > .message-view-wrapper {
       height: 100%;
+      width: inherit;
     }
 
     > .message-input-wrapper {
       position: fixed;
       height: $input-form-height;
+      width: inherit;
       right: 0;
-      margin-bottom: 0;
+      bottom: 10px;
       padding-right: 0;
+      padding-left: 0;
+      margin-bottom: 0;
     }
   }
 
