@@ -54,7 +54,7 @@
 
     li {
       color: white;
-      padding: 5px 15px 5px 15px;
+      padding: 3px 15px 3px 15px;
 
       &.current {
         background-color: $sidebar-selected-color;
@@ -67,8 +67,9 @@
 
     > .room-item {
       > .badge {
-        margin-top: 2px;
+        margin-top: 4px;
         float: right;
+        padding: 1px 7px;
       }
     }
 
