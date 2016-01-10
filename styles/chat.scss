@@ -33,9 +33,11 @@
     }
 
     > .message-input-wrapper {
+      position: fixed;
       height: $input-form-height;
+      right: 0;
       margin-bottom: 0;
-      padding: 0;
+      padding-right: 0;
     }
   }
 
@@ -58,10 +60,13 @@
   }
 
   .message-input {
-    margin-top: 15px;
+    height: 100%;
+    margin: 0;
 
     .input-form-wrapper {
+      right: 0;
       width: 100%;
+      margin-bottom: 0;
 
       input {
         height: 35px;
@@ -73,8 +78,12 @@
       padding: 6px 12px;
     }
 
-    .say-button {
-      width: 100%;
+    .button-form-column {
+      height: 100%;
+
+      .say-button {
+        width: 100%;
+      }
     }
   }
 }
