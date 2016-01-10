@@ -1,11 +1,15 @@
-var sharedStructure = function() {
-  var data = {};
-  var jumpers = {};
+(function() {
+  'use strict';
 
-  return {
-    data: data,
-    jumpers: jumpers
+  var sharedStructure = function() {
+    var data = {};
+    var jumpers = {};
+
+    return {
+      data: data,
+      jumpers: jumpers
+    };
   };
-};
 
-module.exports = new sharedStructure();
+  module.exports = new sharedStructure();
+})();

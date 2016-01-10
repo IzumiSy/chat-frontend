@@ -1,14 +1,18 @@
-var controllers = {
-  root:     require("./controllers/root.js"),
-  error:    require("./controllers/error.js"),
-  entrance: require("./controllers/entrance.js"),
+(function() {
+  'use strict';
 
-  partials: {
-    messageInput: require("./controllers/messageInput.js"),
-    messageView:  require("./controllers/messageView.js"),
-    header:       require("./controllers/header.js"),
-    sidebar:      require("./controllers/sidebar.js")
-  }
-};
+  var controllers = {
+    root:     require("./controllers/root.js"),
+    error:    require("./controllers/error.js"),
+    entrance: require("./controllers/entrance.js"),
 
-module.exports = controllers;
+    partials: {
+      messageInput: require("./controllers/messageInput.js"),
+      messageView:  require("./controllers/messageView.js"),
+      header:       require("./controllers/header.js"),
+      sidebar:      require("./controllers/sidebar.js")
+    }
+  };
+
+  module.exports = controllers;
+})();

@@ -1,61 +1,65 @@
-var components = require("./components.js");
-var api = require("./api.js");
-var shared = require("./shared.js");
+(function() {
+  'use strict';
 
-// It is possible to map routings implicitly just by including
-// route.js without creating mapRoutings(...) function, but it would
-// be difficult to understand code stream in app.js if doing that.
+  var components = require("./components.js");
+  var api = require("./api.js");
+  var shared = require("./shared.js");
 
-var routings = null;
-var events = null;
+  // It is possible to map routings implicitly just by including
+  // route.js without creating mapRoutings(...) function, but it would
+  // be difficult to understand code stream in app.js if doing that.
 
-var jumpers = {
-  root: function() {
-    routings.go({ path: "/" });
-  },
+  var routings = null;
+  var events = null;
 
-  entrance: function() {
-    routings.go({ path: "/entrance" });
-  },
+  var jumpers = {
+    root: function() {
+      routings.go({ path: "/" });
+    },
 
-  error: function() {
-    routings.go({ path: "/error" });
-  },
+    entrance: function() {
+      routings.go({ path: "/entrance" });
+    },
 
-  jump: function(args) {
-    if (args.path) {
-      routings.go({ path: args.path });
-    }
-  }
-};
+    error: function() {
+      routings.go({ path: "/error" });
+    },
 
-module.exports = {
-  mapRoutings: function(app) {
-    routings = new VueRouter();
-
-    // Map all routings
-    routings.map({
-      "/": {
-        component: components.pages.root
-      },
-      "/entrance": {
-        component: components.pages.entrance
-      },
-      "/error": {
-        component: components.pages.error
+    jump: function(args) {
+      if (args.path) {
+        routings.go({ path: args.path });
       }
-    });
+    }
+  };
 
-    // Handles non-mapped routing
-    routings.redirect({
-      '*': '/'
-    });
+  module.exports = {
+    mapRoutings: function(app) {
+      routings = new VueRouter();
 
-    // Im not really sure about it, but shared object
-    // gets clear after routings.start(...), so jumpers
-    // have to be set just at here. Need more investigation.
-    shared.jumpers = jumpers;
+      // Map all routings
+      routings.map({
+        "/": {
+          component: components.pages.root
+        },
+        "/entrance": {
+          component: components.pages.entrance
+        },
+        "/error": {
+          component: components.pages.error
+        }
+      });
 
-    routings.start(app, "body");
-  }
-};
+      // Handles non-mapped routing
+      routings.redirect({
+        '*': '/'
+      });
+
+      // Im not really sure about it, but shared object
+      // gets clear after routings.start(...), so jumpers
+      // have to be set just at here. Need more investigation.
+      shared.jumpers = jumpers;
+
+      routings.start(app, "body");
+    }
+  };
+})();
