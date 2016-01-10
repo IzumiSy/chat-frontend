@@ -12,22 +12,38 @@ body {
       background-color: #edeff1;
       border-radius: 6px;
       min-height: 300px;
-      min-width: 300px;
-      max-width: 550px;
+      min-width: 450px;
+      max-width: 450px;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 100px;
+      margin-top: 80px;
       padding-bottom: 15px;
       text-align: center;
 
-      .text {
+      > .text {
         margin-bottom: 10px;
+
+        > p {
+          font-size: 14px;
+          margin: 0;
+        }
       }
 
-      img.logo {
+      > .reload-btn {
+        margin-top: 20px;
+
+        > a.btn.btn-primary {
+          font-size: 14px;
+          padding: 5px 15px;
+        }
+      }
+
+      > img.logo {
         position: relative;
         margin-top: 30px;
-        margin: 30px 175px;
+        margin: 30px 150px;
+        width: 150px;
+        height: 150px;
       }
     }
   }
