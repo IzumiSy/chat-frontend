@@ -5,7 +5,7 @@
 
   var functions = {
     checkLogin: function() {
-      token = storage.get("token");
+      var token = storage.get("token");
       if (token) {
         return true;
       } else {
