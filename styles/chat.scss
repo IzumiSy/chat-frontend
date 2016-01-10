@@ -78,6 +78,8 @@
     li.message-item {
       > .message-content {
         font-size: 14px;
+        word-wrap: break-word;
+        word-break: break-word;
       }
     }
   }
