@@ -8,7 +8,9 @@
       });
 
       this.$on("app:msgView:addMessage", function(data) {
-        // TODO append a new messages to the messages on main-view
+        var messages = this.$get("messages");
+        messages.push(data);
+        this.$set("messages", messages);
       });
     }
   };
