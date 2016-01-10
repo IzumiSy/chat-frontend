@@ -35,13 +35,7 @@ var sidebarController = {
       }
     });
 
-    api.getRoomUsers(nextRoomId, function(data, isSuccess) {
-      if (isSuccess) {
-        _this.$set("users", data);
-      } else {
-        console.warn("Error at api.getRoomUsers: Id(" + nextRoomId + ")");
-      }
-    });
+    _this.$dispatch("app:root:fetchRoomData", nextRoomId);
   },
 
   onUserClicked: function(user) {

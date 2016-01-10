@@ -14,7 +14,7 @@ var fetchUsersAndMessages = function(_this, roomId) {
 
   api.getRoomMessages(roomId, function(data, isSuccess) {
     if (isSuccess && data) {
-      _this.$broadcast("app:msgView:setMessage", data);
+      _this.$broadcast("app:msgView:setMessages", data);
     } else {
       console.warn("Error at api.getRoomMessages");
     }
@@ -51,6 +51,14 @@ var rootController = {
     var _this = this;
     var lobbyId = shared.data.lobbyId;
     var rooms = shared.data.rooms;
+    var roomDataSetup = function(roomId) {
+      fetchUsersAndMessages(_this, roomId);
+      setupNewMessageListener(_this, roomId);
+    }
+
+    _this.$on("app:root:fetchRoomData", function(roomId) {
+      roomDataSetup(roomId);
+    });
 
     // TODO Here should be rewritten to be more user-friendly
     if (!lobbyId || !rooms.length) {
@@ -65,8 +73,7 @@ var rootController = {
       enterRoom(_this, next, lobbyId);
     }).then(function(res, next) {
       if (!res) return next();
-      fetchUsersAndMessages(_this, shared.data.currentRoomId);
-      setupNewMessageListener(_this, shared.data.currentRoomId);
+      roomDataSetup(shared.data.currentRoomId);
       return next();
     }).end();
   }
