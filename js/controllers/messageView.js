@@ -1,6 +1,6 @@
 var messageViewController = {
   created: function() {
-    this.$once("app:msgView:setMessage", function(messages) {
+    this.$on("app:msgView:setMessage", function(messages) {
       this.$set("messages", messages);
     });
 
