@@ -12,6 +12,10 @@
         messages.push(data);
         this.$set("messages", messages);
       });
+    },
+
+    ready: function() {
+      var element = this.$el;
     }
   };
 
