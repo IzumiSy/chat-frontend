@@ -54,7 +54,7 @@ var rootController = {
     var roomDataSetup = function(roomId) {
       fetchUsersAndMessages(_this, roomId);
       setupNewMessageListener(_this, roomId);
-    }
+    };
 
     _this.$on("app:root:fetchRoomData", function(roomId) {
       roomDataSetup(roomId);
