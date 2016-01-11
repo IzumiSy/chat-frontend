@@ -38,6 +38,8 @@
   bottom: 0px;
   left: 0px;
   right: 0;
+  padding-left: 0;
+  padding-right: 0;
 
   > .main-row-container {
     height: 100%;
@@ -68,11 +70,12 @@
     height: 100%;
 
     > ul.message-list {
+      list-style-type: none;
       height: 100%;
       overflow-y: scroll;
       margin-bottom: 0;
-      padding-left: 0;
-      list-style-type: none;
+      padding-left: 15px;
+      padding-right: 15px;
     }
 
     li.message-item {
