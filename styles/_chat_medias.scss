@@ -3,22 +3,22 @@
 @media (max-width: 767px) {
   .main-view {
     padding-left: $sidebar-min-width !important;
-
-    > .main-row-container {
-      padding-bottom: 70px !important;
-    }
   }
 
   .message-input-wrapper {
     left: $sidebar-min-width;
-    bottom: 35px !important;
 
     .input-form-column {
-      padding: 0;
+      position: absolute;
+      float: left;
+      width: 75%;
+      padding-left: 10px;
     }
 
     .button-form-column {
-      padding: 0;
+      float: right;
+      width: 25%;
+      padding-right: 10px;
     }
   }
 }
