@@ -51,7 +51,8 @@
       },
       methods: {
         sendMessage: controllers.partials.messageInput.sendMessage
-      }
+      },
+      ready: controllers.partials.messageInput.ready
     }
   };
 

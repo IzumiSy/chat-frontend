@@ -22,6 +22,10 @@
         }
         _this.$set("message", null);
       });
+    },
+
+    ready: function() {
+      $(this.$el).find("input.message").focus();
     }
   };
 
