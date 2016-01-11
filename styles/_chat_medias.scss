@@ -1,0 +1,45 @@
+@import "variables";
+
+@media (max-width: 767px) {
+  .main-view {
+    padding-left: $sidebar-min-width !important;
+
+    > .main-row-container {
+      padding-bottom: 60px !important;
+    }
+  }
+
+  .message-input-wrapper {
+    left: $sidebar-min-width;
+    bottom: 35px !important;
+
+    .input-form-column {
+      padding: 0;
+    }
+
+    .button-form-column {
+      padding: 0;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 999px) {
+  .main-view {
+    margin-left: 25%;
+  }
+
+  .message-input-wrapper {
+    position: absolute !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  .main-view {
+    margin-left: $sidebar-max-width;
+  }
+
+  .message-input-wrapper {
+    left: $sidebar-max-width;
+  }
+}
