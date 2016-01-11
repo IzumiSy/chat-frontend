@@ -4,8 +4,9 @@
     .form-group.name
       input.form-control.login-field(
         type="text"
-        v-model="username"
         placeholder="ログインネームを入力..."
+        v-model="username"
+        v-on:keyup.enter="enterRobby"
       )
     .form-group.enter
       a.btn.btn-primary.enter-button(v-on:click="enterRobby")

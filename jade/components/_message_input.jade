@@ -1,7 +1,12 @@
 div.row.message-input
   div.col-sm-10.input-form-column
     div.form-group.input-form-wrapper
-      input.form-control.message(type="text" v-model="message" placeholder="送信するメッセージを入力...")
+      input.form-control.message(
+        type="text"
+        placeholder="送信するメッセージを入力..."
+        v-model="message"
+        v-on:keyup.enter="sendMessage"
+      )
   div.col-sm-2.button-form-column
     div.form-group
       a.btn.btn-primary.say-button(v-on:click="sendMessage")
