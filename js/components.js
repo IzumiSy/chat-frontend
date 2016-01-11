@@ -88,7 +88,8 @@
       methods: {
         enterRobby: controllers.entrance.enterRobby
       },
-      created: controllers.entrance.created
+      created: controllers.entrance.created,
+      ready: controllers.entrance.ready
     },
 
     error: {

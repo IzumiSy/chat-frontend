@@ -85,6 +85,10 @@
           return next();
         }
       }).end();
+    },
+
+    ready: function() {
+      $(this.$el).find("input.login-field").focus();
     }
   };
 
