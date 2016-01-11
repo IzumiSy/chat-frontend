@@ -21,6 +21,7 @@
           return;
         }
         _this.$set("message", null);
+        _this.$dispatch("app:root:newMessage");
       });
     },
 

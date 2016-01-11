@@ -12,6 +12,12 @@
         messages.push(data);
         this.$set("messages", messages);
       });
+    },
+
+    ready: function() {
+      this.$on("app:msgView:scrollBottom", function() {
+        // TODO Scroll bottom
+      });
     }
   };
 

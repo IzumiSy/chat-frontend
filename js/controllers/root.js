@@ -33,6 +33,7 @@
     shared.data.rocketio.listeners.newMessage =
       shared.data.rocketio.instance.on("newMessage", function(data) {
         _this.$broadcast("app:msgView:addMessage", data);
+        _this.$broadcast("app:msgView:scrollBottom");
       });
   };
 
@@ -50,6 +51,16 @@
   };
 
   var rootController = {
+    created: function() {
+      this.$on("app:root:fetchRoomData", function(roomId) {
+        roomDataSetup(roomId);
+      });
+
+      this.$on("app:root:newMessage", function() {
+        this.$broadcast("app:msgView:scrollBottom");
+      });
+    },
+
     ready: function() {
       if (!utils.checkLogin() || !shared.data.user) {
         this.$broadcast("logout");
@@ -63,10 +74,6 @@
         fetchUsersAndMessages(_this, roomId);
         setupNewMessageListener(_this, roomId);
       };
-
-      _this.$on("app:root:fetchRoomData", function(roomId) {
-        roomDataSetup(roomId);
-      });
 
       // TODO Here should be rewritten to be more user-friendly
       if (!lobbyId || !rooms.length) {
