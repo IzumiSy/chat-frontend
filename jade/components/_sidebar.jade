@@ -1,6 +1,6 @@
 .profile-section
   .picture
-    img.profile-picture(src="{{ currentFace }}")
+    img.profile-picture(v-bind:src="currentFace")
   .name
     span.badge.profile-name
       | {{ currentUser.name }}
