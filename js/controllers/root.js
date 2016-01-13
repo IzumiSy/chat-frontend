@@ -31,7 +31,7 @@
     shared.data.rocketio.instance = api.connectRocketIO(roomId);
     shared.data.rocketio.listeners.newMessage =
       shared.data.rocketio.instance.on("newMessage", function(data) {
-        _this.$broadcast("app:msgView:addMessage", data);
+        _this.$broadcast("app:msgView:addMessage", JSON.parse(data));
         _this.$broadcast("app:msgView:scrollBottom");
       });
   };
