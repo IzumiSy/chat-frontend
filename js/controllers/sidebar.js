@@ -5,19 +5,22 @@
   var shared = require("../shared.js");
   var api = require("../api.js");
 
+  var listenersSetup = function(_this) {
+    _this.$once("app:sidebar:setCurrentRoom", function(roomId) {
+      _this.$set("currentRoomId", roomId);
+    });
+
+    _this.$on("app:sidebar:updateRooms", function(data) {
+      _this.$set("rooms", data);
+    });
+    _this.$on("app:sidebar:updateUsers", function(data) {
+      _this.$set("users", data);
+    });
+  }
+
   var sidebarController = {
     created: function() {
-      this.$once("app:sidebar:setCurrentRoom", function(roomId) {
-        this.$set("currentRoomId", roomId);
-      });
-
-      this.$on("app:sidebar:updateRooms", function(data) {
-        this.$set("rooms", data);
-      });
-      this.$on("app:sidebar:updateUsers", function(data) {
-        this.$set("users", data);
-      });
-
+      listenersSetup(this);
       this.$set("currentUser", shared.data.user);
     },
 
