@@ -22,10 +22,12 @@
           rooms: [],
           users: [],
           currentUser: null,
-          currentRoomId: null
+          currentRoomId: null,
+          currentFace: null
         };
       },
       created: controllers.partials.sidebar.created,
+      ready: controllers.partials.sidebar.ready,
       methods: {
         onRoomClicked: controllers.partials.sidebar.onRoomClicked,
         onUserClicked: controllers.partials.sidebar.onUserClicked

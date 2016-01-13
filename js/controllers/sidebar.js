@@ -21,6 +21,12 @@
       this.$set("currentUser", shared.data.user);
     },
 
+    ready: function() {
+      if (shared.data.user && shared.data.user.face) {
+        this.currentFace = ("assets/face-" + shared.data.user.face + ".png");
+      }
+    },
+
     onRoomClicked: function(room) {
       var currentRoomId = shared.data.currentRoomId;
       var nextRoomId = room._id.$oid;
