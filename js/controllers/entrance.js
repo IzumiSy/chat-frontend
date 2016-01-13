@@ -50,7 +50,7 @@
             console.warn("Error at api.getAllRooms");
             return _next(null, false);
           } else if (!data.length) {
-            console.warn("Lobby room not found");
+            console.warn("Rooms not found");
             shared.jumpers.error();
             return _next(null, false);
           }
@@ -58,6 +58,10 @@
           shared.data.lobbyId = _.find(shared.data.rooms, function(r) {
             return r.name == "Lobby";
           })._id.$oid;
+          if (!shared.data.lobbyId) {
+            error("ロビールームがありません。")
+            return _next(null, false);
+          }
           shared.jumpers.root();
           return _next();
         });
