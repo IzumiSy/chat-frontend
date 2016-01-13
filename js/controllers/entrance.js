@@ -23,7 +23,7 @@
         return r.name == "Lobby";
       })._id.$oid;
       if (!shared.data.lobbyId) {
-        error("ロビールームがありません。")
+        error("ロビールームがありません。");
         return _next(null, false);
       }
     };
