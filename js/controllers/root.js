@@ -14,7 +14,6 @@
         console.warn("Error at api.getRoomUsers");
       }
     });
-
     api.getRoomMessages(roomId, function(data, isSuccess) {
       if (isSuccess && data) {
         _this.$broadcast("app:msgView:setMessages", data);
@@ -50,15 +49,23 @@
     });
   };
 
+  var roomDataSetup = function(_this, roomId) {
+    fetchUsersAndMessages(_this, roomId);
+    setupNewMessageListener(_this, roomId);
+  };
+
+  var listenersSetup = function(_this) {
+    _this.$on("app:root:fetchRoomData", function(roomId) {
+      roomDataSetup(this, roomId);
+    });
+    _this.$on("app:root:newMessage", function() {
+      _this.$broadcast("app:msgView:scrollBottom");
+    });
+  };
+
   var rootController = {
     created: function() {
-      this.$on("app:root:fetchRoomData", function(roomId) {
-        roomDataSetup(roomId);
-      });
-
-      this.$on("app:root:newMessage", function() {
-        this.$broadcast("app:msgView:scrollBottom");
-      });
+      listenersSetup(this);
     },
 
     ready: function() {
@@ -70,10 +77,6 @@
       var _this = this;
       var lobbyId = shared.data.lobbyId;
       var rooms = shared.data.rooms;
-      var roomDataSetup = function(roomId) {
-        fetchUsersAndMessages(_this, roomId);
-        setupNewMessageListener(_this, roomId);
-      };
 
       // TODO Here should be rewritten to be more user-friendly
       if (!lobbyId || !rooms.length) {
@@ -88,7 +91,7 @@
         enterRoom(_this, next, lobbyId);
       }).then(function(res, next) {
         if (!res) return next();
-        roomDataSetup(shared.data.currentRoomId);
+        roomDataSetup(_this, shared.data.currentRoomId);
         return next();
       }).end();
     }

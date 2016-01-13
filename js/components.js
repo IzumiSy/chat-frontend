@@ -77,6 +77,7 @@
         };
       },
       template: require("./main.html"),
+      created: controllers.root.created,
       ready: controllers.root.ready
     },
 
