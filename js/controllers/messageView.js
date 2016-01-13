@@ -1,23 +1,23 @@
 (function() {
   'use strict';
 
+  var listenersSetup = function(_this) {
+    _this.$on("app:msgView:setMessages", function(messages) {
+      _this.$set("messages", messages);
+    });
+    _this.$on("app:msgView:addMessage", function(data) {
+      var messages = _this.$get("messages");
+      messages.push(data);
+      _this.$set("messages", messages);
+    });
+    _this.$on("app:msgView:scrollBottom", function() {
+      // TODO Scroll bottom
+    });
+  };
+
   var messageViewController = {
-    created: function() {
-      this.$on("app:msgView:setMessages", function(messages) {
-        this.$set("messages", messages);
-      });
-
-      this.$on("app:msgView:addMessage", function(data) {
-        var messages = this.$get("messages");
-        messages.push(data);
-        this.$set("messages", messages);
-      });
-    },
-
     ready: function() {
-      this.$on("app:msgView:scrollBottom", function() {
-        // TODO Scroll bottom
-      });
+      listenersSetup(this);
     }
   };
 
