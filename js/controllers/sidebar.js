@@ -16,7 +16,7 @@
     _this.$on("app:sidebar:updateUsers", function(data) {
       _this.$set("users", data);
     });
-  }
+  };
 
   var sidebarController = {
     created: function() {
