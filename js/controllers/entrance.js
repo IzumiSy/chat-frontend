@@ -18,6 +18,15 @@
         _this.message = msg;
       }
     };
+    var storeLobbyId = function(rooms, _next) {
+      shared.data.lobbyId = _.find(rooms, function(r) {
+        return r.name == "Lobby";
+      })._id.$oid;
+      if (!shared.data.lobbyId) {
+        error("ロビールームがありません。")
+        return _next(null, false);
+      }
+    };
 
     var exec = {
       nameCheck: function(_next) {
@@ -55,13 +64,7 @@
             return _next(null, false);
           }
           shared.data.rooms = data;
-          shared.data.lobbyId = _.find(shared.data.rooms, function(r) {
-            return r.name == "Lobby";
-          })._id.$oid;
-          if (!shared.data.lobbyId) {
-            error("ロビールームがありません。")
-            return _next(null, false);
-          }
+          storeLobbyId(data);
           shared.jumpers.root();
           return _next();
         });
