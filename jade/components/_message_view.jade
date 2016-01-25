@@ -3,4 +3,5 @@ div.row.message-view
     li.message-item(v-for="message in messages")
       img.user-face(v-bind:src="'assets/face-' + message.user.face + '.png'")
       .message-author {{ message.user.name }}
+      .sent-time {{ message.formatted_created_at_time }}
       .message-content {{ message.content }}
