@@ -2,5 +2,5 @@ div.row.message-view
   ul.message-list
     li.message-item(v-for="message in messages")
       img.user-face(v-bind:src="'assets/face-' + message.user.face + '.png'")
-      .message-author
+      .message-author {{ message.user.name }}
       .message-content {{ message.content }}
