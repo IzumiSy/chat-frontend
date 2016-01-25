@@ -48,6 +48,7 @@
     }
 
     li.message-item {
+      cursor: default;
       padding-left: 20px;
       padding-right: 20px;
 
@@ -70,6 +71,7 @@
 
       > .message-content {
         font-size: 14px;
+        font-weight: lighter;
         word-wrap: break-word;
         word-break: break-word;
       }
