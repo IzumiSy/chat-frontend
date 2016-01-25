@@ -5,7 +5,10 @@ div.row.message-view
         v-if="!isPrevUserSame($index)"
         v-bind:src="'assets/face-' + message.user.face + '.png'"
       )
-      .message-author(v-if="!isPrevUserSame($index)")
+      .message-author(
+        v-if="!isPrevUserSame($index)"
+      )
         | {{ message.user.name }}
         .sent-time {{ message.formatted_created_at_time }}
-      .message-content {{ message.content }}
+      .message-content
+        | {{ message.content }}
