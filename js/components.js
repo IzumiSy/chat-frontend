@@ -41,7 +41,6 @@
           messages: []
         };
       },
-      created: controllers.partials.messageView.created,
       ready: controllers.partials.messageView.ready
     },
 
