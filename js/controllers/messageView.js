@@ -18,6 +18,17 @@
   var messageViewController = {
     ready: function() {
       listenersSetup(this);
+    },
+
+    isPrevUserSame: function(index) {
+      var messages = this.$get("messages");
+      var isSame = false;
+
+      if (index > 0) {
+        isSame = (messages[index - 1].user_id.$oid == messages[index].user_id.$oid);
+      }
+
+      return isSame;
     }
   };
 

@@ -41,6 +41,9 @@
           messages: []
         };
       },
+      methods: {
+        isPrevUserSame: controllers.partials.messageView.isPrevUserSame
+      },
       ready: controllers.partials.messageView.ready
     },
 
