@@ -44,11 +44,30 @@
       height: 100%;
       overflow-y: scroll;
       margin-bottom: 0;
-      padding-left: 15px;
-      padding-right: 15px;
+      padding: 0;
     }
 
     li.message-item {
+      padding-left: 20px;
+      padding-right: 20px;
+
+      &:hover {
+        background-color: whitesmoke;
+      }
+
+      > .user-face {
+        width: 35px;
+        height: 35px;
+        float: left;
+        margin-top: 5px;
+        margin-right: 10px;
+      }
+
+      > .message-author {
+        font-size: 15px;
+        font-weight: bold;
+      }
+
       > .message-content {
         font-size: 14px;
         word-wrap: break-word;
