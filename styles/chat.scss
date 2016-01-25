@@ -69,15 +69,15 @@
       > .message-author {
         font-size: 15px;
         font-weight: bold;
-        float: left;
-        margin-right: 10px;
-      }
 
-      > .sent-time {
-        font-size: 12px;
-        font-weight: lighter;
-        color: #b8b8b8;
-        padding-top: 5px;
+        > .sent-time {
+          display: inline-block;
+          font-size: 12px;
+          font-weight: lighter;
+          color: #b8b8b8;
+          padding-top: 5px;
+          margin-left: 5px;
+        }
       }
 
       > .message-content {
