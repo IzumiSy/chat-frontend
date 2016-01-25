@@ -51,6 +51,8 @@
       cursor: default;
       padding-left: 20px;
       padding-right: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
 
       &:hover {
         background-color: whitesmoke;
@@ -67,12 +69,15 @@
       > .message-author {
         font-size: 15px;
         font-weight: bold;
+        float: left;
+        margin-right: 10px;
       }
 
       > .sent-time {
-        font-size: 14px;
+        font-size: 12px;
         font-weight: lighter;
         color: #b8b8b8;
+        padding-top: 5px;
       }
 
       > .message-content {
