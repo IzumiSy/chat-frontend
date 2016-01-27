@@ -6,12 +6,7 @@
     var data = {
       rocketio: {
         instance: null,
-        listeners: {
-          newMessage: null,
-          updateRooms: null,
-          userEnter: null,
-          userLeave: null
-        }
+        listeners: {}
       }
     };
 
