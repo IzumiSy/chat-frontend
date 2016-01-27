@@ -17,8 +17,9 @@
     },
 
     created: function() {
-      if (!EventSource) {
-        // Show a message that says "Your browser cannot browse this page"
+      if (!WebSocket || WebSocketIO) {
+        console.error("Your browser seems not compatible with WebSocket");
+        // Show an alert that says "Your browser cannot browse this page"
       }
 
       router.mapRoutings(this);
