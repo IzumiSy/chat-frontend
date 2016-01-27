@@ -32,9 +32,9 @@
   };
 
   var delegateRocketioListeners = function() {
-    if (shared.data.rocketio.listeners.newMessage) {
-      shared.data.rocketio.instance.removeListener("newMessage");
-    }
+    Object.keys(shared.data.rocketio.listeners).forEach(function(listener) {
+      shared.data.rocketio.instance.removeListener(listener);
+    });
   };
 
   var setupNewMessageListener = function(_this, roomId) {
