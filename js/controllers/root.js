@@ -60,7 +60,7 @@
       userLeave: function(data) {
         // TODO Add a system message that someone left from the room
       }
-    }
+    };
 
     shared.data.rocketio.instance = api.connectRocketIO(roomId);
     shared.data.rocketio.listeners = {
