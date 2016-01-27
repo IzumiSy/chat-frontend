@@ -17,7 +17,7 @@
     },
 
     created: function() {
-      if (!WebSocket || WebSocketIO) {
+      if (!WebSocket || !WebSocketIO) {
         console.error("Your browser seems not compatible with WebSocket");
         // Show an alert that says "Your browser cannot browse this page"
       }
