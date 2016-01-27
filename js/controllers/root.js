@@ -4,7 +4,6 @@
   var api = require("../api.js");
   var utils = require("../utils.js");
   var shared = require("../shared.js");
-  var _ = require("underscore");
 
   var formatCreatedAtTime = function(data) {
     var date = new Date(data.created_at);
@@ -15,7 +14,7 @@
   var fetchUsersAndMessages = function(_this, roomId) {
     api.getRoomUsers(roomId, function(data, isSuccess) {
       if (isSuccess && data) {
-        _this.$broadcast("app:sidebar:updateUsers", _.sortBy(data, "created_at"));
+        _this.$broadcast("app:sidebar:updateUsers", data);
         shared.data.currentRoomUsers = data;
       } else {
         console.warn("Error at api.getRoomUsers");
