@@ -31,11 +31,14 @@
     });
   };
 
-  var setupNewMessageListener = function(_this, roomId) {
+  var delegateRocketioListeners = function() {
     if (shared.data.rocketio.listeners.newMessage) {
       shared.data.rocketio.instance.removeListener("newMessage");
     }
+  };
 
+  var setupNewMessageListener = function(_this, roomId) {
+    delegateRocketioListeners();
     shared.data.rocketio.instance = api.connectRocketIO(roomId);
     shared.data.rocketio.listeners.newMessage =
       shared.data.rocketio.instance.on("newMessage", function(data) {
