@@ -39,18 +39,36 @@
 
   var setupNewMessageListener = function(_this, roomId) {
     delegateRocketioListeners();
-    shared.data.rocketio.instance = api.connectRocketIO(roomId);
-    shared.data.rocketio.listeners.newMessage =
-      shared.data.rocketio.instance.on("newMessage", function(data) {
+
+    var listeners = {
+      newMessage: function(data) {
         data = JSON.parse(data);
         formatCreatedAtTime(data);
         _this.$broadcast("app:msgView:addMessage", data);
         _this.$broadcast("app:msgView:scrollBottom");
-      });
-      shared.data.rocketio.instance.on("updateRooms", function(data) {
+      },
+
+      updateRooms: function(data) {
         data = JSON.parse(data);
         _this.$broadcast("app:sidebar:updateRooms", data);
-      });
+      },
+
+      userEnter: function(data) {
+         // TODO Add a system message that someone got in to the room
+      },
+
+      userLeave: function(data) {
+        // TODO Add a system message that someone left from the room
+      }
+    }
+
+    shared.data.rocketio.instance = api.connectRocketIO(roomId);
+    shared.data.rocketio.listeners = {
+      newMessage:   shared.data.rocketio.instance.on("newMessage", listeners.newMessage),
+      updateRooms:  shared.data.rocketio.instance.on("updateRooms", listeners.updateRooms),
+      userEnter:    shared.data.rocketio.instance.on("userEnter", listeners.userEnter),
+      userLeave:    shared.data.rocketio.instance.on("userLeave", listeners.userLeave)
+    };
   };
 
   var enterRoom = function(_this, bucksNext, roomId) {
