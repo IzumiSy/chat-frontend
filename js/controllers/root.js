@@ -15,7 +15,7 @@
   var fetchUsersAndMessages = function(_this, roomId) {
     api.getRoomUsers(roomId, function(data, isSuccess) {
       if (isSuccess && data) {
-        _this.$broadcast("app:sidebar:updateUsers", data);
+        _this.$broadcast("app:sidebar:updateUsers", _.sortBy(data, "created_at"));
         shared.data.currentRoomUsers = data;
       } else {
         console.warn("Error at api.getRoomUsers");
