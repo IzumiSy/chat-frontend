@@ -44,6 +44,10 @@
         _this.$broadcast("app:msgView:addMessage", data);
         _this.$broadcast("app:msgView:scrollBottom");
       });
+      shared.data.rocketio.instance.on("updateRooms", function(data) {
+        data = JSON.parse(data);
+        _this.$broadcast("app:sidebar:updateRooms", data);
+      });
   };
 
   var enterRoom = function(_this, bucksNext, roomId) {
