@@ -32,7 +32,10 @@
   };
 
   var delegateRocketioListeners = function() {
-    Object.keys(shared.data.rocketio.listeners).forEach(function(listener) {
+    var listeners = Object.keys(shared.data.rocketio.listeners);
+
+    if (!listeners.length) return;
+    listeners.forEach(function(listener) {
       shared.data.rocketio.instance.removeListener(listener);
     });
   };
