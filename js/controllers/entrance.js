@@ -30,14 +30,12 @@
 
     var exec = {
       nameCheck: function(_next) {
-        api.checkNameAvailability(username, function(data, isSuccess) {
-          if (isSuccess && data && data.status === true) {
-            _this.message = "入室処理中...";
-            return _next(null, true);
-          } else {
-            error("ログインネームがすでに使われていました");
-            return _next(null, false);
-          }
+        api.checkNameAvailability(username).then(function(res) {
+          _this.message = "入室処理中...";
+          return _next(null, true);
+        }, function(res) {
+          error("ログインネームがすでに使われていました");
+          return _next(null, false);
         });
       },
 

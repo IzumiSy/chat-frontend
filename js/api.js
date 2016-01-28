@@ -55,11 +55,7 @@
     },
 
     checkNameAvailability: function(name, callback) {
-      this.api.checkName.save({ name: name }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.checkName.save({ name: name });
     },
 
     getSelfData: function(callback) {
