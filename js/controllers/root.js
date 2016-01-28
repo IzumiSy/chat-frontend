@@ -59,6 +59,10 @@
         _this.$broadcast("app:sidebar:updateRooms", data);
       },
 
+      updateMembers: function(data) {
+         // TODO impelement here
+      },
+
       userEnter: function(data) {
          // TODO Add a system message that someone got in to the room
       },
@@ -70,10 +74,11 @@
 
     shared.data.rocketio.instance = api.connectRocketIO(roomId);
     shared.data.rocketio.listeners = {
-      newMessage:   shared.data.rocketio.instance.on("newMessage", listeners.newMessage),
-      updateRooms:  shared.data.rocketio.instance.on("updateRooms", listeners.updateRooms),
-      userEnter:    shared.data.rocketio.instance.on("userEnter", listeners.userEnter),
-      userLeave:    shared.data.rocketio.instance.on("userLeave", listeners.userLeave)
+      newMessage: shared.data.rocketio.instance.on("newMessage", listeners.newMessage),
+      updateRooms: shared.data.rocketio.instance.on("updateRooms", listeners.updateRooms),
+      updateMembers: shared.data.rocketio.instance.on("updateMembers", listeners.updateMembers),
+      userEnter: shared.data.rocketio.instance.on("userEnter", listeners.userEnter),
+      userLeave: shared.data.rocketio.instance.on("userLeave", listeners.userLeave)
     };
   };
 
