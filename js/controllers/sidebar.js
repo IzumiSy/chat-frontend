@@ -35,6 +35,10 @@
       var nextRoomId = room._id.$oid;
       var _this = this;
 
+      if (nextRoomId === currentRoomId) {
+        return;
+      }
+
       shared.data.currentRoomId = nextRoomId;
       _this.$set("currentRoomId", nextRoomId);
       _this.$set("users", []);
