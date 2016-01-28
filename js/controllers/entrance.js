@@ -54,19 +54,15 @@
       },
 
       getRooms: function(_next) {
-        api.getAllRooms(function(data, isSuccess) {
-          if (!isSuccess || !data) {
-            console.warn("Error at api.getAllRooms");
-            return _next(null, false);
-          } else if (!data.length) {
-            console.warn("Rooms not found");
-            shared.jumpers.error();
-            return _next(null, false);
-          }
-          shared.data.rooms = data;
-          storeLobbyId(data);
+        api.getAllRooms().then(function(res) {
+          shared.data.rooms = res.data;
+          storeLobbyId(res.data);
           shared.jumpers.root();
           return _next();
+        }, function(res) {
+          console.warn("Error at api.getAllRooms");
+          shared.jumpers.error();
+          return _next(null, false);
         });
       }
     };

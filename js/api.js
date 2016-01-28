@@ -73,11 +73,7 @@
 
     getAllRooms: function(callback) {
       var token = storage.get("token");
-      this.api.allRooms.get({ token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.allRooms.get({ token: token })
     },
 
     getRoomUsers: function(roomId, callback) {
