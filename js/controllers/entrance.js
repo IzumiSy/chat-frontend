@@ -31,23 +31,27 @@
     var exec = {
       nameCheck: function(_next) {
         api.checkNameAvailability(username).then(function(res) {
-          _this.message = "入室処理中...";
-          return _next(null, true);
-        }, function(res) {
-          error("ログインネームがすでに使われていました");
+          if (res.data.status === true) {
+            _this.message = "入室処理中...";
+            return _next(null, true);
+          } else {
+            error("ログインネームがすでに使われていました");
+            return _next(null, false);
+          }
+        }, function() {
+          shared.jumpers.error();
           return _next(null, false);
         });
       },
 
       userCreate: function(_next) {
-        api.createNewUser(username, function(data, isSucceed) {
-          if (!isSucceed || !data) {
-            error("入室に失敗しました");
-            return _next(null, false);
-          }
-          storage.set("token", data.token);
-          shared.data.user = data;
+        api.createNewUser(username).then(function(res) {
+          storage.set("token", res.data.token);
+          shared.data.user = res.data;
           return _next(null, true);
+        }, function() {
+          error("入室に失敗しました");
+          return _next(null, false);
         });
       },
 

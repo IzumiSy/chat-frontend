@@ -47,11 +47,7 @@
     },
 
     createNewUser: function(name, callback) {
-      this.api.newUser.save({ name: name }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.newUser.save({ name: name });
     },
 
     checkNameAvailability: function(name, callback) {
