@@ -46,6 +46,10 @@
   var setupNewMessageListener = function(_this, roomId) {
     delegateRocketioListeners();
 
+    if (shared.data.rocketio.instance) {
+      shared.data.rocketio.instance.close();
+    }
+
     var listeners = {
       newMessage: function(data) {
         data = JSON.parse(data);
