@@ -46,21 +46,17 @@
       });
     },
 
-    createNewUser: function(name, callback) {
+    createNewUser: function(name) {
       return this.api.newUser.save({ name: name });
     },
 
-    checkNameAvailability: function(name, callback) {
+    checkNameAvailability: function(name) {
       return this.api.checkName.save({ name: name });
     },
 
-    getSelfData: function(callback) {
+    getSelfData: function() {
       var token = storage.get("token");
-      this.api.userSelf.get({ token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.userSelf.get({ token: token });
     },
 
     getAllRooms: function() {
@@ -78,12 +74,12 @@
       return this.api.getMsgs.get({ id: roomId }, { token: token });
     },
 
-    userRoomEnter: function(roomId, callback) {
+    userRoomEnter: function(roomId) {
       var token = storage.get("token");
       return this.api.roomEnter.save({ id: roomId }, { token: token });
     },
 
-    userRoomLeave: function(roomId, callback) {
+    userRoomLeave: function(roomId) {
       var token = storage.get("token");
       return this.api.roomLeave.save({ id: roomId }, { token: token });
     },
