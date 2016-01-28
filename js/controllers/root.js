@@ -18,13 +18,11 @@
     }, function(res) {
       console.warn("Error at api.getAllRooms");
     });
-    api.getRoomUsers(roomId, function(data, isSuccess) {
-      if (isSuccess && data) {
-        _this.$broadcast("app:sidebar:updateUsers", data);
-        shared.data.currentRoomUsers = data;
-      } else {
-        console.warn("Error at api.getRoomUsers");
-      }
+    api.getRoomUsers(roomId).then(function(res) {
+      _this.$broadcast("app:sidebar:updateUsers", data);
+      shared.data.currentRoomUsers = data;
+    }, function() {
+      console.warn("Error at api.getRoomUsers");
     });
     api.getRoomMessages(roomId, function(data, isSuccess) {
       if (isSuccess && data) {

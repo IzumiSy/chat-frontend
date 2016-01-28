@@ -70,11 +70,7 @@
 
     getRoomUsers: function(roomId, callback) {
       var token = storage.get("token");
-      this.api.getUsers.get({ id: roomId }, { token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.getUsers.get({ id: roomId }, { token: token })
     },
 
     getRoomMessages: function(roomId, callback) {
