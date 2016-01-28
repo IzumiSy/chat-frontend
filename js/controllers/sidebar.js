@@ -9,7 +9,6 @@
     _this.$once("app:sidebar:setCurrentRoom", function(roomId) {
       _this.$set("currentRoomId", roomId);
     });
-
     _this.$on("app:sidebar:updateRooms", function(data) {
       _this.$set("rooms", data);
     });
