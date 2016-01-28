@@ -44,14 +44,13 @@
 
       // userRoomLeave doesnt have to be called here.
       // because userRoomEnter updates current room data to the new one.
-      api.userRoomEnter(nextRoomId, function(data, isSuccess) {
-        if (!isSuccess) {
-          console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
-        }
 
-        // This dispater cannot be asynchronizing, because
-        // app:root:fetchRoomData needs waiting for update of user list in backend.
+      // This dispater cannot be asynchronizing, because
+      // app:root:fetchRoomData needs waiting for update of user list in backend.
+      api.userRoomEnter(nextRoomId).then(function(res) {
         _this.$dispatch("app:root:fetchRoomData", nextRoomId);
+      }, function() {
+        console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
       });
     },
 

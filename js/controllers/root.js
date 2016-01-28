@@ -91,15 +91,13 @@
   };
 
   var enterRoom = function(_this, bucksNext, roomId) {
-    api.userRoomEnter(roomId, function(data, isSuccess) {
-      if (isSuccess) {
-        _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-        shared.data.currentRoomId = roomId;
-        return bucksNext(null, true);
-      } else {
-        console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
-        return bucksNext(null, false);
-      }
+    api.userRoomEnter(roomId).then(function(res) {
+      _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
+      shared.data.currentRoomId = roomId;
+      return bucksNext(null, true);
+    }, function() {
+      console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
+      return bucksNext(null, false);
     });
   };
 

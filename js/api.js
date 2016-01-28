@@ -80,20 +80,12 @@
 
     userRoomEnter: function(roomId, callback) {
       var token = storage.get("token");
-      this.api.roomEnter.save({ id: roomId }, { token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.roomEnter.save({ id: roomId }, { token: token });
     },
 
     userRoomLeave: function(roomId, callback) {
       var token = storage.get("token");
-      this.api.roomLeave.save({ id: roomId }, { token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.roomLeave.save({ id: roomId }, { token: token });
     },
 
     sendMessage: function(roomId, message, callback) {
