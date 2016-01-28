@@ -50,9 +50,8 @@
           console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
         }
 
-        // This dispater cannot be asynchronizing, because app:root:fetchRoomData
-        // includes action to update user list of the room to enter.
-        // It is needed to wait for update of user list in backend.
+        // This dispater cannot be asynchronizing, because
+        // app:root:fetchRoomData needs waiting for update of user list in backend.
         _this.$dispatch("app:root:fetchRoomData", nextRoomId);
       });
     },
