@@ -60,7 +60,8 @@
       },
 
       updateMembers: function(data) {
-         // TODO impelement here
+        data = JSON.parse(data);
+        _this.$broadcast("app:sidebar:updateUsers", data);
       },
 
       userEnter: function(data) {
