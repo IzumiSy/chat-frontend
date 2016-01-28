@@ -63,12 +63,12 @@
       });
     },
 
-    getAllRooms: function(callback) {
+    getAllRooms: function() {
       var token = storage.get("token");
       return this.api.allRooms.get({ token: token })
     },
 
-    getRoomUsers: function(roomId, callback) {
+    getRoomUsers: function(roomId) {
       var token = storage.get("token");
       return this.api.getUsers.get({ id: roomId }, { token: token })
     },
