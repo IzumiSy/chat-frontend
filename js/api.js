@@ -65,21 +65,17 @@
 
     getAllRooms: function() {
       var token = storage.get("token");
-      return this.api.allRooms.get({ token: token })
+      return this.api.allRooms.get({ token: token });
     },
 
     getRoomUsers: function(roomId) {
       var token = storage.get("token");
-      return this.api.getUsers.get({ id: roomId }, { token: token })
+      return this.api.getUsers.get({ id: roomId }, { token: token });
     },
 
-    getRoomMessages: function(roomId, callback) {
+    getRoomMessages: function(roomId) {
       var token = storage.get("token");
-      this.api.getMsgs.get({ id: roomId }, { token: token }).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.getMsgs.get({ id: roomId }, { token: token });
     },
 
     userRoomEnter: function(roomId, callback) {

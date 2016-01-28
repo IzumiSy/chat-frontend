@@ -19,18 +19,17 @@
       console.warn("Error at api.getAllRooms");
     });
     api.getRoomUsers(roomId).then(function(res) {
-      _this.$broadcast("app:sidebar:updateUsers", data);
-      shared.data.currentRoomUsers = data;
+      _this.$broadcast("app:sidebar:updateUsers", res.data);
+      shared.data.currentRoomUsers = res.data;
     }, function() {
       console.warn("Error at api.getRoomUsers");
     });
-    api.getRoomMessages(roomId, function(data, isSuccess) {
-      if (isSuccess && data) {
-        data.forEach(formatCreatedAtTime);
-        _this.$broadcast("app:msgView:setMessages", data);
-      } else {
-        console.warn("Error at api.getRoomMessages");
-      }
+    api.getRoomMessages(roomId).then(function(res) {
+      var data = res.data;
+      data.forEach(formatCreatedAtTime);
+      _this.$broadcast("app:msgView:setMessages", data);
+    }, function() {
+      console.warn("Error at api.getRoomMessages");
     });
   };
 
