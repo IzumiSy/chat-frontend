@@ -12,6 +12,14 @@
   };
 
   var fetchUsersAndMessages = function(_this, roomId) {
+    api.getAllRooms(function(data, isSuccess) {
+      if (isSuccess && data) {
+        _this.$broadcast("app:sidebar:updateRooms", data);
+        shared.data.rooms = data;
+      } else {
+        console.warn("Error at api.getAllRooms");
+      }
+    });
     api.getRoomUsers(roomId, function(data, isSuccess) {
       if (isSuccess && data) {
         _this.$broadcast("app:sidebar:updateUsers", data);
