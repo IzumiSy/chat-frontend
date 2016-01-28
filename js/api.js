@@ -38,12 +38,8 @@
       sendMessage: resource(API_HOST + "/api/message/:id")
     },
 
-    pingRequest: function(callback) {
-      this.api.ping.get().then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+    pingRequest: function() {
+      return this.api.ping.get();
     },
 
     createNewUser: function(name) {

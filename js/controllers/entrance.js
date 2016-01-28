@@ -95,10 +95,10 @@
 
     created: function() {
       (new Bucks()).then(function(res, next) {
-        api.pingRequest(function(data, isSucceed) {
-          if (isSucceed) return next();
+        api.pingRequest().then(function(res) {
+          return next();
+        }, function() {
           shared.jumpers.error();
-          return;
         });
       }).then(function(res, next) {
         if (storage.get("token")) {
