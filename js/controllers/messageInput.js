@@ -15,13 +15,11 @@
         return;
       }
 
-      api.sendMessage(currentRoomId, message, function(data, isSuccess) {
-        if (!isSuccess) {
-          console.warn("Error at api.sendMessage(...)");
-          return;
-        }
+      api.sendMessage(currentRoomId, message).then(function(res) {
         _this.$set("message", null);
         _this.$dispatch("app:root:newMessage");
+      }, function() {
+        console.warn("Error at api.sendMessage(...)");
       });
     },
 

@@ -84,14 +84,10 @@
       return this.api.roomLeave.save({ id: roomId }, { token: token });
     },
 
-    sendMessage: function(roomId, message, callback) {
+    sendMessage: function(roomId, message) {
       var token = storage.get("token");
       var params = { content: message, token: token };
-      this.api.sendMessage.save({ id: roomId }, params).then(function(response) {
-        callback(response.data, true);
-      }, function(response) {
-        callback(response.data, false);
-      });
+      return this.api.sendMessage.save({ id: roomId }, params);
     },
 
     connectRocketIO: function(roomId) {
