@@ -29,6 +29,10 @@
       }
     },
 
+    beforeDestroy: function() {
+      this.$off();
+    },
+
     onRoomClicked: function(room) {
       var currentRoomId = shared.data.currentRoomId;
       var nextRoomId = room._id.$oid;

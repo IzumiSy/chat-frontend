@@ -28,6 +28,7 @@
       },
       created: controllers.partials.sidebar.created,
       ready: controllers.partials.sidebar.ready,
+      beforeDestroy: controllers.partials.sidebar.beforeDestroy,
       methods: {
         onRoomClicked: controllers.partials.sidebar.onRoomClicked,
         onUserClicked: controllers.partials.sidebar.onUserClicked
