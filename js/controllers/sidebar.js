@@ -29,6 +29,9 @@
       }
     },
 
+    // RocketIO subscribers for user leave/enter are always called on
+    // even when the current user leaves from the chat.
+    // so sidebar event listeners have to be "off"ed before elements destroy.
     beforeDestroy: function() {
       this.$off();
     },
