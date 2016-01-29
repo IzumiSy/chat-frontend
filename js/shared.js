@@ -8,6 +8,7 @@
         instance: null,
         listeners: {}
       }
+      channel_messages: []
     };
 
     return {
