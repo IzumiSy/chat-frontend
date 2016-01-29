@@ -139,10 +139,6 @@
         roomDataSetup(_this, shared.data.currentRoomId);
         return next();
       }).end();
-
-      $(window).bind("beforeunload", function(e) {
-        // TODO Set alert showing here to confirm of leaving and call leave transaction
-      });
     }
   };
 
