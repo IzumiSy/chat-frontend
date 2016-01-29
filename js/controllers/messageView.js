@@ -3,36 +3,37 @@
 
   var shared = require("../shared.js");
 
-  var roomChange = function(_this) {
+  // If 'messages' parameter is given, this method substitutes that messages
+  // to shared data as current room messages. If not, this just loads messages
+  // of current room and return them.
+  var populateRoomMessages = function(messages) {
     var currentRoomId = shared.data.currentRoomId;
-    var currentRoomMessages = null;
+    var currentRoomMessages = [];
 
     if (currentRoomId) {
+      if (messages !== undefined && $.isArray(messages)) {
+        shared.data.channel_messages[currentRoomId] = messages;
+        return messages
+      }
+
       currentRoomMessages = shared.data.channel_messages[currentRoomId];
       if (!currentRoomMessages) {
          shared.data.channel_messages[currentRoomId] = [];
          currentRoomMessages = [];
       }
     }
-    _this.$set("messages", currentRoomMessages);
+
+    return currentRoomMessages
   };
 
-  var addMessage = function(_this) {
+  var roomChange = function(_this) {
+    _this.$set("messages", populateRoomMessages());
+  };
+
+  var addMessage = function(_this, data) {
     var messages = _this.$get("messages");
-    var currentRoomId = shared.data.currentRoomId;
-    var currentRoomMessages = null;
-
     messages.push(data);
-    _this.$set("messages", messages);
-
-    if (currentRoomId) {
-      currentRoomMessages = shared.data.channel_messages[currentRoomId];
-      if (currentRoomMessages) {
-        shared.data.channel_messages[currentRoomId] = messages;
-      } else {
-        shared.data.channel_messages[currentRoomId] = [];
-      }
-    }
+    _this.$set("messages", populateRoomMessages(messages));
   };
 
   var listenersSetup = function(_this) {
@@ -40,7 +41,7 @@
       roomChange(_this);
     });
     _this.$on("app:msgView:addMessage", function(data) {
-      addMessage(_this);
+      addMessage(_this, data);
     });
     _this.$on("app:msgView:scrollBottom", function() {
       // TODO Scroll bottom
