@@ -7,7 +7,7 @@
       rocketio: {
         instance: null,
         listeners: {}
-      }
+      },
       channel_messages: []
     };
 
