@@ -30,7 +30,6 @@
       getUser:   resource(API_HOST + "/api/user/:id"),
 
       allRooms:  resource(API_HOST + "/api/room"),
-      getMsgs:   resource(API_HOST + "/api/room/:id/messages"),
       getUsers:  resource(API_HOST + "/api/room/:id/users"),
       roomEnter: resource(API_HOST + "/api/room/:id/enter"),
       roomLeave: resource(API_HOST + "/api/room/:id/leave"),
@@ -63,11 +62,6 @@
     getRoomUsers: function(roomId) {
       var token = storage.get("token");
       return this.api.getUsers.get({ id: roomId }, { token: token });
-    },
-
-    getRoomMessages: function(roomId) {
-      var token = storage.get("token");
-      return this.api.getMsgs.get({ id: roomId }, { token: token });
     },
 
     userRoomEnter: function(roomId) {

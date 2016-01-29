@@ -24,13 +24,6 @@
     }, function() {
       console.warn("Error at api.getRoomUsers");
     });
-    api.getRoomMessages(roomId).then(function(res) {
-      var data = res.data;
-      data.forEach(formatCreatedAtTime);
-      _this.$broadcast("app:msgView:setMessages", data);
-    }, function() {
-      console.warn("Error at api.getRoomMessages");
-    });
   };
 
   var delegateRocketioListeners = function() {
