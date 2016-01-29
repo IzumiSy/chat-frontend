@@ -114,6 +114,11 @@
     },
 
     ready: function() {
+      if (!shared.data.user) {
+        shared.jumpers.entrance();
+        return;
+      }
+
       var _this = this;
       var lobbyId = shared.data.lobbyId;
       var rooms = shared.data.rooms;
