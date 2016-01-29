@@ -22,7 +22,6 @@
       shared.data.lobbyId = _.find(rooms, function(r) {
         return r.name == "Lobby";
       })._id.$oid;
-      return !!shared.data.lobbyId;
     };
 
     var exec = {
@@ -58,11 +57,12 @@
             shared.jumpers.error();
             return _next();
           }
-          shared.data.rooms = res.data;
-          if (!storeLobbyId(res.data)) {
+          if (!res.data.length) {
             error("ロビールームがありません。");
             return;
           }
+          storeLobbyId(res.data)
+          shared.data.rooms = res.data;
           shared.jumpers.root();
           return _next();
         }, function() {
