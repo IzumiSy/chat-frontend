@@ -61,7 +61,7 @@
             error("ロビールームがありません。");
             return;
           }
-          storeLobbyId(res.data)
+          storeLobbyId(res.data);
           shared.data.rooms = res.data;
           shared.jumpers.root();
           return _next();
