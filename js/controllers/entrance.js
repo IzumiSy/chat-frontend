@@ -98,18 +98,11 @@
     },
 
     created: function() {
-      (new Bucks()).then(function(res, next) {
-        api.pingRequest().then(function(res) {
-          return next();
-        }, function() {
-          shared.jumpers.error();
-        });
-      }).then(function(res, next) {
-        if (storage.get("token")) {
-          shared.jumpers.root();
-          return next();
-        }
-      }).end();
+      api.pingRequest().then(function(res) {
+        // noop
+      }, function() {
+        shared.jumpers.error();
+      });
     },
 
     ready: function() {
