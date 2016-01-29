@@ -4,6 +4,10 @@
   var api = require("../api.js");
   var shared = require("../shared.js");
 
+  var setInputFocus = function(_this) {
+    $(_this.$el).find("input.message").focus();
+  };
+
   var messageInputController = {
     sendMessage: function() {
       var message = this.message;
@@ -23,8 +27,14 @@
       });
     },
 
+    created: function() {
+      this.$on("app:msgInput:setFocus", function() {
+        setInputFocus(this);
+      });
+    },
+
     ready: function() {
-      $(this.$el).find("input.message").focus();
+      setInputFocus(this);
     }
   };
 

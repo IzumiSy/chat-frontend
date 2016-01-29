@@ -108,6 +108,7 @@
     });
     _this.$on("app:root:roomChange", function() {
       _this.$broadcast("app:msgView:roomChange");
+      _this.$broadcast("app:msgInput:setFocus");
     });
   };
 

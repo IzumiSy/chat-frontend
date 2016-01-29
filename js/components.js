@@ -57,6 +57,7 @@
       methods: {
         sendMessage: controllers.partials.messageInput.sendMessage
       },
+      created: controllers.partials.messageInput.created,
       ready: controllers.partials.messageInput.ready
     }
   };
