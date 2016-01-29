@@ -15,7 +15,7 @@
   var leaveTransaction = function() {
     var currentRoomId =
       shared.data.currentRoomId ? shared.data.currentRoomId : "all";
-    api.userRoomLeave(currentRoomId, function() {});
+    api.userRoomLeave(currentRoomId);
     storage.remove("token");
     shared.jumpers.entrance();
   };
