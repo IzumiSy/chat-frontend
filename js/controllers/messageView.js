@@ -4,8 +4,18 @@
   var shared = require("../shared.js");
 
   var listenersSetup = function(_this) {
-    _this.$on("app:msgView:clearMessages", function() {
-      _this.$set("messages", []);
+    _this.$on("app:msgView:roomChange", function() {
+      var currentRoomId = shared.data.currentRoomId;
+      var currentRoomMessages = null;
+
+      if (currentRoomId) {
+        currentRoomMessages = shared.data.channel_messages[currentRoomId];
+        if (!currentRoomMessages) {
+           shared.data.channel_messages[currentRoomId] = [];
+           currentRoomMessages = [];
+        }
+      }
+      _this.$set("messages", currentRoomMessages);
     });
 
     _this.$on("app:msgView:scrollBottom", function() {
@@ -19,12 +29,13 @@
 
       messages.push(data);
       _this.$set("messages", messages);
+
       if (currentRoomId) {
         currentRoomMessages = shared.data.channel_messages[currentRoomId];
         if (currentRoomMessages) {
-          currentRoomMessages.push(data);
+          shared.data.channel_messages[currentRoomId] = messages;
         } else {
-          currentRoomMessages = messages;
+          shared.data.channel_messages[currentRoomId] = [];
         }
       }
     });

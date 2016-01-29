@@ -107,7 +107,7 @@
       _this.$broadcast("app:msgView:scrollBottom");
     });
     _this.$on("app:root:roomChange", function() {
-      _this.$broadcast("app:msgView:clearMessages");
+      _this.$broadcast("app:msgView:roomChange");
     });
   };
 

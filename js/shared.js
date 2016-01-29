@@ -9,7 +9,7 @@
         instance: null,
         listeners: {}
       },
-      channel_messages: []
+      channel_messages: {}
     };
 
     return {
