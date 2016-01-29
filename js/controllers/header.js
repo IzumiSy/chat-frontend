@@ -6,17 +6,15 @@
   var storage = require("../storage.js");
 
   // TODO Need any error handling here?
-  var leaveTransaction = function() {
-    var currentRoomId =
-      shared.data.currentRoomId ? shared.data.currentRoomId : "all";
-    api.userRoomLeave(currentRoomId);
+  var leaveTransaction = function(roomId) {
+    api.userRoomLeave(roomId);
     storage.remove("token");
     shared.jumpers.entrance();
   };
 
   var headerController = {
     logout: function() {
-      leaveTransaction();
+      leaveTransaction("all");
     }
   };
 
