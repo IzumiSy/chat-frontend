@@ -18,16 +18,11 @@
         _this.message = msg;
       }
     };
-    var storeLobbyId = function(rooms, _next) {
-      if (!rooms || !shared.data.lobbyId) {
-        error("ロビールームがありません。");
-        return;
-      }
+    var storeLobbyId = function(rooms) {
       shared.data.lobbyId = _.find(rooms, function(r) {
         return r.name == "Lobby";
       })._id.$oid;
-      shared.jumpers.root();
-      return _next();
+      return !!shared.data.lobbyId;
     };
 
     var exec = {
@@ -59,8 +54,17 @@
 
       getRooms: function(_next) {
         api.getAllRooms().then(function(res) {
+          if (!res.data) {
+            shared.jumpers.error();
+            return _next();
+          }
           shared.data.rooms = res.data;
-          storeLobbyId(res.data, _next);
+          if (!storeLobbyId(res.data)) {
+            error("ロビールームがありません。");
+            return;
+          }
+          shared.jumpers.root();
+          return _next();
         }, function() {
           console.warn("Error at api.getAllRooms");
           shared.jumpers.error();
