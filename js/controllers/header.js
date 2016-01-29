@@ -5,12 +5,6 @@
   var shared = require("../shared.js");
   var storage = require("../storage.js");
 
-  var listenersSetup = function(_this) {
-    _this.$on("logout", function(data) {
-      leaveTransaction();
-    });
-  };
-
   // TODO Need any error handling here?
   var leaveTransaction = function() {
     var currentRoomId =
@@ -21,10 +15,6 @@
   };
 
   var headerController = {
-    created: function() {
-      listenersSetup(this);
-    },
-
     logout: function() {
       leaveTransaction();
     }

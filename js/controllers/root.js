@@ -114,11 +114,6 @@
     },
 
     ready: function() {
-      if (!utils.checkLogin() || !shared.data.user) {
-        this.$broadcast("logout");
-        return;
-      }
-
       var _this = this;
       var lobbyId = shared.data.lobbyId;
       var rooms = shared.data.rooms;

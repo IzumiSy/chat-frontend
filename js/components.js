@@ -9,7 +9,6 @@
   var _partials = {
     header: {
       template: require("./components/_header.html"),
-      created: controllers.partials.header.created,
       methods: {
         logout: controllers.partials.header.logout
       }
