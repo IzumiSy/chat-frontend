@@ -4,6 +4,7 @@
   var SharedStructure = function() {
     var jumpers = {};
     var data = {
+      currentRoomId: null,
       rocketio: {
         instance: null,
         listeners: {}
