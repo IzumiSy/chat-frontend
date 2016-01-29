@@ -49,6 +49,8 @@
       _this.$set("currentRoomId", nextRoomId);
       _this.$set("users", []);
 
+      _this.$dispatch("app:root:roomChange");
+
       // userRoomLeave doesnt have to be called here.
       // because userRoomEnter updates current room data to the new one.
 

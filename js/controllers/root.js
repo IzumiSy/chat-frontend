@@ -106,6 +106,9 @@
     _this.$on("app:root:newMessage", function() {
       _this.$broadcast("app:msgView:scrollBottom");
     });
+    _this.$on("app:root:roomChange", function() {
+      _this.$broadcast("app:msgView:clearMessages");
+    });
   };
 
   var rootController = {

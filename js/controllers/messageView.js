@@ -1,17 +1,32 @@
 (function() {
   'use strict';
 
+  var shared = require("../shared.js");
+
   var listenersSetup = function(_this) {
-    _this.$on("app:msgView:setMessages", function(messages) {
-      _this.$set("messages", messages);
+    _this.$on("app:msgView:clearMessages", function() {
+      _this.$set("messages", []);
     });
-    _this.$on("app:msgView:addMessage", function(data) {
-      var messages = _this.$get("messages");
-      messages.push(data);
-      _this.$set("messages", messages);
-    });
+
     _this.$on("app:msgView:scrollBottom", function() {
       // TODO Scroll bottom
+    });
+
+    _this.$on("app:msgView:addMessage", function(data) {
+      var messages = _this.$get("messages");
+      var currentRoomId = shared.data.currentRoomId;
+      var currentRoomMessages = null;
+
+      messages.push(data);
+      _this.$set("messages", messages);
+      if (currentRoomId) {
+        currentRoomMessages = shared.data.channel_messages[currentRoomId];
+        if (currentRoomMessages) {
+          currentRoomMessages.push(data);
+        } else {
+          currentRoomMessages = messages;
+        }
+      }
     });
   };
 
