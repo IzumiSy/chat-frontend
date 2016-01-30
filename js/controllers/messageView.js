@@ -13,7 +13,7 @@
     if (currentRoomId) {
       if (messages !== undefined && $.isArray(messages)) {
         shared.data.channel_messages[currentRoomId] = messages;
-        return messages
+        return messages;
       }
 
       currentRoomMessages = shared.data.channel_messages[currentRoomId];
@@ -23,7 +23,7 @@
       }
     }
 
-    return currentRoomMessages
+    return currentRoomMessages;
   };
 
   var roomChange = function(_this) {
