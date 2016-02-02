@@ -24,9 +24,8 @@
     api: {
       ping: resource(API_HOST + "/api/ping"),
 
-      newUser:   resource(API_HOST + "/api/user/new"),
-      checkName: resource(API_HOST + "/api/user/usable"),
       userSelf:  resource(API_HOST + "/api/user"),
+      newUser:   resource(API_HOST + "/api/user/new"),
       getUser:   resource(API_HOST + "/api/user/:id"),
 
       allRooms:  resource(API_HOST + "/api/room"),
@@ -43,10 +42,6 @@
 
     createNewUser: function(name) {
       return this.api.newUser.save({ name: name });
-    },
-
-    checkNameAvailability: function(name) {
-      return this.api.checkName.save({ name: name });
     },
 
     getSelfData: function() {
