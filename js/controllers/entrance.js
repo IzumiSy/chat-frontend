@@ -31,7 +31,7 @@
           shared.data.user = res.data;
           return _next(null, true);
         }, function(res) {
-          if (res.data && res.data == "Duplicated username") {
+          if (res.data && res.data == "Duplicated user name") {
             error("ユーザー名が使われています");
           } else {
             error("入室に失敗しました");
