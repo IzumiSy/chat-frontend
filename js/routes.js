@@ -9,8 +9,7 @@
   // route.js without creating mapRoutings(...) function, but it would
   // be difficult to understand code stream in app.js if doing that.
 
-  var routings = null;
-  var events = null;
+  var routings = new VueRouter();
 
   var jumpers = {
     root: function() {
@@ -34,7 +33,6 @@
 
   module.exports = {
     mapRoutings: function() {
-      var routings = new VueRouter();
       var app = Vue.extend({});
 
       // Map all routings
