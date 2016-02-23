@@ -22,7 +22,7 @@
         // Show an alert that says "Your browser cannot browse this page"
       }
 
-      router.mapRoutings(this);
+      router.mapRoutings();
     }
   });
 })();

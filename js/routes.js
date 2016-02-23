@@ -33,8 +33,9 @@
   };
 
   module.exports = {
-    mapRoutings: function(app) {
-      routings = new VueRouter();
+    mapRoutings: function() {
+      var routings = new VueRouter();
+      var app = Vue.extend({});
 
       // Map all routings
       routings.map({
