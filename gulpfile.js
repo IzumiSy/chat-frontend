@@ -90,7 +90,7 @@ gulp.task("default", function() {
     .pipe(server({
       root: dists.dest,
       port: process.env.PORT || 8000,
-      livereload: process.env.NODE_ENV == "production" ? false : true,
+      livereload: process.env.NODE_ENV === 'production' ? false : true,
       open: true
      }));
   sequence("sass", "jade", "js", "venders-concat-js",
