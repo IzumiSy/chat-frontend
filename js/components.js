@@ -2,6 +2,7 @@
   'use strict';
 
   var controllers = require("./controllers.js");
+  var utils = require("./utils.js");
 
   // --------------------
   //  Partial components
@@ -88,13 +89,17 @@
       template: require("./entrance.html"),
       data: function() {
         return {
-          username: null,
-          message:  null,
-          error:    false
+          currentView: 1,
+          username:    null,
+          message:     null,
+          error:       false,
+          faces:       []
         };
       },
       methods: {
-        enterRobby: controllers.entrance.enterRobby
+        enterRobby: controllers.entrance.enterRobby,
+        selectFace: controllers.entrance.selectFace,
+        attrFaceAsset: utils.attrFaceAsset
       },
       created: controllers.entrance.created,
       ready: controllers.entrance.ready

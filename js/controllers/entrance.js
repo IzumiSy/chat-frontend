@@ -52,14 +52,18 @@
           }
           storeLobbyId(res.data);
           shared.data.rooms = res.data;
-          shared.jumpers.root();
-          return _next();
+          return _next(null, true);
         }, function() {
           console.warn("Error at api.getAllRooms");
           shared.jumpers.error();
           return _next(null, false);
         });
-      }
+      },
+
+      setUserFace: function(_next) {
+        _this.faces = _.sample(shared.FACE_ASSETS, 3);
+        _this.currentView = 2;
+      },
     };
 
     (new Bucks()).then(function(res, next) {
@@ -70,6 +74,9 @@
       if (!res) return next();
       _this.message = "ルーム一覧を取得しています...";
       exec.getRooms(next);
+    }).then(function(res, next) {
+      if (!res) return next();
+      exec.setUserFace(next);
     }).end();
   };
 
@@ -80,6 +87,20 @@
         return;
       }
       entranceTransaction(this);
+    },
+
+    selectFace: function(face) {
+      var payload = { face: face };
+      var userId = shared.data.user._id.$oid;
+
+      api.patchUser(userId, payload).then(function(res) {
+        if (res.data) {
+          shared.data.user = res.data;
+        }
+        shared.jumpers.root();
+      }, function() {
+        shared.jumpers.error();
+      });
     },
 
     created: function() {

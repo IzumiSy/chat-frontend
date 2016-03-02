@@ -16,6 +16,7 @@
         | チャットロビーへ入る
       p.message(v-bind:class="{ 'error': error }")
         | {{ message }}
+
   .form-section.face-select-view(
     v-if="currentView == 2"
     transition="expand"
@@ -23,4 +24,8 @@
     .caption-text
       b 好みの顔を選んでください
     .face-options
-      img.face-preview(v-for="face in faces" v-bind:src="face")
+      img.face-preview(
+        v-for="face in faces"
+        v-bind:src="attrFaceAsset(face)"
+        v-on:click="selectFace(face)"
+      )
