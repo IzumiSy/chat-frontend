@@ -11,6 +11,10 @@
       } else {
         return false;
       }
+    },
+
+    attrFaceAsset: function() {
+      return ("assets/face-" + face + ".png");
     }
   };
 
