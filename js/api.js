@@ -6,6 +6,7 @@
   var PRODUCTION_SERVER = 'http://chat-server-1000.herokuapp.com';
   var DEVELOPMENT_SERVER = 'http://localhost:3000';
 
+  // TODO need fixing here. NODE_ENV detection needed.
   var API_HOST =
     (process.env.NODE_ENV === 'development') ?
       DEVELOPMENT_SERVER : PRODUCTION_SERVER;
