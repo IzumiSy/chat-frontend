@@ -73,6 +73,7 @@
       }
     };
 
+    // TODO Monitor disconnection of RocketIO caused by some errors on network
     shared.data.rocketio.instance = api.connectRocketIO(roomId);
     shared.data.rocketio.listeners = {
       newMessage: shared.data.rocketio.instance.on("newMessage", listeners.newMessage),
