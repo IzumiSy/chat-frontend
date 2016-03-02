@@ -4,7 +4,7 @@
   var _ = require("underscore");
   var shared = require("../shared.js");
   var api = require("../api.js");
-  var util = require("../utils.js");
+  var utils = require("../utils.js");
 
   var listenersSetup = function(_this) {
     _this.$once("app:sidebar:setCurrentRoom", function(roomId) {
