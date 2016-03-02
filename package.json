@@ -2,6 +2,9 @@
   "name": "chat-frontend",
   "version": "1.0.0",
   "description": "Chat Application",
+  "scripts": {
+    "start": "gulp"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IzumiSy/chat-frontend.git"
