@@ -14,9 +14,7 @@
   // it can prevent sending pre-flight request when accessing to
   // the backend server to call API.
   var resource = function(url) {
-    var options = {
-      emulateJSON: true
-    };
+    var options = { emulateJSON: true };
     return Vue.resource(url, null, null, options);
   };
 
@@ -52,7 +50,7 @@
 
     patchUser: function(userId, data) {
       var token = storage.get("token");
-      return this.api.patchUser.update({ id: userId, data: data, token: token });
+      return this.api.patchUser.save({ id: userId, token: token }, { data: data });
     },
 
     getAllRooms: function() {
