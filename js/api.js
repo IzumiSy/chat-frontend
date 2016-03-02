@@ -27,6 +27,7 @@
       userSelf:  resource(API_HOST + "/api/user"),
       newUser:   resource(API_HOST + "/api/user/new"),
       getUser:   resource(API_HOST + "/api/user/:id"),
+      patchUser: resource(API_HOST + "/api/user/:id"),
 
       allRooms:  resource(API_HOST + "/api/room"),
       getUsers:  resource(API_HOST + "/api/room/:id/users"),
@@ -47,6 +48,11 @@
     getSelfData: function() {
       var token = storage.get("token");
       return this.api.userSelf.get({ token: token });
+    },
+
+    patchUser: function(userId, data) {
+      var token = storage.get("token");
+      return this.api.patchUser.patch({ id: userId, data: data, token: token });
     },
 
     getAllRooms: function() {
