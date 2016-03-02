@@ -13,7 +13,7 @@
       }
     },
 
-    attrFaceAsset: function() {
+    attrFaceAsset: function(face) {
       return ("assets/face-" + face + ".png");
     }
   };
