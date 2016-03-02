@@ -52,7 +52,7 @@
 
     patchUser: function(userId, data) {
       var token = storage.get("token");
-      return this.api.patchUser.patch({ id: userId, data: data, token: token });
+      return this.api.patchUser.update({ id: userId, data: data, token: token });
     },
 
     getAllRooms: function() {
