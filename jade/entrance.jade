@@ -1,5 +1,8 @@
 .entrance-view
-  .form-section
+  .form-section.username-view(
+    v-if="currentView == 1"
+    transition="expand"
+  )
     img.logo(src="assets/Pocket.png")
     .form-group.name
       input.form-control.login-field(
@@ -13,3 +16,11 @@
         | チャットロビーへ入る
       p.message(v-bind:class="{ 'error': error }")
         | {{ message }}
+  .form-section.face-select-view(
+    v-if="currentView == 2"
+    transition="expand"
+  )
+    .caption-text
+      b 好みの顔を選んでください
+    .face-options
+      img.face-preview(v-for="face in faces" v-bind:src="face")

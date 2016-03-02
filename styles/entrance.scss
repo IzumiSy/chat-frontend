@@ -27,6 +27,27 @@ body {
         width: 150px;
       }
 
+      .caption-text {
+        text-align: center;
+        padding-top: 50px;
+      }
+
+      .face-options {
+        text-align: center;
+        padding-top: 30px;
+
+        img.face-preview {
+          width: 100px;
+          margin: 15px;
+          padding: 5px;
+          border-radius: 10px;
+
+          &:hover {
+            background-color: gainsboro;
+          }
+        }
+      }
+
       .form-group.name {
         padding: 30px;
         padding-top: 10px;
