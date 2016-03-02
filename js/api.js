@@ -7,8 +7,8 @@
   var DEVELOPMENT_SERVER = 'http://localhost:3000';
 
   var API_HOST =
-    (process.env.NODE_ENV === 'production') ?
-      PRODUCTION_SERVER : DEVELOPMENT_SERVER;
+    (process.env.NODE_ENV === 'development') ?
+      DEVELOPMENT_SERVER : PRODUCTION_SERVER;
 
   // Option argument of Vue.resource(...) should have emulateJSON
   // it can prevent sending pre-flight request when accessing to
