@@ -122,7 +122,17 @@ gulp.task("jade", function() {
 });
 
 gulp.task("js", function() {
-  sequence("copy-js", "browserify", "jshint");
+  sequence("copy-config", "copy-js", "browserify", "jshint");
+});
+
+gulp.task("copy-config", function() {
+  var env = (process.env.NODE_ENV === "development" ? "development" : "production");
+  console.log("[TASK] copy-config processing...");
+  console.log("NODE_ENV: " + env);
+  return gulp.src("./configs/config-" + env + ".json")
+    .pipe(plumber())
+    .pipe(rename("config.js"))
+    .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("copy-js", function() {
