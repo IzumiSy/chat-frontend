@@ -2,14 +2,10 @@
   'use strict';
 
   var storage = require("./storage.js");
+  var config = require("./config.json");
 
-  var PRODUCTION_SERVER = 'http://chat-server-1000.herokuapp.com';
-  var DEVELOPMENT_SERVER = 'http://localhost:3000';
-
-  // TODO need fixing here. NODE_ENV detection needed.
-  var API_HOST =
-    (process.env.NODE_ENV === 'development') ?
-      DEVELOPMENT_SERVER : PRODUCTION_SERVER;
+  // The content of apiServerUrl varies according to NODE_ENV
+  var API_HOST = config.apiServerUrl;
 
   // Option argument of Vue.resource(...) should have emulateJSON
   // it can prevent sending pre-flight request when accessing to
