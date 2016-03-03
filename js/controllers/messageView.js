@@ -33,7 +33,7 @@
 
   var scrollToBottom = function() {
     // TODO Handle scroll
-  }
+  };
 
   var addMessage = function(_this, data) {
     var messages = _this.$get("messages");
