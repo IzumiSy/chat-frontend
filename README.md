@@ -13,9 +13,15 @@ Backend server is here: https://github.com/IzumiSy/chat-api-server
 $ npm install
 ```
 ## Run
+**Production**  
 ```Bash
-$ gulp
+$ npm start
 ```
+**Development**  
+```Bash
+$ npm run dev
+```
+
 ## Cleanup
 ```Bash
 $ gulp clean
