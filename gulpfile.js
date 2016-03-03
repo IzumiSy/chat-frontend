@@ -131,7 +131,7 @@ gulp.task("copy-config", function() {
   console.log("NODE_ENV: " + env);
   return gulp.src("./configs/config-" + env + ".json")
     .pipe(plumber())
-    .pipe(rename("config.js"))
+    .pipe(rename("config.json"))
     .pipe(gulp.dest(dists.dest));
 });
 
