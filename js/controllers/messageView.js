@@ -2,6 +2,7 @@
   'use strict';
 
   var shared = require("../shared.js");
+  var _ = require("underscore");
 
   // If 'messages' parameter is given, this method substitutes that messages
   // to shared data as current room messages. If not, this just loads messages
@@ -30,10 +31,15 @@
     _this.$set("messages", populateRoomMessages());
   };
 
+  var scrollToBottom = function() {
+    // TODO Handle scroll
+  }
+
   var addMessage = function(_this, data) {
     var messages = _this.$get("messages");
     messages.push(data);
     _this.$set("messages", populateRoomMessages(messages));
+    Vue.nextTick(scrollToBottom());
   };
 
   var listenersSetup = function(_this) {
