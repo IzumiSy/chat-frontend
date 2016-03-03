@@ -48,6 +48,10 @@
     }
 
     li.message-item {
+      &.no-face-msg {
+        padding-left: 65px;
+      }
+
       cursor: default;
       padding-left: 20px;
       padding-right: 20px;
