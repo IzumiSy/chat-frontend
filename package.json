@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Chat Application",
   "scripts": {
-    "start": "gulp",
-    "dev": "NODE_ENV=development npm start"
+    "start": "NODE_ENV=production gulp",
+    "dev": "NODE_ENV=development gulp"
   },
   "repository": {
     "type": "git",
