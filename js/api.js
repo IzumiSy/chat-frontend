@@ -77,7 +77,11 @@
     },
 
     connectRocketIO: function(roomId) {
-      return (new RocketIO({ channel: roomId })).connect(API_HOST);
+      var rocketioInstance = (new RocketIO({
+        type: "comet",
+        channel: roomId
+      })).connect(API_HOST);
+      return rocketioInstance;
     }
   };
 })();
