@@ -16,7 +16,7 @@
   };
 
   var setTokenHeader = function(token) {
-    Vue.http.headers.common['Authorization'] = "Basic " + token;
+    Vue.http.headers.common['Authorization'] = ("Basic " + token);
   };
 
   module.exports = {
@@ -61,12 +61,12 @@
 
     userRoomEnter: function(roomId) {
       setTokenHeader(storage.get("token"));
-      return this.api.roomEnter.save({ id: roomId });
+      return this.api.roomEnter.save({ id: roomId }, {});
     },
 
     userRoomLeave: function(roomId) {
       setTokenHeader(storage.get("token"));
-      return this.api.roomLeave.save({ id: roomId });
+      return this.api.roomLeave.save({ id: roomId }, {});
     },
 
     sendMessage: function(roomId, message) {
