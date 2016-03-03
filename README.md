@@ -12,6 +12,7 @@ Backend server is here: https://github.com/IzumiSy/chat-api-server
 ```Bash
 $ npm install
 ```
+In addition, if you have a production server anywhere like Heroku, you need to edit `configs/config-production.json` in order to specify API server to access. You can just leave `configs/config-development.json` even while you plan to launch your local API server with `localhost:3000`.
 ## Run
 **Production**  
 ```Bash
