@@ -15,11 +15,14 @@
     return Vue.resource(url, null, null, options);
   };
 
+  var setTokenHeader = function(token) {
+    Vue.http.headers.common['Authorization'] = "Basic " + token;
+  };
+
   module.exports = {
     api: {
       ping: resource(API_HOST + "/api/ping"),
 
-      userSelf:  resource(API_HOST + "/api/user"),
       newUser:   resource(API_HOST + "/api/user/new"),
       getUser:   resource(API_HOST + "/api/user/:id"),
       patchUser: resource(API_HOST + "/api/user/:id"),
@@ -37,42 +40,38 @@
     },
 
     createNewUser: function(name) {
+      setTokenHeader(storage.get("token"));
       return this.api.newUser.save({ name: name });
     },
 
-    getSelfData: function() {
-      var token = storage.get("token");
-      return this.api.userSelf.get({ token: token });
-    },
-
     patchUser: function(userId, data) {
-      var token = storage.get("token");
-      return this.api.patchUser.save({ id: userId, token: token }, { data: data });
+      setTokenHeader(storage.get("token"));
+      return this.api.patchUser.save({ id: userId }, { data: data });
     },
 
     getAllRooms: function() {
-      var token = storage.get("token");
-      return this.api.allRooms.get({ token: token });
+      setTokenHeader(storage.get("token"));
+      return this.api.allRooms.get();
     },
 
     getRoomUsers: function(roomId) {
-      var token = storage.get("token");
-      return this.api.getUsers.get({ id: roomId }, { token: token });
+      setTokenHeader(storage.get("token"));
+      return this.api.getUsers.get({ id: roomId });
     },
 
     userRoomEnter: function(roomId) {
-      var token = storage.get("token");
-      return this.api.roomEnter.save({ id: roomId }, { token: token });
+      setTokenHeader(storage.get("token"));
+      return this.api.roomEnter.save({ id: roomId });
     },
 
     userRoomLeave: function(roomId) {
-      var token = storage.get("token");
-      return this.api.roomLeave.save({ id: roomId }, { token: token });
+      setTokenHeader(storage.get("token"));
+      return this.api.roomLeave.save({ id: roomId });
     },
 
     sendMessage: function(roomId, message) {
-      var token = storage.get("token");
-      var params = { content: message, token: token };
+      var params = { content: message };
+      setTokenHeader(storage.get("token"));
       return this.api.sendMessage.save({ id: roomId }, params);
     },
 
