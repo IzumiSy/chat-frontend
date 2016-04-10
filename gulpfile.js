@@ -91,6 +91,7 @@ gulp.task("default", function() {
     .pipe(plumber())
     .pipe(server({
       root: dists.dest,
+      host: process.env.HOST || 'localhost',
       port: process.env.PORT || 8000,
       livereload: process.env.NODE_ENV === 'production' ? false : true,
       open: true
