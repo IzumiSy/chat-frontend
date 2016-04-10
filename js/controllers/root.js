@@ -32,10 +32,9 @@
     });
   };
 
-  var roomDataSetup = function(_this, _next, roomId) {
+  var roomDataSetup = function(_this, roomId) {
     fetchUsersAndMessages(_this, roomId);
     rocketio.setupRocketIOListeners(_this, roomId);
-    return _next();
   };
 
   var listenersSetup = function(_this) {
@@ -82,7 +81,8 @@
       (new Bucks()).then(function(res, next) {
         enterRoom(_this, next, lobbyId);
       }).then(function(res, next) {
-        roomDataSetup(_this, next, shared.data.currentRoomId);
+        roomDataSetup(_this, shared.data.currentRoomId);
+        return next();
       }).end();
     }
   };
