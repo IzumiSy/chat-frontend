@@ -16,7 +16,8 @@ var sequence   = require("run-sequence");
 var stringify  = require("stringify");
 var browserify = require("browserify");
 var source     = require("vinyl-source-stream");
-
+var buffer     = require("vinyl-buffer");
+var dotenv     = require("dotenv");
 
 var targets = {
   sass: [
@@ -126,13 +127,24 @@ gulp.task("js", function() {
 });
 
 gulp.task("copy-config", function() {
-  var env = (process.env.NODE_ENV === "development" ? "development" : "production");
   console.log("[TASK] copy-config processing...");
-  console.log("NODE_ENV: " + env);
-  return gulp.src("./configs/config-" + env + ".json")
-    .pipe(plumber())
-    .pipe(rename("config.json"))
-    .pipe(gulp.dest(dists.dest));
+
+  var url = null
+  var stream = source("config.json")
+  var env = process.env.NODE_ENV ===
+    'production' ? 'production' : 'development';
+
+  dotenv.config();
+  switch (env) {
+    case "production": url = process.env.PRODUCTION_SERVER; break;
+    case "development": url = process.env.DEVELOPMENT_SERVER; break;
+  }
+
+  stream.write(' { "apiServerUrl": "' + url + '" }');
+  process.nextTick(function() {
+    stream.end()
+  });
+  stream.pipe(buffer()).pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("copy-js", function() {
@@ -205,5 +217,6 @@ gulp.task("copy-assets", function() {
 
 gulp.task("clean", function() {
   del([dists.dest + "*.*", dists.dest + "/**/*"]);
+  process.exit(0)
 });
 
