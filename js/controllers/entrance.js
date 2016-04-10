@@ -29,7 +29,7 @@
         return api.createNewUser(username).then(function(res) {
           storage.set("token", res.data.token);
           shared.data.user = res.data;
-          return _next(null, true);
+          return _next();
         }).catch(function(res) {
           if (res.data && res.data === "Duplicated user name") {
             return _next(new Error("ユーザー名が使われています"));
@@ -42,11 +42,11 @@
       getRooms: function(_next) {
         return api.getAllRooms().then(function(res) {
           if (!res.data || !res.data.length) {
-            throw ("ロビールームがありません。");
+            throw _next(new Error("ロビールームがありません。"));
           }
           storeLobbyId(res.data);
           shared.data.rooms = res.data;
-          return _next(null, true);
+          return _next();
         }).catch(function(res) {
           return _next(new Error(null));
         });
