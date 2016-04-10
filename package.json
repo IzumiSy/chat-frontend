@@ -41,6 +41,7 @@
     "nanoscroller": "^0.8.7",
     "rocketio-client": "0.0.4",
     "run-sequence": "^1.1.5",
+    "spinkit": "^1.2.5",
     "stringify": "^3.1.0",
     "underscore": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
