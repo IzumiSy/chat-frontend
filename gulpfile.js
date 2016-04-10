@@ -43,7 +43,7 @@ var targets = {
       "./node_modules/flat-ui/bootstrap/css/bootstrap.css",
       "./node_modules/flat-ui/css/flat-ui.css",
       "./node_modules/nanoscroller/bin/css/nanoscroller.css",
-      ",/node_modules/spinkit/css/spinkit.css"
+      "./node_modules/spinkit/css/spinkit.css"
     ],
 
     js: [
