@@ -28,7 +28,7 @@
       return _next();
     }, function() {
       console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
-      return _next(new Error(null))
+      return _next(new Error(null));
     });
   };
 
