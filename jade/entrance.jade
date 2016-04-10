@@ -13,7 +13,10 @@
         v-on:keyup.enter="enterRobby"
       )
     .form-group.enter
-      a.btn.btn-primary.enter-button(v-on:click="enterRobby")
+      a.btn.btn-primary.enter-button(
+        v-on:click="enterRobby"
+        v-bind:disabled="resWaiting"
+      )
         | チャットロビーへ入る
       p.message(v-bind:class="{ 'error': error }")
         | {{ message }}
