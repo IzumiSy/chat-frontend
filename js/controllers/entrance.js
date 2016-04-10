@@ -106,8 +106,9 @@
     },
 
     created: function() {
+      var _this = this;
       api.pingRequest().then(function(res) {
-        // noop
+        _this.resWaiting = false;
       }, function() {
         shared.jumpers.error();
       });
