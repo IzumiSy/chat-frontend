@@ -89,6 +89,7 @@
       template: require("./entrance.html"),
       data: function() {
         return {
+          resWaiting:  false,
           currentView: 1,
           username:    null,
           message:     null,

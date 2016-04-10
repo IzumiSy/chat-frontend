@@ -9,6 +9,7 @@
         type="text"
         placeholder="ログインネームを入力..."
         v-model="username"
+        v-bind:disabled="resWaiting"
         v-on:keyup.enter="enterRobby"
       )
     .form-group.enter

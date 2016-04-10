@@ -26,37 +26,29 @@
 
     var exec = {
       userCreate: function(_next) {
-        api.createNewUser(username).then(function(res) {
+        return api.createNewUser(username).then(function(res) {
           storage.set("token", res.data.token);
           shared.data.user = res.data;
           return _next(null, true);
-        }, function(res) {
-          if (res.data && res.data == "Duplicated user name") {
-            error("ユーザー名が使われています");
+        }).catch(function(res) {
+          if (res.data && res.data === "Duplicated user name") {
+            return _next(new Error("ユーザー名が使われています"));
           } else {
-            error("入室に失敗しました");
+            return _next(new Error("入室に失敗しました"));
           }
-          return _next(null, false);
         });
       },
 
       getRooms: function(_next) {
-        api.getAllRooms().then(function(res) {
-          if (!res.data) {
-            shared.jumpers.error();
-            return _next();
-          }
-          if (!res.data.length) {
-            error("ロビールームがありません。");
-            return;
+        return api.getAllRooms().then(function(res) {
+          if (!res.data || !res.data.length) {
+            throw ("ロビールームがありません。");
           }
           storeLobbyId(res.data);
           shared.data.rooms = res.data;
           return _next(null, true);
-        }, function() {
-          console.warn("Error at api.getAllRooms");
-          shared.jumpers.error();
-          return _next(null, false);
+        }).catch(function(res) {
+          return _next(new Error(null));
         });
       },
 
@@ -66,17 +58,28 @@
       },
     };
 
-    (new Bucks()).then(function(res, next) {
+    var bucks = new Bucks();
+
+    Bucks.onError(function(e, bucks) {
+      _this.resWaiting = false;
+      if (e.message) {
+        error(e.message);
+      } else {
+        shared.jumpers.error();
+      }
+    });
+
+    _this.resWaiting = true;
+    bucks.then(function(res, next) {
       error(null);
       _this.message = "ユーザ作成中...";
       exec.userCreate(next);
     }).then(function(res, next) {
-      if (!res) return next();
       _this.message = "ルーム一覧を取得しています...";
       exec.getRooms(next);
     }).then(function(res, next) {
-      if (!res) return next();
       exec.setUserFace(next);
+      _this.resWaiting = false;
     }).end();
   };
 
