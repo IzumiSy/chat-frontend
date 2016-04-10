@@ -21,20 +21,21 @@
     });
   };
 
-  var enterRoom = function(_this, bucksNext, roomId) {
+  var enterRoom = function(_this, _next, roomId) {
     api.userRoomEnter(roomId).then(function(res) {
       _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
       shared.data.currentRoomId = roomId;
-      return bucksNext(null, true);
+      return _next();
     }, function() {
       console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
-      return bucksNext(null, false);
+      return _next(new Error(null))
     });
   };
 
-  var roomDataSetup = function(_this, roomId) {
+  var roomDataSetup = function(_this, _next, roomId) {
     fetchUsersAndMessages(_this, roomId);
     rocketio.setupRocketIOListeners(_this, roomId);
+    return _next();
   };
 
   var listenersSetup = function(_this) {
@@ -74,12 +75,14 @@
 
       _this.$broadcast("app:sidebar:updateRooms", rooms);
 
+      Bucks.onError(function(e, bucks) {
+        // noop
+      });
+
       (new Bucks()).then(function(res, next) {
         enterRoom(_this, next, lobbyId);
       }).then(function(res, next) {
-        if (!res) return next();
-        roomDataSetup(_this, shared.data.currentRoomId);
-        return next();
+        roomDataSetup(_this, next, shared.data.currentRoomId);
       }).end();
     }
   };

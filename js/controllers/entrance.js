@@ -58,8 +58,6 @@
       },
     };
 
-    var bucks = new Bucks();
-
     Bucks.onError(function(e, bucks) {
       _this.resWaiting = false;
       if (e.message) {
@@ -70,7 +68,7 @@
     });
 
     _this.resWaiting = true;
-    bucks.then(function(res, next) {
+    (new Bucks()).then(function(res, next) {
       error(null);
       _this.message = "ユーザ作成中...";
       exec.userCreate(next);
