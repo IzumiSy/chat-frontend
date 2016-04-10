@@ -10,10 +10,17 @@ Backend server is here: https://github.com/IzumiSy/chat-api-server
 <img src="https://dl.dropboxusercontent.com/u/50923926/chat-frontend-screen-shot.png" width="450">
 
 ## Setup
+Install dependencies
 ```Bash
 $ npm install
 ```
-In addition, if you have a production server anywhere like Heroku, you need to edit `configs/config-production.json` in order to specify API server to access. You can just leave `configs/config-development.json` even while you plan to launch your local API server with `localhost:3000`.
+
+Edit API server url
+```Bash
+$ cp .env.sample .env
+$ vi .env
+```
+
 ## Run
 **Production**  
 ```Bash
