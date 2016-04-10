@@ -30,3 +30,10 @@
         v-bind:src="attrFaceAsset(face)"
         v-on:click="selectFace(face)"
       )
+
+  .form-section.waiting-view(
+    v-if="currentView == 3"
+    transition="expand"
+  )
+    .sk-rotating-plane
+

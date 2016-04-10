@@ -94,6 +94,7 @@
       var payload = { face: face };
       var userId = shared.data.user._id.$oid;
 
+      this.currentView = 3;
       api.patchUser(userId, payload).then(function(res) {
         if (res.data) {
           shared.data.user = res.data;

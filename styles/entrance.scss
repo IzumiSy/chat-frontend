@@ -19,6 +19,14 @@ body {
       margin-right: auto;
       margin-top: 80px;
 
+      &.waiting-view {
+        > .sk-rotating-plane {
+          position: relative;
+          background-color: orange;
+          top: 125px;
+        }
+      }
+
       img.logo {
         position: relative;
         margin-top: 30px;
