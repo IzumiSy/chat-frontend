@@ -6,8 +6,12 @@ div.row.message-input
         placeholder="送信するメッセージを入力..."
         v-model="message"
         v-on:keyup.enter="sendMessage"
+        v-bind:disabled="resWaiting"
       )
   div.col-sm-2.button-form-column
     div.form-group
-      a.btn.btn-primary.say-button(v-on:click="sendMessage")
+      a.btn.btn-primary.say-button(
+        v-on:click="sendMessage"
+        v-bind:disabled="resWaiting"
+      )
        | 発言

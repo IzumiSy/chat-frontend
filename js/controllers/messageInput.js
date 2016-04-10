@@ -19,9 +19,11 @@
         return;
       }
 
+      _this.resWaiting = true;
       api.sendMessage(currentRoomId, message).then(function(res) {
         _this.$set("message", null);
         _this.$dispatch("app:root:newMessage");
+        _this.resWaiting = false;
       }, function() {
         console.warn("Error at api.sendMessage(...)");
       });

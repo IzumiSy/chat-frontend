@@ -52,7 +52,8 @@
       template: require("./components/_message_input.html"),
       data: function() {
         return {
-          message: null
+          message: null,
+          resWaiting: false
         };
       },
       methods: {
