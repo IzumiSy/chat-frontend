@@ -103,7 +103,6 @@
         selectFace: controllers.entrance.selectFace,
         attrFaceAsset: utils.attrFaceAsset
       },
-      created: controllers.entrance.created,
       ready: controllers.entrance.ready
     },
 

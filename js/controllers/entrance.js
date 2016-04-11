@@ -105,17 +105,16 @@
       });
     },
 
-    created: function() {
+    ready: function() {
       var _this = this;
       api.pingRequest().then(function(res) {
         _this.resWaiting = false;
+        Vue.nextTick(function() {
+          $(_this.$el).find("input.login-field").focus();
+        });
       }, function() {
         shared.jumpers.error();
       });
-    },
-
-    ready: function() {
-      $(this.$el).find("input.login-field").focus();
     }
   };
 
