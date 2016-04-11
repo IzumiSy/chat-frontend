@@ -25,6 +25,10 @@
       }
 
       var listeners = {
+        connected: function() {
+          console.log("[Rocket.io] Connected.");
+        },
+
         newMessage: function(data) {
           data = JSON.parse(data);
           utils.formatCreatedAtTime(data);
@@ -58,7 +62,8 @@
         updateRooms: shared.data.rocketio.instance.on("updateRooms", listeners.updateRooms),
         updateMembers: shared.data.rocketio.instance.on("updateMembers", listeners.updateMembers),
         userEnter: shared.data.rocketio.instance.on("userEnter", listeners.userEnter),
-        userLeave: shared.data.rocketio.instance.on("userLeave", listeners.userLeave)
+        userLeave: shared.data.rocketio.instance.on("userLeave", listeners.userLeave),
+        connected: shared.data.rocketio.instance.on("connect", listeners.connected)
       };
     }
   };
