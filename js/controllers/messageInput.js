@@ -39,8 +39,16 @@
     },
 
     created: function() {
+      var _this = this;
+
       this.$on("app:msgInput:setFocus", function() {
         setInputFocus(this);
+      });
+      this.$on("app:msgInput:networkError", function() {
+        _this.networkError = true;
+      });
+      this.$on("app:msgInput:networkConnected", function() {
+        _this.networkError = false;
       });
     },
 

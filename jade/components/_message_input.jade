@@ -3,15 +3,16 @@ div.row.message-input
     div.form-group.input-form-wrapper
       input.form-control.message(
         type="text"
-        placeholder="送信するメッセージを入力..."
         v-model="message"
         v-on:keypress.enter="sendMessage"
-        v-bind:disabled="resWaiting"
+        v-bind:placeholder="placeholdingText"
+        v-bind:disabled="resWaiting || networkError"
       )
   div.col-sm-2.button-form-column
     div.form-group
-      a.btn.btn-primary.say-button(
+      a.btn.say-button(
         v-on:click="sendMessage"
-        v-bind:disabled="resWaiting"
+        v-bind:disabled="resWaiting || networkError"
+        v-bind:class="{ 'btn-danger': networkError, 'btn-primary': !networkError }"
       )
        | 発言

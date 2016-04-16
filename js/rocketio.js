@@ -26,7 +26,11 @@
 
       var listeners = {
         connected: function() {
-          console.log("[Rocket.io] Connected.");
+          _this.$broadcast("app:msgInput:networkConnected");
+        },
+
+        error: function() {
+          _this.$broadcast("app:msgInput:networkError");
         },
 
         newMessage: function(data) {
@@ -56,14 +60,15 @@
       };
 
       // TODO Monitor disconnection of RocketIO caused by some errors on network
-      shared.data.rocketio.instance = api.connectRocketIO(roomId);
+      var rocketio = shared.data.rocketio.instance = api.connectRocketIO(roomId);
       shared.data.rocketio.listeners = {
-        newMessage: shared.data.rocketio.instance.on("newMessage", listeners.newMessage),
-        updateRooms: shared.data.rocketio.instance.on("updateRooms", listeners.updateRooms),
-        updateMembers: shared.data.rocketio.instance.on("updateMembers", listeners.updateMembers),
-        userEnter: shared.data.rocketio.instance.on("userEnter", listeners.userEnter),
-        userLeave: shared.data.rocketio.instance.on("userLeave", listeners.userLeave),
-        connected: shared.data.rocketio.instance.on("connect", listeners.connected)
+        newMessage:    rocketio.on("newMessage", listeners.newMessage),
+        updateRooms:   rocketio.on("updateRooms", listeners.updateRooms),
+        updateMembers: rocketio.on("updateMembers", listeners.updateMembers),
+        userEnter:     rocketio.on("userEnter", listeners.userEnter),
+        userLeave:     rocketio.on("userLeave", listeners.userLeave),
+        connected:     rocketio.on("connect", listeners.connected),
+        error:         rocketio.on("error", listeners.error)
       };
     }
   };

@@ -54,12 +54,22 @@
         return {
           message:       null,
           resWaiting:    false,
+          networkError:  false,
           previousInput: null,
         };
       },
       watch: {
         "message": function() {
           this.previousInput = this.message
+        }
+      },
+      computed: {
+        placeholdingText: function() {
+          return (
+            this.networkError ?
+            "ネットワークエラーがおきています..." :
+            "送信するテキストを入力..."
+          );
         }
       },
       methods: {
