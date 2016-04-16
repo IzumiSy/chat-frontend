@@ -12,7 +12,7 @@
     sendMessage: function() {
       // Prevention for mis-enter with IME on
       if (this.message !== this.previousInput) {
-        return
+        return;
       }
 
       var message = this.message;
@@ -32,7 +32,7 @@
 
         Vue.nextTick(function() {
           $(_this.$el).find("input.message").focus();
-        })
+        });
       }, function() {
         console.warn("Error at api.sendMessage(...)");
       });
