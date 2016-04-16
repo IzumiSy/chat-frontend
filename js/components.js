@@ -90,13 +90,19 @@
       template: require("./entrance.html"),
       data: function() {
         return {
-          resWaiting:  true,
-          currentView: 1,
-          username:    null,
-          message:     null,
-          error:       false,
-          faces:       []
+          previousInput: null,
+          resWaiting:    true,
+          currentView:   1,
+          username:      null,
+          message:       null,
+          error:         false,
+          faces:         []
         };
+      },
+      watch: {
+        "username": function() {
+          this.previousInput = this.username;
+        }
       },
       methods: {
         enterRobby: controllers.entrance.enterRobby,

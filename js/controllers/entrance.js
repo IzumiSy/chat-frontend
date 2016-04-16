@@ -87,7 +87,12 @@
         error("ログインネームを入力してください");
         return;
       }
-      entranceTransaction(this);
+
+      // Vue.js catches enter with IME on, so to prevent this,
+      // here checks the previous input data with the current one.
+      if (this.username === this.previousInput) {
+        entranceTransaction(this);
+      }
     },
 
     selectFace: function(face) {

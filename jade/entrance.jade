@@ -10,7 +10,7 @@
         placeholder="ログインネームを入力..."
         v-model="username"
         v-bind:disabled="resWaiting"
-        v-on:keyup.enter="enterRobby"
+        v-on:keypress.enter="enterRobby"
       )
     .form-group.enter
       a.btn.btn-primary.enter-button(
