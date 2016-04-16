@@ -16,6 +16,13 @@
     _this.$on("app:sidebar:updateUsers", function(data) {
       _this.$set("users", data);
     });
+
+    _this.$on("app:sidebar:networkError", function() {
+      _this.networkError = true;
+    });
+    _this.$on("app:sidebar:networkConnected", function() {
+      _this.networkError = false;
+    });
   };
 
   var sidebarController = {
@@ -38,6 +45,10 @@
     },
 
     onRoomClicked: function(room) {
+      if (this.networkError) {
+        return
+      }
+
       var currentRoomId = shared.data.currentRoomId;
       var nextRoomId = room._id.$oid;
       var _this = this;
@@ -65,7 +76,9 @@
     },
 
     onUserClicked: function(user) {
-
+      if (this.networkError) {
+        return;
+      }
     }
   };
 

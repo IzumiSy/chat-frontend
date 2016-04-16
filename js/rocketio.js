@@ -27,10 +27,12 @@
       var listeners = {
         connected: function() {
           _this.$broadcast("app:msgInput:networkConnected");
+          _this.$broadcast("app:sidebar:networkConnected");
         },
 
         error: function() {
           _this.$broadcast("app:msgInput:networkError");
+          _this.$broadcast("app:sidebar:networkError");
         },
 
         newMessage: function(data) {

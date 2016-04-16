@@ -21,9 +21,10 @@
         return {
           rooms: [],
           users: [],
-          currentUser: null,
+          currentUser:   null,
           currentRoomId: null,
-          currentFace: null
+          currentFace:   null,
+          networkError:  false
         };
       },
       created: controllers.partials.sidebar.created,
