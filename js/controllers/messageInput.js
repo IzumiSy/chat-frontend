@@ -10,6 +10,11 @@
 
   var messageInputController = {
     sendMessage: function() {
+      // Prevention for mis-enter with IME on
+      if (this.message !== this.previousInput) {
+        return
+      }
+
       var message = this.message;
       var currentRoomId = shared.data.currentRoomId;
       var _this = this;

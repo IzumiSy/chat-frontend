@@ -5,7 +5,7 @@ div.row.message-input
         type="text"
         placeholder="送信するメッセージを入力..."
         v-model="message"
-        v-on:keyup.enter="sendMessage"
+        v-on:keypress.enter="sendMessage"
         v-bind:disabled="resWaiting"
       )
   div.col-sm-2.button-form-column

@@ -52,9 +52,15 @@
       template: require("./components/_message_input.html"),
       data: function() {
         return {
-          message: null,
-          resWaiting: false
+          message:       null,
+          resWaiting:    false,
+          previousInput: null,
         };
+      },
+      watch: {
+        "message": function() {
+          this.previousInput = this.message
+        }
       },
       methods: {
         sendMessage: controllers.partials.messageInput.sendMessage
