@@ -29,6 +29,10 @@
         _this.$set("message", null);
         _this.$dispatch("app:root:newMessage");
         _this.resWaiting = false;
+
+        Vue.nextTick(function() {
+          $(_this.$el).find("input.message").focus();
+        })
       }, function() {
         console.warn("Error at api.sendMessage(...)");
       });
