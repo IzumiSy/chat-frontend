@@ -61,7 +61,7 @@
       },
       watch: {
         "message": function() {
-          this.previousInput = this.message
+          this.previousInput = this.message;
         }
       },
       computed: {
