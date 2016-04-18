@@ -46,7 +46,7 @@
 
     onRoomClicked: function(room) {
       if (this.networkError) {
-        return
+        return;
       }
 
       var currentRoomId = shared.data.currentRoomId;
