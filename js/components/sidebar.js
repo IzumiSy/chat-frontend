@@ -15,8 +15,11 @@
         currentFace:   null,
         networkError:  false,
 
-        bindingClasses: {
+        roomItemClasses: {
           'current': (currentRoomId == room._id.$oid),
+          'error': networkError
+        },
+        userItemClasses: {
           'error': networkError
         }
       };

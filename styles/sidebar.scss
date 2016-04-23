@@ -65,15 +65,17 @@
       }
     }
 
+    > .room-item, > .user-item {
+      &.error {
+        opacity: 0.5;
+      }
+    }
+
     > .room-item {
       > .badge {
         margin-top: 4px;
         float: right;
         padding: 1px 7px;
-      }
-
-      &.error {
-        opacity: 0.5;
       }
     }
 
