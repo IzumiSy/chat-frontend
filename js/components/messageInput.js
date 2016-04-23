@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers.js");
+  var controllers = require("./controllers/messageInput.js");
 
   var messsageInputComponent = {
-    template: require("./components/_message_input.html"),
+    template: require("../_message_input.html"),
 
     data: function() {
       return {

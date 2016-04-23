@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controller.js");
+  var controllers = require("./controller/sidebar.js");
 
   var sidebarComponent = {
-    template: require("./components/_sidebar.html"),
+    template: require("../_sidebar.html"),
 
     data: function() {
       return {

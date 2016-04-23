@@ -1,10 +1,11 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers.js")
+  var controllers = require("./controllers/entrance.js")
+  var utils = require("../utils.js");
 
   var entranceComponent = {
-    template: require("./entrance.html"),
+    template: require("../entrance.html"),
 
     data: function() {
       return {

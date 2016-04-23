@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controller.js")
+  var controllers = require("./controller/error.js")
 
   var errorComponent = {
-    template: require("./error.html"),
+    template: require("../error.html"),
 
     created: controllers.error.created,
 

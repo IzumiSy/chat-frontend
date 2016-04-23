@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers.js");
+  var controllers = require("./controllers/root.js");
 
   var rootComponent = {
-    template: require("./main.html"),
+    template: require("../main.html"),
 
     components: {
       "va-header": _partials.header,

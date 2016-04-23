@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers.js");
+  var controllers = require("./controllers/messageView.js");
 
   var messageViewComponent = {
-    template: require("./components/_message_view.html"),
+    template: require("../_message_view.html"),
 
     data: function() {
       return {

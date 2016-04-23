@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers.js");
+  var controllers = require("./controllers/header.js");
 
   var headerComponent = {
-    template: require("./components/_header.html"),
+    template: require("../_header.html"),
 
     methods: {
       logout: controllers.partials.header.logout
