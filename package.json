@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Chat Application",
   "scripts": {
+    "test": "gulp jshint",
     "start": "NODE_ENV=production gulp",
     "dev": "NODE_ENV=development gulp",
     "clean": "gulp clean"
