@@ -32,5 +32,5 @@
     ready: controller.ready
   };
 
-  module.export = rootComponent;
+  module.exports = rootComponent;
 })();

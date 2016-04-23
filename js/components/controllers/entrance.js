@@ -112,6 +112,7 @@
 
     ready: function() {
       var _this = this;
+
       api.pingRequest().then(function(res) {
         _this.resWaiting = false;
         Vue.nextTick(function() {
@@ -120,6 +121,8 @@
       }, function() {
         shared.jumpers.error();
       });
+
+      console.info("[APP] Entrance ready.");
     }
   };
 

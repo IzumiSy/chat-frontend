@@ -39,5 +39,5 @@
     }
   };
 
-  module.export = messageInputComponent;
+  module.exports = messageInputComponent;
 })();

@@ -13,5 +13,5 @@
     }
   };
 
-  module.export = errorComponent;
+  module.exports = errorComponent;
 })();

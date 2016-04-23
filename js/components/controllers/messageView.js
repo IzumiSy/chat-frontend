@@ -57,6 +57,7 @@
   var messageViewController = {
     ready: function() {
       listenersSetup(this);
+      console.info("[APP] Message view ready.");
     },
 
     isPrevUserSame: function(index) {

@@ -11,5 +11,5 @@
     }
   };
 
-  module.export = headerComponent;
+  module.exports = headerComponent;
 })();

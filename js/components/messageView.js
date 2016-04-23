@@ -19,5 +19,5 @@
     }
   };
 
-  module.export = messageViewComponent;
+  module.exports = messageViewComponent;
 })();

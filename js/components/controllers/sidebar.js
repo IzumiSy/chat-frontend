@@ -35,6 +35,7 @@
       if (shared.data.user && shared.data.user.face) {
         this.currentFace = utils.attrFaceAsset(shared.data.user.face);
       }
+      console.info("[APP] Sidebar ready.");
     },
 
     // RocketIO subscribers for user leave/enter are always called on

@@ -29,5 +29,5 @@
     }
   };
 
-  module.export = sidebarComponent;
+  module.exports = sidebarComponent;
 })();

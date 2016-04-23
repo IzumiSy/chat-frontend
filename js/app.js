@@ -28,6 +28,8 @@
       }
 
       router.mapRoutings();
+
+      console.info("[APP] App created.");
     }
   });
 })();

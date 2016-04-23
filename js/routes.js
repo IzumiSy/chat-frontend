@@ -63,6 +63,8 @@
       shared.jumpers = jumpers;
 
       routings.start(app, "body");
+
+      console.info("[APP] Routings mapped.");
     }
   };
 })();

@@ -53,6 +53,7 @@
   var rootController = {
     created: function() {
       listenersSetup(this);
+      console.info("[APP] Root created.");
     },
 
     ready: function() {
@@ -84,6 +85,8 @@
         roomDataSetup(_this, shared.data.currentRoomId);
         return next();
       }).end();
+
+      console.info("[APP] Root ready.");
     }
   };
 

@@ -51,6 +51,8 @@
       this.$on("app:msgInput:networkConnected", function() {
         _this.networkError = false;
       });
+
+      console.info("[APP] Message input ready");
     },
 
     ready: function() {
