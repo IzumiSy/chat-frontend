@@ -13,17 +13,13 @@
         currentUser:   null,
         currentRoomId: null,
         currentFace:   null,
-        networkError:  false
-      };
-    },
+        networkError:  false,
 
-    computed: {
-      bindingClasses: function() {
-        return {
-         'current': (currentRoomId == room._id.$oid),
-         'error': networkError
-        };
-      }
+        bindingClasses: {
+          'current': (currentRoomId == room._id.$oid),
+          'error': networkError
+        }
+      };
     },
 
     created: controller.created,
