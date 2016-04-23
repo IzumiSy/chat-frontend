@@ -16,8 +16,8 @@
     components: {
       "va-header":        components.header,
       "va-sidebar":       components.sidebar,
-      "va-message-view":  components.message_view,
-      "va-message-input": components.message_input
+      "va-message-view":  components.messageView,
+      "va-message-input": components.messageInput
     },
 
     data: function() {
