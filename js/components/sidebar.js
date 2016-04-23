@@ -13,15 +13,7 @@
         currentUser:   null,
         currentRoomId: null,
         currentFace:   null,
-        networkError:  false,
-
-        roomItemClasses: {
-          'current': (currentRoomId == room._id.$oid),
-          'error': networkError
-        },
-        userItemClasses: {
-          'error': networkError
-        }
+        networkError:  false
       };
     },
 
@@ -33,7 +25,23 @@
 
     methods: {
       onRoomClicked: controller.onRoomClicked,
-      onUserClicked: controller.onUserClicked
+      onUserClicked: controller.onUserClicked,
+
+      // Here returns v-bind:class contents for its own,
+      // because Jade cannot use new linings in double-quoted attributes.
+
+      roomItemClasses: function(room) {
+        return {
+          'current': (this.currentRoomId == room._id.$oid),
+          'error': this.networkError
+        };
+      },
+
+      userItemClasses: function() {
+        return {
+          'error': this.networkError
+        };
+      }
     }
   };
 
