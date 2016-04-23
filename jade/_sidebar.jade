@@ -8,7 +8,7 @@ ul.room-list
   li.room-item(
     v-for="room in rooms"
     v-on:click="onRoomClicked(room)"
-    v-bind:class="{ 'current': (currentRoomId == room._id.$oid) }"
+    v-bind:class="bindingClasses"
   )
     span
       | {{ room.name }}

@@ -17,6 +17,15 @@
       };
     },
 
+    computed: {
+      bindingClasses: function() {
+        return {
+         'current': (currentRoomId == room._id.$oid),
+         'error': networkError
+        };
+      }
+    },
+
     created: controller.created,
 
     ready: controller.ready,
