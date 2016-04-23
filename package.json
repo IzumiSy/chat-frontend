@@ -4,7 +4,8 @@
   "description": "Chat Application",
   "scripts": {
     "start": "NODE_ENV=production gulp",
-    "dev": "NODE_ENV=development gulp"
+    "dev": "NODE_ENV=development gulp",
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",
