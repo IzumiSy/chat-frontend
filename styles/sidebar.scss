@@ -3,16 +3,6 @@
 
 $sidebar-background-color: #2c3e50;
 
-@mixin error-background {
-  &:hover {
-    background-color: $sidebar-background-color;
-  }
-
-  &.current {
-    background-color: $sidebar-selected-color;
-  }
-}
-
 .sidebar {
   position: fixed;
   top: $header-height;
@@ -71,24 +61,22 @@ $sidebar-background-color: #2c3e50;
       &:hover {
         background-color: $sidebar-hover-color;
 
-        &.error {
-          &:hover {
-            background-color: $sidebar-background-color;
-          }
+        &.disabled:hover {
+          background-color: $sidebar-background-color;
         }
       }
 
       &.current {
         background-color: $sidebar-selected-color;
 
-        &.error:hover {
+        &.disabled:hover {
           background-color: $sidebar-selected-color;
         }
       }
     }
 
     > .room-item, > .user-item {
-      &.error {
+      &.disabled {
         opacity: 0.5;
       }
     }

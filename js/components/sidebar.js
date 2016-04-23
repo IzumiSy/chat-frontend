@@ -10,10 +10,15 @@
       return {
         rooms: [],
         users: [],
+
         currentUser:   null,
         currentRoomId: null,
         currentFace:   null,
-        networkError:  false
+        networkError:  false,
+
+        // Here will be updated right after curretnRoomId is set
+        // from message dispatching of root controller.
+        nowLoading: true
       };
     },
 
@@ -33,13 +38,13 @@
       roomItemClasses: function(room) {
         return {
           'current': (this.currentRoomId == room._id.$oid),
-          'error': this.networkError
+          'disabled': this.networkError || this.nowLoading
         };
       },
 
       userItemClasses: function() {
         return {
-          'error': this.networkError
+          'disabled': this.networkError || this.nowLoading
         };
       }
     }
