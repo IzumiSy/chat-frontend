@@ -1,15 +1,15 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers/header.js");
+  var controller = require("./controllers/header.js");
 
   var headerComponent = {
     template: require("../_header.html"),
 
     methods: {
-      logout: controllers.partials.header.logout
+      logout: controller.logout
     }
   };
 
   module.export = headerComponent;
-})()
+})();

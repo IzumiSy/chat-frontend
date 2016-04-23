@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers/messageInput.js");
+  var controller = require("./controllers/messageInput.js");
 
-  var messsageInputComponent = {
+  var messageInputComponent = {
     template: require("../_message_input.html"),
 
     data: function() {
@@ -25,19 +25,19 @@
       placeholdingText: function() {
         return (
           this.networkError ?
-          "$B%M%C%H%o!<%/%(%i!<$,$*$-$F$$$^$9(B..." :
-          "$BAw?.$9$k%F%-%9%H$rF~NO(B..."
+          "ネットワークエラーがおきています..." :
+          "メッセージを入力..."
         );
       }
     },
 
-    created: controllers.partials.messageInput.created,
-    ready: controllers.partials.messageInput.ready
+    created: controller.created,
+    ready: controller.ready,
 
     methods: {
-      sendMessage: controllers.partials.messageInput.sendMessage
+      sendMessage: controller.sendMessage
     }
-  }
+  };
 
   module.export = messageInputComponent;
-})()
+})();

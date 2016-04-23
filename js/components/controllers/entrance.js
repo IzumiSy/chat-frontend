@@ -2,9 +2,9 @@
   'use strict';
 
   var _ = require("underscore");
-  var api = require("../api.js");
-  var shared = require("../shared.js");
-  var storage = require("../storage.js");
+  var api = require("../../api.js");
+  var shared = require("../../shared.js");
+  var storage = require("../../storage.js");
 
   var entranceTransaction = function(_this) {
     var username = _this.username;

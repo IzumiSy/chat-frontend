@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers/messageView.js");
+  var controller = require("./controllers/messageView.js");
 
   var messageViewComponent = {
     template: require("../_message_view.html"),
@@ -12,12 +12,12 @@
       };
     },
 
-    ready: controllers.partials.messageView.ready,
+    ready: controller.ready,
 
     methods: {
-      isPrevUserSame: controllers.partials.messageView.isPrevUserSame
+      isPrevUserSame: controller.isPrevUserSame
     }
-  }
+  };
 
   module.export = messageViewComponent;
-})()
+})();

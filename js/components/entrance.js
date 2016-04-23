@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers/entrance.js")
+  var controller = require("./controllers/entrance.js");
   var utils = require("../utils.js");
 
   var entranceComponent = {
@@ -25,14 +25,14 @@
       }
     },
 
-    ready: controllers.entrance.ready,
+    ready: controller.ready,
 
     methods: {
-      enterRobby: controllers.entrance.enterRobby,
-      selectFace: controllers.entrance.selectFace,
+      enterRobby: controller.enterRobby,
+      selectFace: controller.selectFace,
       attrFaceAsset: utils.attrFaceAsset
     }
-  }
+  };
 
   module.exports = entranceComponent;
 })();

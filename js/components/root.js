@@ -1,16 +1,23 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controllers/root.js");
+  var controller = require("./controllers/root.js");
+
+  var components = {
+    header:       require("./header.js"),
+    sidebar:      require("./sidebar.js"),
+    messageView:  require("./messageView.js"),
+    messageInput: require("./messageInput")
+  };
 
   var rootComponent = {
     template: require("../main.html"),
 
     components: {
-      "va-header": _partials.header,
-      "va-sidebar": _partials.sidebar,
-      "va-message-view": _partials.message_view,
-      "va-message-input": _partials.message_input
+      "va-header":        components.header,
+      "va-sidebar":       components.sidebar,
+      "va-message-view":  components.message_view,
+      "va-message-input": components.message_input
     },
 
     data: function() {
@@ -20,10 +27,10 @@
       };
     },
 
-    created: controllers.root.created,
+    created: controller.created,
 
-    ready: controllers.root.ready
+    ready: controller.ready
   };
 
   module.export = rootComponent;
-})()
+})();

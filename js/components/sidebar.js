@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controller/sidebar.js");
+  var controller = require("./controllers/sidebar.js");
 
   var sidebarComponent = {
     template: require("../_sidebar.html"),
@@ -17,17 +17,17 @@
       };
     },
 
-    created: controllers.partials.sidebar.created,
+    created: controller.created,
 
-    ready: controllers.partials.sidebar.ready,
+    ready: controller.ready,
 
-    beforeDestroy: controllers.partials.sidebar.beforeDestroy,
+    beforeDestroy: controller.beforeDestroy,
 
     methods: {
-      onRoomClicked: controllers.partials.sidebar.onRoomClicked,
-      onUserClicked: controllers.partials.sidebar.onUserClicked
+      onRoomClicked: controller.onRoomClicked,
+      onUserClicked: controller.onUserClicked
     }
   };
 
   module.export = sidebarComponent;
-})()
+})();

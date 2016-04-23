@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var api = require("../api.js");
-  var utils = require("../utils.js");
-  var shared = require("../shared.js");
-  var rocketio = require("../rocketio.js");
+  var api = require("../../api.js");
+  var utils = require("../../utils.js");
+  var shared = require("../../shared.js");
+  var rocketio = require("../../rocketio.js");
 
   var fetchUsersAndMessages = function(_this, roomId) {
     api.getAllRooms().then(function(res) {

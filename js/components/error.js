@@ -1,17 +1,17 @@
 (function() {
   'use strict';
 
-  var controllers = require("./controller/error.js")
+  var controller = require("./controllers/error.js");
 
   var errorComponent = {
     template: require("../error.html"),
 
-    created: controllers.error.created,
+    created: controller.created,
 
     methods: {
-      reload: controllers.error.reload
+      reload: controller.reload
     }
-  }
+  };
 
-  module.export = errorComponent
-})()
+  module.export = errorComponent;
+})();

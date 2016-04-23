@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var shared = require("../shared.js");
+  var shared = require("../../shared.js");
   var _ = require("underscore");
 
   // If 'messages' parameter is given, this method substitutes that messages
