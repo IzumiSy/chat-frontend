@@ -13,13 +13,13 @@
 
     if (currentRoomId) {
       if (messages !== undefined && $.isArray(messages)) {
-        shared.data.channel_messages[currentRoomId] = messages;
+        shared.data.channelMessages[currentRoomId] = messages;
         return messages;
       }
 
-      currentRoomMessages = shared.data.channel_messages[currentRoomId];
+      currentRoomMessages = shared.data.channelMessages[currentRoomId];
       if (!currentRoomMessages) {
-         shared.data.channel_messages[currentRoomId] = [];
+         shared.data.channelMessages[currentRoomId] = [];
          currentRoomMessages = [];
       }
     }
