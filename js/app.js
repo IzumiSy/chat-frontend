@@ -1,19 +1,24 @@
 (function() {
   'use strict';
 
-  var api = require("./api.js");
-  var router = require("./routes.js");
-  var components = require("./components.js");
+  var api     = require("./api.js");
+  var router  = require("./routes.js");
   var storage = require("./storage.js");
+
+  var components = {
+    root:    require("./components/root.js"),
+    error:   require("./components/error.js"),
+    entrace: require("./components/entrance.js")
+  };
 
   Vue.use(VueRouter);
   Vue.use(VueResource);
 
   var app = new Vue({
     components: {
-      "va-root-view": components.pages.root,
-      "va-entrance-view": components.pages.entrance,
-      "va-error-view": components.pages.error
+      "va-root-view":     components.root,
+      "va-error-view":    components.error,
+      "va-entrance-view": components.entrance
     },
 
     created: function() {
@@ -23,6 +28,8 @@
       }
 
       router.mapRoutings();
+
+      console.info("[APP] App created.");
     }
   });
 })();

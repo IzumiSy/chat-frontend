@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
-  var api = require("../api.js");
-  var utils = require("../utils.js");
-  var shared = require("../shared.js");
-  var rocketio = require("../rocketio.js");
+  var api = require("../../api.js");
+  var utils = require("../../utils.js");
+  var shared = require("../../shared.js");
+  var rocketio = require("../../rocketio.js");
 
   var fetchUsersAndMessages = function(_this, roomId) {
     api.getAllRooms().then(function(res) {
@@ -53,6 +53,7 @@
   var rootController = {
     created: function() {
       listenersSetup(this);
+      console.info("[APP] Root created.");
     },
 
     ready: function() {
@@ -84,6 +85,8 @@
         roomDataSetup(_this, shared.data.currentRoomId);
         return next();
       }).end();
+
+      console.info("[APP] Root ready.");
     }
   };
 

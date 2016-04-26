@@ -2,9 +2,9 @@
   'use strict';
 
   var _ = require("underscore");
-  var api = require("../api.js");
-  var shared = require("../shared.js");
-  var storage = require("../storage.js");
+  var api = require("../../api.js");
+  var shared = require("../../shared.js");
+  var storage = require("../../storage.js");
 
   var entranceTransaction = function(_this) {
     var username = _this.username;
@@ -112,6 +112,7 @@
 
     ready: function() {
       var _this = this;
+
       api.pingRequest().then(function(res) {
         _this.resWaiting = false;
         Vue.nextTick(function() {
@@ -120,6 +121,8 @@
       }, function() {
         shared.jumpers.error();
       });
+
+      console.info("[APP] Entrance ready.");
     }
   };
 

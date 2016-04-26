@@ -22,12 +22,14 @@
 
       if (shared.data.rocketio.instance) {
         shared.data.rocketio.instance.close();
+        console.info("[ROCKET.IO] Closed.");
       }
 
       var listeners = {
         connected: function() {
           _this.$broadcast("app:msgInput:networkConnected");
           _this.$broadcast("app:sidebar:networkConnected");
+          console.info("[ROCKET.IO] Connected.");
         },
 
         error: function() {

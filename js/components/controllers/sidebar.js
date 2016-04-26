@@ -2,14 +2,16 @@
   'use strict';
 
   var _ = require("underscore");
-  var shared = require("../shared.js");
-  var api = require("../api.js");
-  var utils = require("../utils.js");
+  var shared = require("../../shared.js");
+  var api = require("../../api.js");
+  var utils = require("../../utils.js");
 
   var listenersSetup = function(_this) {
     _this.$once("app:sidebar:setCurrentRoom", function(roomId) {
       _this.$set("currentRoomId", roomId);
+      _this.nowLoading = false;
     });
+
     _this.$on("app:sidebar:updateRooms", function(data) {
       _this.$set("rooms", data);
     });
@@ -35,6 +37,7 @@
       if (shared.data.user && shared.data.user.face) {
         this.currentFace = utils.attrFaceAsset(shared.data.user.face);
       }
+      console.info("[APP] Sidebar ready.");
     },
 
     // RocketIO subscribers for user leave/enter are always called on
@@ -45,7 +48,7 @@
     },
 
     onRoomClicked: function(room) {
-      if (this.networkError) {
+      if (this.networkError || this.nowLoading) {
         return;
       }
 
@@ -60,6 +63,7 @@
       shared.data.currentRoomId = nextRoomId;
       _this.$set("currentRoomId", nextRoomId);
       _this.$set("users", []);
+      _this.nowLoading = true;
 
       _this.$dispatch("app:root:roomChange");
 
@@ -70,13 +74,14 @@
       // app:root:fetchRoomData needs waiting for update of user list in backend.
       api.userRoomEnter(nextRoomId).then(function(res) {
         _this.$dispatch("app:root:fetchRoomData", nextRoomId);
+        _this.nowLoading = false;
       }, function() {
         console.warn("Error at api.userRoomEnter: Id(" + nextRoomId + ")");
       });
     },
 
     onUserClicked: function(user) {
-      if (this.networkError) {
+      if (this.networkError || this.nowLoading) {
         return;
       }
     }

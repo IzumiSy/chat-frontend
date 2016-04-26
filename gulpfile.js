@@ -218,7 +218,9 @@ gulp.task("copy-assets", function() {
 });
 
 gulp.task("clean", function() {
-  del([dists.dest + "*.*", dists.dest + "/**/*"]);
-  process.exit(0)
+  del([dists.dest + "*.*", dists.dest + "/**/*"])
+    .then(function() {
+      return process.exit(0);
+    });
 });
 

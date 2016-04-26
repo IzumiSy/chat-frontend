@@ -1,9 +1,14 @@
 (function() {
   'use strict';
 
-  var components = require("./components.js");
   var api = require("./api.js");
   var shared = require("./shared.js");
+
+  var components = {
+    root:     require("./components/root.js"),
+    error:    require("./components/error.js"),
+    entrance: require("./components/entrance.js")
+  };
 
   // It is possible to map routings implicitly just by including
   // route.js without creating mapRoutings(...) function, but it would
@@ -35,16 +40,15 @@
     mapRoutings: function() {
       var app = Vue.extend({});
 
-      // Map all routings
       routings.map({
         "/": {
-          component: components.pages.root
+          component: components.root
         },
         "/entrance": {
-          component: components.pages.entrance
+          component: components.entrance
         },
         "/error": {
-          component: components.pages.error
+          component: components.error
         }
       });
 
@@ -59,6 +63,8 @@
       shared.jumpers = jumpers;
 
       routings.start(app, "body");
+
+      console.info("[APP] Routings mapped.");
     }
   };
 })();
