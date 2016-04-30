@@ -6,8 +6,9 @@
       jumpers: {},
 
       data: {
-        channelMessages: {}
+        channelMessages: {},
         currentRoomId: null,
+
         rocketio: {
           instance: null,
           listeners: {}
