@@ -21,17 +21,6 @@
     });
   };
 
-  var enterRoom = function(_this, _next, roomId) {
-    api.userRoomEnter(roomId).then(function(res) {
-      _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-      shared.data.currentRoomId = roomId;
-      return _next();
-    }, function() {
-      console.warn("Error at api.userRoomEnter: Id(" + roomId + ")");
-      return _next(new Error(null));
-    });
-  };
-
   var roomDataSetup = function(_this, roomId) {
     fetchUsersAndMessages(_this, roomId);
     rocketio.setupRocketIOListeners(_this, roomId);
@@ -61,31 +50,7 @@
         shared.jumpers.entrance();
         return;
       }
-
-      var _this = this;
-      var lobbyId = shared.data.lobbyId;
-      var rooms = shared.data.rooms;
-
-      // TODO Here should be rewritten to be more user-friendly
-      if (!lobbyId || !rooms.length) {
-        console.warn("Internal error seems to have occurred.");
-        shared.jumpers.error();
-        return;
-      }
-
-      _this.$broadcast("app:sidebar:updateRooms", rooms);
-
-      Bucks.onError(function(e, bucks) {
-        // noop
-      });
-
-      (new Bucks()).then(function(res, next) {
-        enterRoom(_this, next, lobbyId);
-      }).then(function(res, next) {
-        roomDataSetup(_this, shared.data.currentRoomId);
-        return next();
-      }).end();
-
+      roomDataSetup(this, shared.data.currentRoomId);
       console.info("[APP] Root ready.");
     }
   };
