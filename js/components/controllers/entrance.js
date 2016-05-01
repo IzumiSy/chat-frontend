@@ -78,7 +78,6 @@
       this.currentView = 3;
       api.createNewUser(this.username, face).then(function(res) {
         storage.set("token", res.data.token);
-        shared.data.currentRoomId = res.data.room_id.$oid;
         shared.data.user = res.data;
         shared.jumpers.root();
       }).catch(function(res) {
