@@ -83,6 +83,7 @@
           return;
         }
         storage.set("token", res.data.token);
+        shared.data.currentRoomId = res.data.room_id.$oid;
         shared.data.user = res.data;
         shared.jumpers.root();
       }).catch(function(res) {
