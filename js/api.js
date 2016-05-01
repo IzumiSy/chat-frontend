@@ -40,6 +40,11 @@
       return this.api.ping.get();
     },
 
+    isNameDuplicated: function(name) {
+      setTokenHeader(storage.get("token"));
+      return this.api.isNameDup.get({ name: name });
+    },
+
     createNewUser: function(name) {
       setTokenHeader(storage.get("token"));
       return this.api.newUser.save({ name: name });
