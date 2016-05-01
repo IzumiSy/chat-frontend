@@ -45,9 +45,9 @@
       return this.api.isNameDup.get({ name: name });
     },
 
-    createNewUser: function(name, face, roomId) {
+    createNewUser: function(name, face) {
       setTokenHeader(storage.get("token"));
-      return this.api.newUser.save({ name: name, face: face, room_id: roomId });
+      return this.api.newUser.save({ name: name, face: face });
     },
 
     patchUser: function(userId, data) {
