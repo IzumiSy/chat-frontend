@@ -25,6 +25,18 @@
     };
 
     var exec = {
+      checkDuplication: function(_next) {
+        return api.isNameDuplicated(username).then(function(res) {
+          if (res.data && res.data.status) {
+            _next()
+          } else {
+            return _next(new Error("ユーザー名が使われています"));
+          }
+        }).catch(function(res) {
+          return _next(new Error("システムエラー"));
+        });
+      },
+
       userCreate: function(_next) {
         return api.createNewUser(username).then(function(res) {
           storage.set("token", res.data.token);
@@ -67,11 +79,12 @@
       }
     });
 
+    error(null);
     _this.resWaiting = true;
+
     (new Bucks()).then(function(res, next) {
-      error(null);
-      _this.message = "ユーザ作成中...";
-      exec.userCreate(next);
+      _this.message = "ユーザ名が使えるかチェックしています...";
+      exec.checkDuplication(next);
     }).then(function(res, next) {
       _this.message = "ルーム一覧を取得しています...";
       exec.getRooms(next);
