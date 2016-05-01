@@ -23,6 +23,7 @@
     api: {
       ping: resource(API_HOST + "/api/ping"),
 
+      isNameDup: resource(API_HOST + "/api/user/duplicate/:name"),
       newUser:   resource(API_HOST + "/api/user/new"),
       getUser:   resource(API_HOST + "/api/user/:id"),
       patchUser: resource(API_HOST + "/api/user/:id"),
