@@ -23,7 +23,7 @@
       checkDuplication: function(_next) {
         return api.isNameDuplicated(username).then(function(res) {
           if (res.data && res.data.status) {
-            _next()
+            return _next();
           } else {
             return _next(new Error("ユーザー名が使われています"));
           }
@@ -35,7 +35,7 @@
       setUserFace: function(_next) {
         _this.faces = _.sample(shared.FACE_ASSETS, 3);
         _this.currentView = 2;
-        return _next()
+        return _next();
       },
     };
 
@@ -77,6 +77,11 @@
     selectFace: function(face) {
       this.currentView = 3;
       api.createNewUser(this.username, face).then(function(res) {
+        if (!res.data.room_id) {
+          // TODO Better to show an error detail here
+          shared.jumpers.error();
+          return;
+        }
         storage.set("token", res.data.token);
         shared.data.user = res.data;
         shared.jumpers.root();
