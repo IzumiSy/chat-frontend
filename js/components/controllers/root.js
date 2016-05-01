@@ -22,6 +22,7 @@
   };
 
   var roomDataSetup = function(_this, roomId) {
+    _this.$broadcast("app:sidebar:setCurrentRoom", roomId);
     fetchUsersAndMessages(_this, roomId);
     rocketio.setupRocketIOListeners(_this, roomId);
   };
