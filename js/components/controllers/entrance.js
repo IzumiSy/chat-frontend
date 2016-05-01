@@ -18,11 +18,6 @@
         _this.message = msg;
       }
     };
-    var storeLobbyId = function(rooms) {
-      shared.data.lobbyId = _.find(rooms, function(r) {
-        return r.name == "Lobby";
-      })._id.$oid;
-    };
 
     var exec = {
       checkDuplication: function(_next) {
@@ -37,36 +32,10 @@
         });
       },
 
-      userCreate: function(_next) {
-        return api.createNewUser(username).then(function(res) {
-          storage.set("token", res.data.token);
-          shared.data.user = res.data;
-          return _next();
-        }).catch(function(res) {
-          if (res.data && res.data === "Duplicated user name") {
-            return _next(new Error("ユーザー名が使われています"));
-          } else {
-            return _next(new Error("入室に失敗しました"));
-          }
-        });
-      },
-
-      getRooms: function(_next) {
-        return api.getAllRooms().then(function(res) {
-          if (!res.data || !res.data.length) {
-            throw _next(new Error("ロビールームがありません。"));
-          }
-          storeLobbyId(res.data);
-          shared.data.rooms = res.data;
-          return _next();
-        }).catch(function(res) {
-          return _next(new Error(null));
-        });
-      },
-
       setUserFace: function(_next) {
         _this.faces = _.sample(shared.FACE_ASSETS, 3);
         _this.currentView = 2;
+        return _next()
       },
     };
 
@@ -85,9 +54,6 @@
     (new Bucks()).then(function(res, next) {
       _this.message = "ユーザ名が使えるかチェックしています...";
       exec.checkDuplication(next);
-    }).then(function(res, next) {
-      _this.message = "ルーム一覧を取得しています...";
-      exec.getRooms(next);
     }).then(function(res, next) {
       exec.setUserFace(next);
       _this.resWaiting = false;
@@ -109,17 +75,13 @@
     },
 
     selectFace: function(face) {
-      var payload = { face: face };
-      var userId = shared.data.user._id.$oid;
-
       this.currentView = 3;
-      api.patchUser(userId, payload).then(function(res) {
-        if (res.data) {
-          shared.data.user = res.data;
-        }
+      api.createNewUser(this.username, face).then(function(res) {
+        storage.set("token", res.data.token);
+        shared.data.user = res.data;
         shared.jumpers.root();
-      }, function() {
-        shared.jumpers.error();
+      }).catch(function(res) {
+        // TODO Need error handling
       });
     },
 
