@@ -79,6 +79,7 @@
       api.createNewUser(this.username, face).then(function(res) {
         if (!res.data.room_id) {
           // TODO Better to show an error detail here
+          console.warn("Response data does not have room_id");
           shared.jumpers.error();
           return;
         }
