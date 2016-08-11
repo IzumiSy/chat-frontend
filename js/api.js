@@ -16,10 +16,7 @@
   };
 
   var setTokenHeader = function(token) {
-    Vue.http.headers.common = {
-      'Authorization': ("Basic " + token),
-      'HTTP_X_FORWARDED_SSL': 'on'
-    };
+    Vue.http.headers.common.Authorization = ("Basic " + token);
   };
 
   module.exports = {
