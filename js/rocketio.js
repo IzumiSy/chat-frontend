@@ -33,8 +33,11 @@
         },
 
         error: function() {
-          _this.$broadcast("app:msgInput:networkError");
-          _this.$broadcast("app:sidebar:networkError");
+          // TODO now network error handling is disabled here because Heroku will send
+          // "idle connection" as an error so here unhopefully catches them. This error
+          // catching block has to handle them not as an error in the future.
+          // _this.$broadcast("app:msgInput:networkError");
+          // _this.$broadcast("app:sidebar:networkError");
         },
 
         newMessage: function(data) {
