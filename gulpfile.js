@@ -84,6 +84,15 @@ var dists = {
   fonts: "./dist/fonts/",
 }
 
+var runDefaultTasks = function(callback) {
+  sequence(
+    "html", "styles", "venders-concat-js",
+    "venders-concat-css", "copy-assets",
+    "copy-vendor-icons", "copy-vender-fonts",
+    callback
+  );
+};
+
 gulp.watch(targets.sass, ["styles"]);
 gulp.watch(targets.jade, ["html"]);
 gulp.watch(targets.js, ["js"]);
@@ -99,9 +108,13 @@ gulp.task("default", function() {
       livereload: process.env.NODE_ENV === 'production' ? false : true,
       open: true
      }));
-  sequence("html", "styles", "venders-concat-js",
-           "venders-concat-css", "copy-assets",
-           "copy-vendor-icons", "copy-vender-fonts");
+  runDefaultTasks();
+});
+
+gulp.task("build", function() {
+  runDefaultTasks(function() {
+    return process.exit(0);
+  });
 });
 
 gulp.task("html", function() {
@@ -224,7 +237,7 @@ gulp.task("copy-assets", function() {
 });
 
 gulp.task("clean-dist-html-js", function() {
-  del([
+  return del([
     dists.dest + "*.js",
     dists.dest + "*.html",
     dists.dest + "/components",
@@ -235,7 +248,7 @@ gulp.task("clean-dist-html-js", function() {
 });
 
 gulp.task("clean-dist-styles", function() {
-  del([
+  return del([
     dists.dest + "*.css",
     "!" + dists.dest + "styles.css",
     "!" + dists.dest + dists.venders.css
@@ -243,7 +256,7 @@ gulp.task("clean-dist-styles", function() {
 });
 
 gulp.task("clean", function() {
-  del([dists.dest + "*.*", dists.dest + "/**/*"])
+  return del([dists.dest + "*.*", dists.dest + "/**/*"])
     .then(function() {
       return process.exit(0);
     });
