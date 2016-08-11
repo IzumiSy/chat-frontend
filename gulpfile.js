@@ -10,6 +10,7 @@ var jshint   = require("gulp-jshint")
 var concat   = require("gulp-concat");
 var rename   = require("gulp-rename");
 var util     = require("gulp-util");
+var s3       = require("gulp-awspublish")
 
 var del        = require("del");
 var sequence   = require("run-sequence");
