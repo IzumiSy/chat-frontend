@@ -148,7 +148,6 @@ gulp.task("jade", function() {
 });
 
 gulp.task("copy-config", function() {
-
   var url = null
   var stream = source("config.json")
   var env = process.env.NODE_ENV ===
