@@ -71,7 +71,9 @@ var targets = {
 };
 
 var dists = {
-  app:  "app.js",
+  app:   "app.js",
+  style: "styles.css",
+
   venders: {
     js: "venders.js",
     css: "venders.css"
@@ -82,7 +84,7 @@ var dists = {
   fonts: "./dist/fonts/",
 }
 
-gulp.watch(targets.sass, ["sass"]);
+gulp.watch(targets.sass, ["styles"]);
 gulp.watch(targets.jade, ["html"]);
 gulp.watch(targets.js, ["js"]);
 gulp.watch(targets.assets, ["copy-assets"]);
@@ -97,9 +99,22 @@ gulp.task("default", function() {
       livereload: process.env.NODE_ENV === 'production' ? false : true,
       open: true
      }));
-  sequence("sass", "jade", "js", "venders-concat-js",
+  sequence("html", "styles", "venders-concat-js",
            "venders-concat-css", "copy-assets",
            "copy-vendor-icons", "copy-vender-fonts");
+});
+
+gulp.task("html", function() {
+  sequence("jade", "js");
+});
+
+gulp.task("js", function() {
+  sequence("copy-config", "copy-js", "browserify",
+           "jshint", "clean-dist");
+});
+
+gulp.task("styles", function() {
+  sequence("sass", "concat-styles", "clean-dist");
 });
 
 gulp.task("sass", function() {
@@ -111,10 +126,6 @@ gulp.task("sass", function() {
     .pipe(gulp.dest(dists.dest))
 });
 
-gulp.task("html", function() {
-  sequence("jade", "js");
-});
-
 gulp.task("jade", function() {
   console.log("[TASK] jade processing...");
   return gulp.src(targets.jade)
@@ -123,10 +134,6 @@ gulp.task("jade", function() {
       pretty: true
     }))
     .pipe(gulp.dest(dists.dest));
-});
-
-gulp.task("js", function() {
-  sequence("copy-config", "copy-js", "browserify", "jshint");
 });
 
 gulp.task("copy-config", function() {
@@ -180,6 +187,17 @@ gulp.task("jshint", function() {
     .pipe(jshint.reporter("jshint-stylish"));
 });
 
+gulp.task("concat-styles", function() {
+  console.log("[TASK] styles processing...");
+  return gulp.src([
+      dists.dest + "*.css",
+      "!" + dists.dest + "venders.css"
+    ])
+    .pipe(plumber())
+    .pipe(concat(dists.style))
+    .pipe(gulp.dest(dists.dest));
+});
+
 gulp.task("venders-concat-js", function() {
   console.log("[TASK] venders-concat-js processing...");
   return gulp.src(targets.venders.js)
@@ -216,6 +234,18 @@ gulp.task("copy-assets", function() {
     .pipe(plumber())
     .pipe(rename({ prefix: "face-" }))
     .pipe(gulp.dest(dists.assets));
+});
+
+gulp.task("clean-dist", function() {
+  del([
+    dists.dest + "*.js",
+    dists.dest + "*.html",
+    dists.dest + "*.css",
+    dists.dest + "/components",
+    "!" + dists.dest + dists.app,
+    "!" + dists.dest + "index.html",
+    "!" + dists.dest + "styles.css",
+  ]);
 });
 
 gulp.task("clean", function() {
