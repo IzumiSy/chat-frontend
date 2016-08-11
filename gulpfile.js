@@ -89,7 +89,7 @@ var runDefaultTasks = function(callback) {
     "html", "styles", "venders-concat-js",
     "venders-concat-css", "copy-assets",
     "copy-vendor-icons", "copy-vender-fonts",
-    callback
+    callback || "none"
   );
 };
 
@@ -109,6 +109,10 @@ gulp.task("default", function() {
       open: true
      }));
   runDefaultTasks();
+});
+
+gulp.task("deploy", function() {
+  runDefaultTasks("upload-s3");
 });
 
 gulp.task("build", function() {
@@ -150,8 +154,7 @@ gulp.task("jade", function() {
 gulp.task("copy-config", function() {
   var url = null
   var stream = source("config.json")
-  var env = process.env.NODE_ENV ===
-    'production' ? 'production' : 'development';
+  var env = process.env.NODE_ENV || 'development';
 
   dotenv.config();
   url = (env === "production") ?
@@ -261,3 +264,21 @@ gulp.task("clean", function() {
     });
 });
 
+gulp.task("upload-s3", function() {
+  var publisher = s3.create({
+    region: process.env.AWS_REGION,
+    params: {
+      Bucket: process.env.AWS_BUCKET
+    },
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET
+  });
+
+  return gulp.src(dists.dest + "**/*")
+    .pipe(publisher.publish())
+    .pipe(publisher.cache())
+    .pipe(publisher.sync())
+    .pipe(s3.reporter());
+});
+
+gulp.task("none", function(){});
