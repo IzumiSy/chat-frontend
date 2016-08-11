@@ -275,7 +275,7 @@ gulp.task("upload-s3", function() {
   });
 
   return gulp.src(dists.dest + "**/*")
-    .pipe(publisher.publish())
+    .pipe(publisher.publish({}, { noAcl: true }))
     .pipe(publisher.cache())
     .pipe(publisher.sync())
     .pipe(s3.reporter());
