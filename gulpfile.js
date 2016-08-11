@@ -110,15 +110,14 @@ gulp.task("html", function() {
 
 gulp.task("js", function() {
   sequence("copy-config", "copy-js", "browserify",
-           "jshint", "clean-dist");
+           "jshint", "clean-dist-html-js");
 });
 
 gulp.task("styles", function() {
-  sequence("sass", "concat-styles", "clean-dist");
+  sequence("sass", "concat-styles", "clean-dist-styles");
 });
 
 gulp.task("sass", function() {
-  console.log("[TASK] sass processing...");
   return gulp.src(targets.sass)
     .pipe(plumber())
     .pipe(sass())
@@ -127,7 +126,6 @@ gulp.task("sass", function() {
 });
 
 gulp.task("jade", function() {
-  console.log("[TASK] jade processing...");
   return gulp.src(targets.jade)
     .pipe(plumber())
     .pipe(jade({
@@ -137,7 +135,6 @@ gulp.task("jade", function() {
 });
 
 gulp.task("copy-config", function() {
-  console.log("[TASK] copy-config processing...");
 
   var url = null
   var stream = source("config.json")
@@ -145,10 +142,9 @@ gulp.task("copy-config", function() {
     'production' ? 'production' : 'development';
 
   dotenv.config();
-  switch (env) {
-    case "production": url = process.env.PRODUCTION_SERVER; break;
-    case "development": url = process.env.DEVELOPMENT_SERVER; break;
-  }
+  url = (env === "production") ?
+    process.env.PRODUCTION_SERVER :
+    process.env.DEVELOPMENT_SERVER;
 
   stream.write(' { "apiServerUrl": "' + url + '" }');
   process.nextTick(function() {
@@ -158,14 +154,12 @@ gulp.task("copy-config", function() {
 });
 
 gulp.task("copy-js", function() {
-  console.log("[TASK] concat-js processing...");
   return gulp.src(targets.js)
     .pipe(plumber())
     .pipe(gulp.dest(dists.dest));
 });
 
 gulp.task("browserify", function() {
-  console.log("[TASK] browserify processing...");
   return browserify({
       entries: [dists.dest + dists.app]
     })
@@ -181,14 +175,12 @@ gulp.task("browserify", function() {
 });
 
 gulp.task("jshint", function() {
-  console.log("[TASK] jshint processing...");
   return gulp.src(targets.js)
     .pipe(jshint())
     .pipe(jshint.reporter("jshint-stylish"));
 });
 
 gulp.task("concat-styles", function() {
-  console.log("[TASK] styles processing...");
   return gulp.src([
       dists.dest + "*.css",
       "!" + dists.dest + "venders.css"
@@ -199,7 +191,6 @@ gulp.task("concat-styles", function() {
 });
 
 gulp.task("venders-concat-js", function() {
-  console.log("[TASK] venders-concat-js processing...");
   return gulp.src(targets.venders.js)
     .pipe(plumber())
     .pipe(concat(dists.venders.js))
@@ -207,7 +198,6 @@ gulp.task("venders-concat-js", function() {
 });
 
 gulp.task("venders-concat-css", function() {
-  console.log("[TASK] venders-concat-css processing...");
   return gulp.src(targets.venders.css)
     .pipe(plumber())
     .pipe(concat(dists.venders.css))
@@ -215,36 +205,40 @@ gulp.task("venders-concat-css", function() {
 });
 
 gulp.task("copy-vendor-icons", function() {
-  console.log("[TASK] copy-icons processing...");
   return gulp.src(targets.venders.icons)
     .pipe(plumber())
     .pipe(gulp.dest(dists.assets));
 });
 
 gulp.task("copy-vender-fonts", function() {
-  console.log("[TASK] copy-vender-fonts processing...");
   return gulp.src(targets.venders.fonts)
     .pipe(plumber())
     .pipe(gulp.dest(dists.fonts));
 });
 
 gulp.task("copy-assets", function() {
-  console.log("[TASK] copy-assets processing...");
   return gulp.src(targets.assets)
     .pipe(plumber())
     .pipe(rename({ prefix: "face-" }))
     .pipe(gulp.dest(dists.assets));
 });
 
-gulp.task("clean-dist", function() {
+gulp.task("clean-dist-html-js", function() {
   del([
     dists.dest + "*.js",
     dists.dest + "*.html",
-    dists.dest + "*.css",
     dists.dest + "/components",
     "!" + dists.dest + dists.app,
     "!" + dists.dest + "index.html",
+    "!" + dists.dest + dists.venders.js,
+  ]);
+});
+
+gulp.task("clean-dist-styles", function() {
+  del([
+    dists.dest + "*.css",
     "!" + dists.dest + "styles.css",
+    "!" + dists.dest + dists.venders.css
   ]);
 });
 
