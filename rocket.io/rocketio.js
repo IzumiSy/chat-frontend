@@ -4,17 +4,25 @@
 // The MIT License
 var RocketIO = function(opts){
   new EventEmitter().apply(this);
-  if(typeof opts === "undefined" || opts === null) opts = {};
+  if (typeof opts === "undefined" || opts === null) {
+    opts = {};
+  }
+
   this.type = opts.type || null; // "comet" or "websocket"
   this.session = opts.session || null;
+  this.ssl = opts.ssl || null;
   this.channel = null;
+
   if(typeof opts.channel !== "undefined" && opts.channel !== null){
     this.channel = ""+opts.channel;
   }
+
   var setting = {};
-  this.io = null;
   var self = this;
   var ws_close_timer = null;
+
+  this.io = null;
+
   self.on("__connect", function(session_id){
     self.session = session_id;
     self.io.push("__channel_id", self.channel);
@@ -34,21 +42,35 @@ var RocketIO = function(opts){
     }
   };
 
+  var ssl_check = function(url) {
+    return self.ssl ?
+      url.replace('http', 'https') : url;
+  }
+
   var connect_io = function(){
-    self.io = function(){
-      if(self.type === "comet") return;
-      if(typeof WebSocketIO !== "function") return;
+    self.io = (function(){
+      if (self.type === "comet") return;
+      if (typeof WebSocketIO !== "function") return;
       var io = new WebSocketIO();
-      if(typeof setting.websocket === "string") io.url = setting.websocket;
+
+      if (typeof setting.websocket === "string") {
+        io.url = ssl_check(setting.websocket);
+      }
+
       io.session = self.session;
       return io.connect();
-    }() || function(){
-      if(typeof CometIO !== "function") return;
+    }()) || (function() {
+      if (typeof CometIO !== "function") return;
       var io = new CometIO();
-      if(typeof setting.comet === "string") io.url = setting.comet;
+
+      if (typeof setting.comet === "string") {
+        io.url = ssl_check(setting.comet);
+      }
+
       io.session = self.session;
       return io.connect();
-    }();
+    })();
+
     if(typeof self.io === "undefined"){
       setTimeout(function(){
         self.emit("error", "WebSocketIO and CometIO are not available");
@@ -88,6 +110,7 @@ var CometIO = function(url, opts){
   if(typeof opts === "undefined" || opts === null) opts = {};
   this.url = url || "";
   this.session = opts.session || null;
+
   var running = false;
   var self = this;
   var post_queue = [];
