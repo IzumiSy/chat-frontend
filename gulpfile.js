@@ -86,7 +86,7 @@ var dists = {
 
 var runDefaultTasks = function(callback) {
   sequence(
-    "html", "styles", "venders-concat-js",
+    "js", "styles", "venders-concat-js",
     "venders-concat-css", "copy-assets",
     "copy-vendor-icons", "copy-vender-fonts",
     callback || "none"
@@ -94,7 +94,7 @@ var runDefaultTasks = function(callback) {
 };
 
 gulp.watch(targets.sass, ["styles"]);
-gulp.watch(targets.jade, ["html"]);
+gulp.watch(targets.jade, ["js"]);
 gulp.watch(targets.js, ["js"]);
 gulp.watch(targets.assets, ["copy-assets"]);
 
@@ -121,12 +121,8 @@ gulp.task("build", function() {
   });
 });
 
-gulp.task("html", function() {
-  sequence("jade", "js");
-});
-
 gulp.task("js", function() {
-  sequence("copy-config", "copy-js", "browserify",
+  sequence("jade", "copy-config", "copy-js", "browserify",
            "jshint", "clean-dist-html-js");
 });
 
