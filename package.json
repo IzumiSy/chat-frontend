@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
+    "dotenv": "^2.0.0",
     "node-sass": "^3.10.1",
     "pug": "^2.0.0-beta6",
     "pug-loader": "^2.3.0",
