@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  var VueRouter = require("vue-router");
+
   var api = require("./api.js");
   var shared = require("./shared.js");
 
@@ -14,6 +16,7 @@
   // route.js without creating mapRoutings(...) function, but it would
   // be difficult to understand code stream in app.js if doing that.
 
+  Vue.use(VueRouter);
   var routings = new VueRouter();
 
   var jumpers = {

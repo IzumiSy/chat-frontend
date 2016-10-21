@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var Vue = require("vue");
+  Vue.use(require("vue-resource"));
 
   var storage = require("./storage.js");
 

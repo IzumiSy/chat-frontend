@@ -1,8 +1,6 @@
 (function() {
   'use strict';
 
-  var Vue = require('vue');
-
   var api     = require("./api.js");
   var router  = require("./routes.js");
   var storage = require("./storage.js");
@@ -13,9 +11,6 @@
     entrace: require("./components/entrance.js")
   };
 
-  Vue.use(VueRouter);
-  Vue.use(VueResource);
-
   var app = new Vue({
     components: {
       "va-root-view":     components.root,
@@ -24,7 +19,7 @@
     },
 
     created: function() {
-      if (!WebSocket || !WebSocketIO) {
+      if (!WebSocket) {
         console.error("Your browser seems not compatible with WebSocket");
         // Show an alert that says "Your browser cannot browse this page"
       }
