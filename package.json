@@ -61,7 +61,6 @@
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^3.10.1",
     "pug": "^2.0.0-beta6",
     "pug-loader": "^2.3.0",
