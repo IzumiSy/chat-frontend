@@ -1,4 +1,7 @@
 var webpack = require('webpack')
+var dotenv = require('dotenv')
+
+dotenv.config();
 
 module.exports = {
   entry: __dirname + '/js/app.js',
@@ -20,6 +23,14 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
+      }
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        apiServerUrl: (env === "production") ?
+          process.env.PRODUCTION_SERVER :
+          process.env.DEVELOPMENT_SERVER;
       }
     })
   ]
