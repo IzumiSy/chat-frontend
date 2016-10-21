@@ -2,6 +2,7 @@ var webpack = require('webpack')
 var dotenv = require('dotenv')
 
 dotenv.config();
+var env = process.env;
 
 module.exports = {
   entry: __dirname + '/js/app.js',
@@ -28,9 +29,8 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env': {
-        apiServerUrl: (env === "production") ?
-          process.env.PRODUCTION_SERVER :
-          process.env.DEVELOPMENT_SERVER;
+        apiServerUrl: (env.NODE_ENV === "production") ?
+          env.PRODUCTION_SERVER : env.DEVELOPMENT_SERVER
       }
     })
   ]
