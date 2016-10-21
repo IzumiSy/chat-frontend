@@ -58,5 +58,10 @@
   "engines": {
     "node": "v2.5.0",
     "npm": "v3.8.0"
+  },
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
   }
 }
