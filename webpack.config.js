@@ -6,9 +6,9 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: ['style', 'css'] },
-      { test: /\.scss$/, loader: ['style', 'css', 'sass'] },
-      { test: /\.jade$/, loader: ['pug'] }
+      { test: /\.css$/, loader: 'css-loader' },
+      { test: /\.scss$/, loader: 'sass-loader' },
+      { test: /\.jade$/, loader: 'pug-loader' }
     ]
   }
 };
