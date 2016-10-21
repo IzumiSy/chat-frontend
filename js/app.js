@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  var Vue = require('vue');
+
   var api     = require("./api.js");
   var router  = require("./routes.js");
   var storage = require("./storage.js");

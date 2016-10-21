@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  var Vue = require("vue");
+
   var storage = require("./storage.js");
 
   // The content of apiServerUrl varies according to NODE_ENV
