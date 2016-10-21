@@ -6,10 +6,17 @@ var env = process.env;
 
 module.exports = {
   entry: __dirname + '/js/app.js',
+
   output: {
     path: __dirname + '/dist',
     filename: 'app.js'
   },
+
+  devServer: {
+    contentBase: 'dist',
+    port: 8000
+  },
+
   module: {
     loaders: [
       { test: /\.css$/, loader: 'css-loader' },
@@ -17,6 +24,7 @@ module.exports = {
       { test: /\.jade$/, loader: 'pug-loader' }
     ]
   },
+
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
