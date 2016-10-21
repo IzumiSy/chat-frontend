@@ -5,7 +5,7 @@
   "scripts": {
     "test": "gulp jshint",
     "start": "gulp",
-    "dev": "NODE_ENV=development gulp",
+    "dev": "NODE_ENV=development webpack --watch",
     "build": "NODE_ENV=development webpack",
     "deploy": "NODE_ENV=production gulp deploy",
     "clean": "gulp clean"
