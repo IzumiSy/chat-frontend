@@ -38,6 +38,7 @@ module.exports = {
     */
 
     new webpack.ProvidePlugin({
+      $: 'jquery',
       Vue: 'vue'
     }),
 
