@@ -6,7 +6,7 @@
     "test": "gulp jshint",
     "start": "gulp",
     "dev": "NODE_ENV=development gulp",
-    "build": "NODE_ENV=development gulp build",
+    "build": "NODE_ENV=development webpack",
     "deploy": "NODE_ENV=production gulp deploy",
     "clean": "gulp clean"
   },
