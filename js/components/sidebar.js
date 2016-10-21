@@ -4,7 +4,7 @@
   var controller = require("./controllers/sidebar.js");
 
   var sidebarComponent = {
-    template: require("../_sidebar.html"),
+    template: require("./_sidebar.jade"),
 
     data: function() {
       return {

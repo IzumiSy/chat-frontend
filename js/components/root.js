@@ -11,7 +11,7 @@
   };
 
   var rootComponent = {
-    template: require("../main.html"),
+    template: require("./main.jade"),
 
     components: {
       "va-header":        components.header,
