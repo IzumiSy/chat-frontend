@@ -4,7 +4,7 @@
   var controller = require("./controllers/messageView.js");
 
   var messageViewComponent = {
-    template: require("./_message_view.jade"),
+    template: require("./_message_view.jade")(),
 
     data: function() {
       return {

@@ -5,7 +5,7 @@
   var utils = require("../utils.js");
 
   var entranceComponent = {
-    template: require("./entrance.jade"),
+    template: require("./entrance.jade")(),
 
     data: function() {
       return {

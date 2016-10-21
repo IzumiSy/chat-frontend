@@ -4,7 +4,7 @@
   var controller = require("./controllers/messageInput.js");
 
   var messageInputComponent = {
-    template: require("./_message_input.jade"),
+    template: require("./_message_input.jade")(),
 
     data: function() {
       return {
