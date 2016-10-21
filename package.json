@@ -4,7 +4,7 @@
   "description": "Chat Application",
   "scripts": {
     "test": "gulp jshint",
-    "start": "gulp",
+    "start": "webpack --watch",
     "dev": "NODE_ENV=development webpack --watch",
     "build": "NODE_ENV=development webpack",
     "deploy": "NODE_ENV=production gulp deploy",
