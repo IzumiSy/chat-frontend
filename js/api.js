@@ -2,10 +2,9 @@
   'use strict';
 
   var storage = require("./storage.js");
-  var config = require("./config.json");
 
   // The content of apiServerUrl varies according to NODE_ENV
-  var API_HOST = config.apiServerUrl;
+  var API_HOST = process.env.apiServerUrl;
 
   // Option argument of Vue.resource(...) should have emulateJSON
   // it can prevent sending pre-flight request when accessing to
