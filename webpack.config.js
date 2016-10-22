@@ -18,6 +18,14 @@ module.exports = {
   },
 
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/, /libs/],
+        loader: 'jshint-loader'
+      }
+    ],
+
     loaders: [
       {
         test: /\.css$/,
