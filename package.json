@@ -6,7 +6,7 @@
     "start": "webpack-dev-server",
     "dev": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=development webpack --display-error-details --progress",
-    "deploy": "NODE_ENV=production gulp deploy",
+    "deploy": "NODE_ENV=production npm run build && gulp deploy",
     "clean": "gulp clean"
   },
   "repository": {
