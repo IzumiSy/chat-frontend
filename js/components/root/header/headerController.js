@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  var api = require("../../api.js");
-  var shared = require("../../shared.js");
-  var storage = require("../../storage.js");
+  var api = require("../../../api.js");
+  var shared = require("../../../shared.js");
+  var storage = require("../../../storage.js");
 
   // TODO Need any error handling here?
   var leaveTransaction = function(roomId) {

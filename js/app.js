@@ -6,9 +6,9 @@
   var storage = require("./storage.js");
 
   var components = {
-    root:    require("./components/root.js"),
-    error:   require("./components/error.js"),
-    entrace: require("./components/entrance.js")
+    root:    require("./components/root/root.js"),
+    error:   require("./components/error/error.js"),
+    entrace: require("./components/entrance/entrance.js")
   };
 
   var app = new Vue({

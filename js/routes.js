@@ -7,9 +7,9 @@
   var shared = require("./shared.js");
 
   var components = {
-    root:     require("./components/root.js"),
-    error:    require("./components/error.js"),
-    entrance: require("./components/entrance.js")
+    root:     require("./components/root/root.js"),
+    error:    require("./components/error/error.js"),
+    entrance: require("./components/entrance/entrance.js")
   };
 
   // It is possible to map routings implicitly just by including

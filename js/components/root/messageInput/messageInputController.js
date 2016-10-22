@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  var api = require("../../api.js");
-  var shared = require("../../shared.js");
+  var api = require("../../../api.js");
+  var shared = require("../../../shared.js");
 
   var setInputFocus = function(_this) {
     $(_this.$el).find("input.message").focus();
