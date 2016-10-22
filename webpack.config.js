@@ -21,10 +21,10 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: 'css-loader'
+        loader: 'style-loader!css-loader'
       }, {
         test: /\.scss$/,
-        loader: 'sass-loader'
+        loader: 'style-loader!css-loader!sass-loader'
       }, {
         test: /\.jade$/,
         loader: 'pug-loader'
