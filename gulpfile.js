@@ -47,5 +47,3 @@ gulp.task("deploy-s3", function() {
     .pipe(publisher.sync())
     .pipe(s3.reporter());
 });
-
-gulp.task("none", function(){});
