@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "Chat Application",
   "scripts": {
-    "test": "gulp jshint",
     "start": "webpack-dev-server",
     "dev": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=development webpack --display-error-details --progress",
     "deploy": "NODE_ENV=production gulp deploy",
-    "clean": "gulp clean",
-    "jshint": "gulp jshint"
+    "clean": "gulp clean"
   },
   "repository": {
     "type": "git",
