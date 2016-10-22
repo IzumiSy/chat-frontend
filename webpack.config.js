@@ -5,7 +5,7 @@ var transferWebpackPlugin = require('transfer-webpack-plugin');
 dotenv.config();
 
 module.exports = {
-  entry: __dirname + '/js/app.js',
+  entry: __dirname + '/src/app.js',
 
   output: {
     path: __dirname + '/dist',
