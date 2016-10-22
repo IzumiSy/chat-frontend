@@ -77,7 +77,7 @@ module.exports = {
 
   resolve: {
     modulesDirectories: [
-      "node_modules", "vendors"
+      "node_modules", "libs"
     ]
   }
 };
