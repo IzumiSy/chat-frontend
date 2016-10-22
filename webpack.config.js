@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var dotenv = require('dotenv');
-var path = require('path');
 
 dotenv.config();
 
