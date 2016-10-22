@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=development webpack-dev-server",
     "build": "NODE_ENV=development webpack",
     "deploy": "NODE_ENV=production gulp deploy",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "jshint": "gulp jshint"
   },
   "repository": {
     "type": "git",
