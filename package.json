@@ -24,15 +24,8 @@
     "bootstrap": "^3.3.5",
     "bucks": "^0.8.4",
     "del": "^2.2.0",
-    "dotenv": "^2.0.0",
     "flat-ui": "^2.1.1",
-    "gulp": "^3.9.0",
-    "gulp-awspublish": "^3.3.0",
-    "gulp-jshint": "^1.12.0",
-    "jasmine": "^2.4.1",
     "jquery": "^2.1.4",
-    "jshint": "^2.8.0",
-    "jshint-stylish": "^2.1.0",
     "nanoscroller": "^0.8.7",
     "normalize-css": "^2.3.1",
     "rocketio-client": "0.0.4",
@@ -57,6 +50,13 @@
     "style-loader": "^0.13.1",
     "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-server": "^1.16.2",
+    "gulp": "^3.9.0",
+    "gulp-awspublish": "^3.3.0",
+    "gulp-jshint": "^1.12.0",
+    "jasmine": "^2.4.1",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.1.0",
+    "dotenv": "^2.0.0"
   }
 }
