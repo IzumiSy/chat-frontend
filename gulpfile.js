@@ -1,15 +1,9 @@
 var gulp   = require("gulp");
-var jshint = require("gulp-jshint")
 var s3     = require("gulp-awspublish")
 var del    = require("del");
 var dotenv = require("dotenv");
 
 var targets = {
-  js: [
-    "./src/*.js",
-    "./src/**/*.js"
-  ],
-
   assets: "./assets/*.png"
 };
 
@@ -17,12 +11,6 @@ var dists = {
   app:   "app.js",
   dest: "./dist/",
 }
-
-gulp.task("jshint", function() {
-  return gulp.src(targets.js)
-    .pipe(jshint())
-    .pipe(jshint.reporter("jshint-stylish"));
-});
 
 /*
 gulp.task("copy-assets", function() {
