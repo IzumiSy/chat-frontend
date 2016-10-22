@@ -68,6 +68,7 @@
     "pug-loader": "^2.3.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }
