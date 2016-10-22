@@ -1,5 +1,6 @@
-var webpack = require('webpack')
-var dotenv = require('dotenv')
+var webpack = require('webpack');
+var dotenv = require('dotenv');
+var path = require('path');
 
 dotenv.config();
 
@@ -18,9 +19,19 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.css$/, loader: 'css-loader' },
-      { test: /\.scss$/, loader: 'sass-loader' },
-      { test: /\.jade$/, loader: 'pug-loader' }
+      {
+        test: /\.css$/,
+        loader: 'css-loader'
+      }, {
+        test: /\.scss$/,
+        loader: 'sass-loader'
+      }, {
+        test: /\.jade$/,
+        loader: 'pug-loader'
+      }, {
+        test: /\.png$/,
+        loader: 'file?name=[path][name].[ext]'
+      }
     ]
   },
 
