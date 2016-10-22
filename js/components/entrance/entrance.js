@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  require('./entrance.scss');
+
   var controller = require("./entranceController.js");
   var utils = require("../../utils.js");
 

@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  require('./sidebar.scss');
+
   var controller = require("./sidebarController.js");
 
   var sidebarComponent = {

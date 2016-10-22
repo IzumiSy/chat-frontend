@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  require('normalize-css');
+  require('./app.scss');
+
   var api     = require("./api.js");
   var router  = require("./routes.js");
   var storage = require("./storage.js");

@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  require('./root.scss');
+
   var controller = require("./rootController.js");
 
   var components = {

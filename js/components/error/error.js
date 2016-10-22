@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  require('./error.scss');
+
   var controller = require("./errorController.js");
 
   var errorComponent = {
