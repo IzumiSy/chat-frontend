@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/messageInput.js");
+  var controller = require("./messageInputController.js");
 
   var messageInputComponent = {
     template: require("./_message_input.jade")(),

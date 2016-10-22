@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/messageView.js");
+  var controller = require("./messageViewController.js");
 
   var messageViewComponent = {
     template: require("./_message_view.jade")(),

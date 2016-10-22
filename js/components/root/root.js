@@ -1,17 +1,17 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/root.js");
+  var controller = require("./rootController.js");
 
   var components = {
-    header:       require("./header.js"),
-    sidebar:      require("./sidebar.js"),
-    messageView:  require("./messageView.js"),
-    messageInput: require("./messageInput")
+    header:       require("./header/header.js"),
+    sidebar:      require("./sidebar/sidebar.js"),
+    messageView:  require("./messageView/messageView.js"),
+    messageInput: require("./messageInput/messageInput.js")
   };
 
   var rootComponent = {
-    template: require("./main.jade")(),
+    template: require("./root.jade")(),
 
     components: {
       "va-header":        components.header,

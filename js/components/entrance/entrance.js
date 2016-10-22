@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/entrance.js");
-  var utils = require("../utils.js");
+  var controller = require("./entranceController.js");
+  var utils = require("../../utils.js");
 
   var entranceComponent = {
     template: require("./entrance.jade")(),

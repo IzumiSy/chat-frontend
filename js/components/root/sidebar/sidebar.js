@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/sidebar.js");
+  var controller = require("./sidebarController.js");
 
   var sidebarComponent = {
     template: require("./_sidebar.jade")(),

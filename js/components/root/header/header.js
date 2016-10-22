@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/header.js");
+  var controller = require("./headerController.js");
 
   var headerComponent = {
     template: require("./_header.jade")(),

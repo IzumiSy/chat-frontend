@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var controller = require("./controllers/error.js");
+  var controller = require("./errorController.js");
 
   var errorComponent = {
     template: require("./error.jade")(),
