@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var dotenv = require('dotenv');
+var transferWebpackPlugin = require('transfer-webpack-plugin');
 
 dotenv.config();
 
@@ -51,6 +52,13 @@ module.exports = {
       $: 'jquery',
       Vue: 'vue'
     }),
+
+    new transferWebpackPlugin([
+       {
+         from: 'node_modules/flat-ui/images/icons/png',
+         to: '/assets'
+       }
+    ]),
 
     new webpack.DefinePlugin({
       'process.env': {
