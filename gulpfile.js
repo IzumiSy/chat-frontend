@@ -254,10 +254,13 @@ gulp.task("clean-dist-styles", function() {
 });
 
 gulp.task("clean", function() {
-  return del([dists.dest + "*.*", dists.dest + "/**/*"])
-    .then(function() {
-      return process.exit(0);
-    });
+  return del([
+    dists.dest + "*.*",
+    dists.dest + "/**/*",
+    "!" + dists.dest + "/index.html"
+  ]).then(function() {
+    return process.exit(0);
+  });
 });
 
 gulp.task("upload-s3", function() {
