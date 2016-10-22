@@ -29,7 +29,7 @@ module.exports = {
         test: /\.jade$/,
         loader: 'pug-loader'
       }, {
-        test: /\.(png|svg)(\?.*)?$/,
+        test: /\.(png|svg|eot|ttf|woff)(\?.*)?$/,
         loader: 'file?name=[path][name].[ext]'
       }
     ]
