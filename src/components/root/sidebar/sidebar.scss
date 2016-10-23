@@ -1,0 +1,100 @@
+@import "../../../variables";
+@import "../../../mixins";
+
+$sidebar-background-color: #2c3e50;
+
+.sidebar {
+  position: fixed;
+  top: $header-height;
+  bottom: 0;
+  left: 0;
+  min-width: $sidebar-min-width;
+  max-width: $sidebar-max-width;
+  background-color: $sidebar-background-color;
+
+  .profile-section {
+    margin-top: 15px;
+    padding-top: 10px;
+    height: $profile-section-height;
+
+    > .picture {
+      text-align: center;
+
+      > img.profile-picture {
+        width: $profile-picture-width;
+        height: $profile-picture-height;
+      }
+    }
+
+    > .name {
+      color: white;
+      margin-left: 15%;
+      margin-right: 15%;
+
+      > .profile-name {
+        @include truncate;
+
+        font-weight: bold;
+        width: 100%;
+        font-size: 15px;
+        margin-top: 10px;
+        padding: 5px;
+      }
+    }
+  }
+
+  ul {
+    font-size: $sidebar-list-font-size;
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style-type: none;
+    cursor: default;
+
+    &.room-list {
+      margin-top: 10px !important;
+    }
+
+    > li {
+      color: white;
+      padding: 3px 15px 3px 15px;
+
+      &:hover {
+        background-color: $sidebar-hover-color;
+
+        &.disabled:hover {
+          background-color: $sidebar-background-color;
+        }
+      }
+
+      &.current {
+        background-color: $sidebar-selected-color;
+
+        &.disabled:hover {
+          background-color: $sidebar-selected-color;
+        }
+      }
+    }
+
+    > .room-item, > .user-item {
+      &.disabled {
+        opacity: 0.5;
+      }
+    }
+
+    > .room-item {
+      > .badge {
+        margin-top: 4px;
+        float: right;
+        padding: 1px 7px;
+      }
+    }
+
+    > .user-item {
+      @include truncate;
+
+      .fui-user {
+        margin-right: 5px;
+      }
+    }
+  }
+}

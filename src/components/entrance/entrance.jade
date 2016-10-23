@@ -1,0 +1,42 @@
+.entrance-view
+  .form-section.username-view(
+    v-if="currentView == 1"
+    transition="expand"
+  )
+    img.logo(src="assets/icons/Pocket.png")
+    .form-group.name
+      input.form-control.login-field(
+        type="text"
+        placeholder="ログインネームを入力..."
+        v-model="username"
+        v-bind:disabled="resWaiting"
+        v-on:keypress.enter="enterRobby"
+      )
+    .form-group.enter
+      a.btn.btn-primary.enter-button(
+        v-on:click="enterRobby"
+        v-bind:disabled="resWaiting"
+      )
+        | チャットロビーへ入る
+      p.message(v-bind:class="{ 'error': error }")
+        | {{ message }}
+
+  .form-section.face-select-view(
+    v-if="currentView == 2"
+    transition="expand"
+  )
+    .caption-text
+      b 好みの顔を選んでください
+    .face-options
+      img.face-preview(
+        v-for="face in faces"
+        v-bind:src="attrFaceAsset(face)"
+        v-on:click="selectFace(face)"
+      )
+
+  .form-section.waiting-view(
+    v-if="currentView == 3"
+    transition="expand"
+  )
+    .sk-rotating-plane
+
