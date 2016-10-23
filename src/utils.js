@@ -14,7 +14,7 @@
     },
 
     attrFaceAsset: function(face) {
-      return ("assets/face-" + face + ".png");
+      return ("assets/faces/" + face + ".png");
     },
 
     formatCreatedAtTime: function(messageData) {
