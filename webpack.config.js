@@ -38,7 +38,7 @@ module.exports = {
         loader: 'pug-loader'
       }, {
         test: /\.(png|svg|eot|ttf|woff)(\?.*)?$/,
-        loader: 'file?name=[path][name].[ext]'
+        loader: 'file?name=[name].[ext]'
       }
     ]
   },
