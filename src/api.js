@@ -3,6 +3,8 @@
 
   Vue.use(require("vue-resource"));
 
+  var RocketIO = require('rocket.io/rocketio.js');
+
   var storage = require("./storage.js");
 
   // The content of apiServerUrl varies according to NODE_ENV

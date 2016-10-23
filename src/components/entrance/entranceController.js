@@ -2,6 +2,8 @@
   'use strict';
 
   var _ = require("underscore");
+  var Bucks = require('bucks');
+
   var api = require("../../api.js");
   var shared = require("../../shared.js");
   var storage = require("../../storage.js");
