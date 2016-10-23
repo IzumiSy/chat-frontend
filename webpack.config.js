@@ -3,6 +3,7 @@ var dotenv = require('dotenv');
 var transferWebpackPlugin = require('transfer-webpack-plugin');
 
 dotenv.config();
+const env = process.env;
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -73,8 +74,8 @@ module.exports = {
 
     new webpack.DefinePlugin({
       'process.env': {
+        NODE_ENV: JSON.stringify(env.NODE_ENV),
         apiServerUrl: () => {
-          const env = process.env;
           return JSON.stringify(
             (env.NODE_ENV === "production") ?
               env.PRODUCTION_SERVER :
