@@ -88,7 +88,7 @@
       return (new RocketIO({
         type: "comet",
         channel: roomId,
-        ssl: true
+        ssl: (process.env.NODE_ENV === 'production' ? true : false)
       })).connect(API_HOST);
     }
   };
