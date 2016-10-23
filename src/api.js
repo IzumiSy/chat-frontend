@@ -85,12 +85,11 @@
     },
 
     connectRocketIO: function(roomId) {
-      var rocketioInstance = (new RocketIO({
+      return (new RocketIO({
         type: "comet",
         channel: roomId,
         ssl: true
       })).connect(API_HOST);
-      return rocketioInstance;
     }
   };
 })();
