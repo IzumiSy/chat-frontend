@@ -5,6 +5,7 @@ var transferWebpackPlugin = require('transfer-webpack-plugin');
 dotenv.config();
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: __dirname + '/src/app.js',
 
   output: {
