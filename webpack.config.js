@@ -65,7 +65,10 @@ module.exports = {
     new transferWebpackPlugin([
        {
          from: 'node_modules/flat-ui/images/icons/png',
-         to: '/assets'
+         to: 'assets/icons'
+       }, {
+         from: 'assets/',
+         to: 'assets/faces'
        }
     ]),
 
