@@ -30,8 +30,16 @@ $ npm start
 ```Bash
 $ npm run dev
 ```
-
+## Build
+```Bash
+$ npm run build
+```
+## (WIP) Deploy to S3
+Need to edit secret keys in .env
+```Bash
+$ npm run deploy
+```
 ## Cleanup
 ```Bash
-$ gulp clean
+$ npm run clean
 ```
