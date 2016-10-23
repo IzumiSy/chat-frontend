@@ -329,6 +329,7 @@ var EventEmitter = function(){
 };
 
 if(typeof module !== "undefined" && typeof module.exports !== "undefined"){
-  module.exports = EventEmitter;
+  // module.exports = EventEmitter;
+  module.exports = RocketIO;
 }
 
