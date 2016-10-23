@@ -16,6 +16,8 @@ gulp.task("clean", function() {
 });
 
 gulp.task("deploy-s3", function() {
+  dotenv.config();
+
   var publisher = s3.create({
     region: process.env.AWS_REGION,
     params: {
