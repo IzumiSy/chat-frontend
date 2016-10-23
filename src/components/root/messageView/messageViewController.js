@@ -39,7 +39,7 @@
     var messages = _this.$get("messages");
     messages.push(data);
     _this.$set("messages", populateRoomMessages(messages));
-    Vue.nextTick(scrollToBottom());
+    Vue.nextTick(scrollToBottom);
   };
 
   var listenersSetup = function(_this) {
