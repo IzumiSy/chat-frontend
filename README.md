@@ -22,13 +22,8 @@ $ vi .env
 ```
 
 ## Run
-**Production**  
 ```Bash
 $ npm start
-```
-**Development**  
-```Bash
-$ npm run dev
 ```
 ## Build
 ```Bash
