@@ -5,8 +5,8 @@
   require('nanoscroller');
 
   require('normalize-css');
-  require('flat-ui/css/flat-ui.css');
   require('flat-ui/bootstrap/css/bootstrap.css');
+  require('flat-ui/css/flat-ui.css');
   require('spinkit/css/spinkit.css');
   require('nanoscroller/bin/css/nanoscroller.css');
   require('./app.scss');
