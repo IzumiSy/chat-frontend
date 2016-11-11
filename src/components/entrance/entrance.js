@@ -34,10 +34,12 @@
     },
 
     ready: function() {
+      var _this = this;
+
       api.pingRequest().then(function(res) {
-        this.resWaiting = false;
+        _this.resWaiting = false;
         Vue.nextTick(function() {
-          $(this.$el).find("input.login-field").focus();
+          $(_this.$el).find("input.login-field").focus();
         });
       }, function() {
         shared.jumpers.error();
@@ -123,12 +125,14 @@
         error(null);
         this.resWaiting = true;
 
+        var _this = this;
+
         (new Bucks()).then(function(res, next) {
-          this.message = "ユーザ名が使えるかチェックしています...";
+          _this.message = "ユーザ名が使えるかチェックしています...";
           checkDuplication(next);
         }).then(function(res, next) {
           setUserFace(next);
-          this.resWaiting = false;
+          _this.resWaiting = false;
         }).end();
       }
     }
