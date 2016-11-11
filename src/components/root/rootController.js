@@ -27,19 +27,6 @@
     rocketio.setupRocketIOListeners(_this, roomId);
   };
 
-  var listenersSetup = function(_this) {
-    _this.$on("app:root:fetchRoomData", function(roomId) {
-      roomDataSetup(this, roomId);
-    });
-    _this.$on("app:root:newMessage", function() {
-      _this.$broadcast("app:msgView:scrollBottom");
-    });
-    _this.$on("app:root:roomChange", function() {
-      _this.$broadcast("app:msgView:roomChange");
-      _this.$broadcast("app:msgInput:setFocus");
-    });
-  };
-
   var rootController = {
 
 

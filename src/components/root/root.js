@@ -41,6 +41,23 @@
       }
       roomDataSetup(this, shared.data.currentRoomId);
       console.info("[APP] Root ready.");
+    },
+
+    methods: {
+      listenersSetup: function() {
+        var _this = this;
+
+        this.$on("app:root:fetchRoomData", function(roomId) {
+          roomDataSetup(_this, roomId);
+        });
+        this.$on("app:root:newMessage", function() {
+          _this.$broadcast("app:msgView:scrollBottom");
+        });
+        this.$on("app:root:roomChange", function() {
+          _this.$broadcast("app:msgView:roomChange");
+          _this.$broadcast("app:msgInput:setFocus");
+        });
+      }
     }
   };
 
