@@ -1,7 +1,8 @@
 (function() {
   'use strict';
 
-  var controller = require("./messageInputController.js");
+  var api = require("../../../api.js");
+  var shared = require("../../../shared.js");
 
   var messageInputComponent = {
     template: require("./_message_input.jade")(),
@@ -31,11 +32,60 @@
       }
     },
 
-    created: controller.created,
-    ready: controller.ready,
+    created: function() {
+      var _this = this;
+
+      this.$on("app:msgInput:setFocus", function() {
+        this.setInputFocus();
+      });
+
+      this.$on("app:msgInput:networkError", function() {
+        _this.networkError = true;
+      });
+      this.$on("app:msgInput:networkConnected", function() {
+        _this.networkError = false;
+      });
+
+      console.info("[APP] Message input ready");
+    },
+
+    ready: function() {
+      this.setInputFocus();
+    },
 
     methods: {
-      sendMessage: controller.sendMessage
+      setInputFocus: function() {
+        $(this.$el).find("input.message").focus();
+      };
+
+      sendMessage: function() {
+        // Prevention for mis-enter with IME on
+        if (this.message !== this.previousInput) {
+          return;
+        }
+
+        var message = this.message;
+        var currentRoomId = shared.data.currentRoomId;
+        var _this = this;
+
+        if (!currentRoomId) {
+          console.warn("Error: currentRoomId is undefined or invalid.");
+          return;
+        }
+
+        this.resWaiting = true;
+        api.sendMessage(currentRoomId, message).then(function(res) {
+          _this.$set("message", null);
+          _this.$dispatch("app:root:newMessage");
+          _this.resWaiting = false;
+
+          Vue.nextTick(function() {
+            $(_this.$el).find("input.message").focus();
+          });
+        }, function() {
+          console.warn("Error at api.sendMessage(...)");
+        });
+      }
     }
   };
 
