@@ -56,7 +56,7 @@
     methods: {
       setInputFocus: function() {
         $(this.$el).find("input.message").focus();
-      };
+      },
 
       sendMessage: function() {
         // Prevention for mis-enter with IME on
