@@ -41,19 +41,8 @@
   };
 
   var rootController = {
-    created: function() {
-      listenersSetup(this);
-      console.info("[APP] Root created.");
-    },
 
-    ready: function() {
-      if (!shared.data.user) {
-        shared.jumpers.entrance();
-        return;
-      }
-      roomDataSetup(this, shared.data.currentRoomId);
-      console.info("[APP] Root ready.");
-    }
+
   };
 
   module.exports = rootController;
