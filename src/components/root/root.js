@@ -33,7 +33,7 @@
     },
 
     created: function() {
-      listenersSetup(this);
+      this.listenersSetup();
       console.info("[APP] Root created.");
     },
 
