@@ -51,6 +51,16 @@
     methods: {
       attrFaceAsset: utils.attrFaceAsset,
 
+      setError: function(msg) {
+        if (msg === null) {
+          this.error = false;
+          this.message = "";
+        } else {
+          this.error = true;
+          this.message = msg;
+        }
+      },
+
       selectFace: function(face) {
         this.currentView = 3;
         api.createNewUser(this.username, face).then(function(res) {
@@ -71,7 +81,7 @@
 
       enterRobby: function() {
         if (!this.username) {
-          error("ログインネームを入力してください");
+          this.setError("ログインネームを入力してください");
           return;
         }
 
@@ -83,17 +93,8 @@
       },
 
       entranceTransaction: function() {
+        var _this = this;
         var username = this.username;
-
-        var error = function(msg) {
-          if (msg === null) {
-            this.error = false;
-            this.message = "";
-          } else {
-            this.error = true;
-            this.message = msg;
-          }
-        };
 
         var checkDuplication = function(_next) {
           return api.isNameDuplicated(username).then(function(res) {
@@ -108,24 +109,22 @@
         };
 
         var setUserFace = function(_next) {
-          this.faces = _.sample(shared.FACE_ASSETS, 3);
-          this.currentView = 2;
+          _this.faces = _.sample(shared.FACE_ASSETS, 3);
+          _this.currentView = 2;
           return _next();
         };
 
         Bucks.onError(function(e, bucks) {
-          this.resWaiting = false;
+          _this.resWaiting = false;
           if (e.message) {
-            error(e.message);
+            _this.setError(e.message);
           } else {
             shared.jumpers.error();
           }
         });
 
-        error(null);
+        this.setError(null);
         this.resWaiting = true;
-
-        var _this = this;
 
         (new Bucks()).then(function(res, next) {
           _this.message = "ユーザ名が使えるかチェックしています...";
