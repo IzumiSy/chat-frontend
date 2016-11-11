@@ -75,7 +75,8 @@
           shared.data.user = res.data;
           shared.jumpers.root();
         }).catch(function(res) {
-          // TODO Need error handling
+          shared.jumpers.error();
+          console.error(res);
         });
       },
 
