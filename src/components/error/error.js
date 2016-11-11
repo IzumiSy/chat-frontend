@@ -3,15 +3,20 @@
 
   require('./error.scss');
 
-  var controller = require("./errorController.js");
+  var shared = require("../../shared.js");
+  var storage = require("../../storage.js");
 
   var errorComponent = {
     template: require("./error.jade")(),
 
-    created: controller.created,
+    created: function() {
+      storage.remove("token");
+    },
 
     methods: {
-      reload: controller.reload
+      reload: function() {
+        shared.jumpers.entrance();
+      }
     }
   };
 
