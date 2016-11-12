@@ -276,16 +276,21 @@ var EventEmitter = function(){
   };
   this.__events = new Array();
   this.on = function(type, listener, opts){
-    if(typeof listener !== "function") return;
-    var event_id = self.__events.length > 0 ? 1 + self.__events[self.__events.length-1].id : 0
-    var params = {
+    if (typeof listener !== "function") return;
+
+    const event_id =
+      self.__events.length > 0 ?
+      1 + self.__events[self.__events.length-1].id : 0;
+    const params = {
       id: event_id,
       type: type,
       listener: listener
     };
-    for(i in opts){
-      if(!params[i]) params[i] = opts[i];
+
+    for (var i in opts){
+      if (!params[i]) params[i] = opts[i];
     };
+
     self.__events.push(params);
     return event_id;
   };
