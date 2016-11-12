@@ -9,7 +9,7 @@ const VERBOSE = !process.argv.includes('--verbose');
 dotenv.config();
 const env = process.env;
 
-module.exports = {
+export default {
   cache: DEBUG,
   debug: DEBUG,
 
