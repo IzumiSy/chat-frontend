@@ -40,19 +40,19 @@ export default {
       },
 
       newMessage(data) {
-        _data = JSON.parse(data);
+        let _data = JSON.parse(data);
         utils.formatCreatedAtTime(_data);
         _this.$broadcast("app:msgView:addMessage", _data);
         _this.$broadcast("app:msgView:scrollBottom");
       },
 
       updateRooms(data) {
-        _data = JSON.parse(data);
+        let _data = JSON.parse(data);
         _this.$broadcast("app:sidebar:updateRooms", _data);
       },
 
       updateMembers(data) {
-        _data = JSON.parse(data);
+        let _data = JSON.parse(data);
         _this.$broadcast("app:sidebar:updateUsers", _data);
       },
 
