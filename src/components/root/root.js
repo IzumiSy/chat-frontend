@@ -49,27 +49,27 @@
     methods: {
       roomDataSetup: function(roomId) {
         this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-        fetchUsersAndMessages(roomId);
+        this.fetchUsersAndMessages(roomId);
         rocketio.setupRocketIOListeners(this, roomId);
+      },
+
+      fetchUsersAndMessages: function(roomId) {
+        api.getAllRooms().then(function(res) {
+          _this.$broadcast("app:sidebar:updateRooms", res.data);
+          shared.data.rooms = res.data;
+        }, function(res) {
+          console.warn("Error at api.getAllRooms");
+        });
+        api.getRoomUsers(roomId).then(function(res) {
+          _this.$broadcast("app:sidebar:updateUsers", res.data);
+          shared.data.currentRoomUsers = res.data;
+        }, function() {
+          console.warn("Error at api.getRoomUsers");
+        });
       },
 
       listenersSetup: function() {
         var _this = this;
-
-        var fetchUsersAndMessages = function(roomId) {
-          api.getAllRooms().then(function(res) {
-            _this.$broadcast("app:sidebar:updateRooms", res.data);
-            shared.data.rooms = res.data;
-          }, function(res) {
-            console.warn("Error at api.getAllRooms");
-          });
-          api.getRoomUsers(roomId).then(function(res) {
-            _this.$broadcast("app:sidebar:updateUsers", res.data);
-            shared.data.currentRoomUsers = res.data;
-          }, function() {
-            console.warn("Error at api.getRoomUsers");
-          });
-        };
 
         this.$on("app:root:fetchRoomData", function(roomId) {
           _this.roomDataSetup(roomId);
