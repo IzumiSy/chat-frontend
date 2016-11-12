@@ -54,6 +54,8 @@
       },
 
       fetchUsersAndMessages: function(roomId) {
+        var _this = this;
+
         api.getAllRooms().then(function(res) {
           _this.$broadcast("app:sidebar:updateRooms", res.data);
           shared.data.rooms = res.data;
