@@ -42,11 +42,17 @@
         shared.jumpers.entrance();
         return;
       }
-      roomDataSetup(this, shared.data.currentRoomId);
+      this.roomDataSetup(shared.data.currentRoomId);
       console.info("[APP] Root ready.");
     },
 
     methods: {
+      roomDataSetup: function(roomId) {
+        this.$broadcast("app:sidebar:setCurrentRoom", roomId);
+        fetchUsersAndMessages(roomId);
+        rocketio.setupRocketIOListeners(this, roomId);
+      },
+
       listenersSetup: function() {
         var _this = this;
 
@@ -65,14 +71,8 @@
           });
         };
 
-        var roomDataSetup = function(roomId) {
-          this.$broadcast("app:sidebar:setCurrentRoom", roomId);
-          fetchUsersAndMessages(roomId);
-          rocketio.setupRocketIOListeners(this, roomId);
-        };
-
         this.$on("app:root:fetchRoomData", function(roomId) {
-          roomDataSetup(roomId);
+          _this.roomDataSetup(roomId);
         });
         this.$on("app:root:newMessage", function() {
           _this.$broadcast("app:msgView:scrollBottom");
