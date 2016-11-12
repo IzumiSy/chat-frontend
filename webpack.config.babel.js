@@ -1,6 +1,7 @@
-var webpack = require('webpack');
-var dotenv = require('dotenv');
-var copyWebpackPlugin = require('copy-webpack-plugin');
+import 'babel-polyfill';
+import webpack from 'webpack';
+import dotenv from 'dotenv';
+import copyWebpackPlugin from 'copy-webpack-plugin';
 
 dotenv.config();
 const env = process.env;
@@ -83,13 +84,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(env.NODE_ENV),
-        apiServerUrl: () => {
+        apiServerUrl: (() => {
           return JSON.stringify(
             (env.NODE_ENV === "production") ?
               env.PRODUCTION_SERVER :
               env.DEVELOPMENT_SERVER
             )
-        }()
+        })()
       }
     })
   ],
