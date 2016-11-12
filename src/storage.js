@@ -1,48 +1,37 @@
-(function() {
-  'use strict';
+import shared from "./shared.js";
 
-  var shared = require("./shared.js");
+// If the browse does not support localStorage
+// storage module wraps straging with shared.js module
 
-  // If the browse does not support localStorage
-  // storage module wraps straging with shared.js module
-  var functions = {
-    isAvailable: function() {
-      isStorageAvailable = !window.sessionStorage;
-      if (!isStorageAvailable) {
+export default {
+  isAvailable() {
+    return window.sessionStorage ?
+      true : (() => {
         shared.data.storageData = [];
-      }
-      return isStorageAvailable;
-    },
+        return false;
+      })();
+  },
 
-    set: function(key, value) {
-      var item;
-      if (window.sessionStorage) {
-        item = window.sessionStorage.setItem(key, value);
-      } else {
-        item = { key: key, value: value };
+  set(key, value) {
+    return window.sessionStorage ?
+      window.sessionStorage.setItem(key, value) :
+      (() => {
         shared.data.storageData[key] = value;
-      }
-      return item;
-    },
+        return { key: key, value: value };
+      })();
+  },
 
-    get: function(key) {
-      var item;
-      if (window.sessionStorage) {
-        item = window.sessionStorage.getItem(key);
-      } else {
-        item = shared.data.storageData[key];
-      }
-      return item;
-    },
+  get(key) {
+    return window.sessionStorage ?
+      window.sessionStorage.getItem(key) :
+      item = shared.data.storageData[key];
+  },
 
-    remove: function(key) {
-      if (window.sessionStorage) {
-        window.sessionStorage.removeItem(key);
-      } else {
-        delete shared.data.storageData[key];
-      }
+  remove(key) {
+    if (window.sessionStorage) {
+      window.sessionStorage.removeItem(key);
+    } else {
+      delete shared.data.storageData[key];
     }
-  };
-
-  module.exports = functions;
-})();
+  }
+};
