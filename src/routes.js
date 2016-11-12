@@ -1,73 +1,66 @@
-(function() {
-  'use strict';
+import VueRouter from "vue-router";
+import api from "./api.js";
+import shared from "./shared.js";
 
-  var VueRouter = require("vue-router");
+import RootComponent from "./components/root/root.js";
+import ErrorComponent from "./components/error/error.js";
+import EntranceComponent from "./components/entrance/entrance.js";
 
-  var api = require("./api.js");
-  var shared = require("./shared.js");
+// It is possible to map routings implicitly just by including
+// route.js without creating mapRoutings(...) function, but it would
+// be difficult to understand code stream in app.js if doing that.
 
-  var components = {
-    root:     require("./components/root/root.js"),
-    error:    require("./components/error/error.js"),
-    entrance: require("./components/entrance/entrance.js")
-  };
+Vue.use(VueRouter);
+const routings = new VueRouter();
 
-  // It is possible to map routings implicitly just by including
-  // route.js without creating mapRoutings(...) function, but it would
-  // be difficult to understand code stream in app.js if doing that.
+const jumpers = {
+  root: function() {
+    routings.go({ path: "/" });
+  },
 
-  Vue.use(VueRouter);
-  var routings = new VueRouter();
+  entrance: function() {
+    routings.go({ path: "/entrance" });
+  },
 
-  var jumpers = {
-    root: function() {
-      routings.go({ path: "/" });
-    },
+  error: function() {
+    routings.go({ path: "/error" });
+  },
 
-    entrance: function() {
-      routings.go({ path: "/entrance" });
-    },
+  jump: function(args) {
+    if (args.path) {
+      routings.go({ path: args.path });
+    }
+  }
+};
 
-    error: function() {
-      routings.go({ path: "/error" });
-    },
+export default {
+  mapRoutings: function() {
+    const app = Vue.extend({});
 
-    jump: function(args) {
-      if (args.path) {
-        routings.go({ path: args.path });
+    routings.map({
+      "/": {
+        component: RootComponent
+      },
+      "/entrance": {
+        component: EntranceComponent
+      },
+      "/error": {
+        component: ErrorComponent
       }
-    }
-  };
+    });
 
-  module.exports = {
-    mapRoutings: function() {
-      var app = Vue.extend({});
+    // Handles non-mapped routing
+    routings.redirect({
+      '*': '/'
+    });
 
-      routings.map({
-        "/": {
-          component: components.root
-        },
-        "/entrance": {
-          component: components.entrance
-        },
-        "/error": {
-          component: components.error
-        }
-      });
+    // Im not really sure about it, but shared object
+    // gets clear after routings.start(...), so jumpers
+    // have to be set just at here. Need more investigation.
+    shared.jumpers = jumpers;
 
-      // Handles non-mapped routing
-      routings.redirect({
-        '*': '/'
-      });
+    routings.start(app, "body");
 
-      // Im not really sure about it, but shared object
-      // gets clear after routings.start(...), so jumpers
-      // have to be set just at here. Need more investigation.
-      shared.jumpers = jumpers;
-
-      routings.start(app, "body");
-
-      console.info("[APP] Routings mapped.");
-    }
-  };
-})();
+    console.info("[APP] Routings mapped.");
+  }
+};
