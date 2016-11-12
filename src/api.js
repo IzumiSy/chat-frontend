@@ -1,95 +1,89 @@
-(function() {
-  'use strict';
+import RocketIO from 'rocket.io/rocketio.js';
+import storage from './storage.js';
+import VueResource from 'vue-resource';
 
-  Vue.use(require("vue-resource"));
+const API_HOST = process.env.apiServerUrl;
 
-  var RocketIO = require('rocket.io/rocketio.js');
+Vue.use(VueResource);
 
-  var storage = require("./storage.js");
+// Option argument of Vue.resource(...) should have emulateJSON
+// it can prevent sending pre-flight request when accessing to
+// the backend server to call API.
+const resource = function(url) {
+  return Vue.resource(url, null, null, { emulateJSON: true });
+};
 
-  // The content of apiServerUrl varies according to NODE_ENV
-  var API_HOST = process.env.apiServerUrl;
+const setTokenHeader = function(token) {
+  Vue.http.headers.common.Authorization = ("Basic " + token);
+};
 
-  // Option argument of Vue.resource(...) should have emulateJSON
-  // it can prevent sending pre-flight request when accessing to
-  // the backend server to call API.
-  var resource = function(url) {
-    var options = { emulateJSON: true };
-    return Vue.resource(url, null, null, options);
-  };
+export default {
+  api: {
+    ping: resource(API_HOST + "/api/ping"),
 
-  var setTokenHeader = function(token) {
-    Vue.http.headers.common.Authorization = ("Basic " + token);
-  };
+    isNameDup: resource(API_HOST + "/api/user/duplicate/:name"),
+    newUser:   resource(API_HOST + "/api/user/new"),
+    getUser:   resource(API_HOST + "/api/user/:id"),
+    patchUser: resource(API_HOST + "/api/user/:id"),
 
-  module.exports = {
-    api: {
-      ping: resource(API_HOST + "/api/ping"),
+    allRooms:  resource(API_HOST + "/api/room"),
+    getUsers:  resource(API_HOST + "/api/room/:id/users"),
+    roomEnter: resource(API_HOST + "/api/room/:id/enter"),
+    roomLeave: resource(API_HOST + "/api/room/:id/leave"),
 
-      isNameDup: resource(API_HOST + "/api/user/duplicate/:name"),
-      newUser:   resource(API_HOST + "/api/user/new"),
-      getUser:   resource(API_HOST + "/api/user/:id"),
-      patchUser: resource(API_HOST + "/api/user/:id"),
+    sendMessage: resource(API_HOST + "/api/message/:id")
+  },
 
-      allRooms:  resource(API_HOST + "/api/room"),
-      getUsers:  resource(API_HOST + "/api/room/:id/users"),
-      roomEnter: resource(API_HOST + "/api/room/:id/enter"),
-      roomLeave: resource(API_HOST + "/api/room/:id/leave"),
+  pingRequest() {
+    return this.api.ping.get();
+  },
 
-      sendMessage: resource(API_HOST + "/api/message/:id")
-    },
+  isNameDuplicated(name) {
+    setTokenHeader(storage.get("token"));
+    return this.api.isNameDup.get({ name: name });
+  },
 
-    pingRequest: function() {
-      return this.api.ping.get();
-    },
+  createNewUser(name, face) {
+    setTokenHeader(storage.get("token"));
+    return this.api.newUser.save({ name: name, face: face });
+  },
 
-    isNameDuplicated: function(name) {
-      setTokenHeader(storage.get("token"));
-      return this.api.isNameDup.get({ name: name });
-    },
+  patchUser(userId, data) {
+    setTokenHeader(storage.get("token"));
+    return this.api.patchUser.save({ id: userId }, { data: data });
+  },
 
-    createNewUser: function(name, face) {
-      setTokenHeader(storage.get("token"));
-      return this.api.newUser.save({ name: name, face: face });
-    },
+  getAllRooms() {
+    setTokenHeader(storage.get("token"));
+    return this.api.allRooms.get();
+  },
 
-    patchUser: function(userId, data) {
-      setTokenHeader(storage.get("token"));
-      return this.api.patchUser.save({ id: userId }, { data: data });
-    },
+  getRoomUsers(roomId) {
+    setTokenHeader(storage.get("token"));
+    return this.api.getUsers.get({ id: roomId });
+  },
 
-    getAllRooms: function() {
-      setTokenHeader(storage.get("token"));
-      return this.api.allRooms.get();
-    },
+  userRoomEnter(roomId) {
+    setTokenHeader(storage.get("token"));
+    return this.api.roomEnter.save({ id: roomId }, {});
+  },
 
-    getRoomUsers: function(roomId) {
-      setTokenHeader(storage.get("token"));
-      return this.api.getUsers.get({ id: roomId });
-    },
+  userRoomLeave(roomId) {
+    setTokenHeader(storage.get("token"));
+    return this.api.roomLeave.save({ id: roomId }, {});
+  },
 
-    userRoomEnter: function(roomId) {
-      setTokenHeader(storage.get("token"));
-      return this.api.roomEnter.save({ id: roomId }, {});
-    },
+  sendMessage(roomId, message) {
+    var params = { content: message };
+    setTokenHeader(storage.get("token"));
+    return this.api.sendMessage.save({ id: roomId }, params);
+  },
 
-    userRoomLeave: function(roomId) {
-      setTokenHeader(storage.get("token"));
-      return this.api.roomLeave.save({ id: roomId }, {});
-    },
-
-    sendMessage: function(roomId, message) {
-      var params = { content: message };
-      setTokenHeader(storage.get("token"));
-      return this.api.sendMessage.save({ id: roomId }, params);
-    },
-
-    connectRocketIO: function(roomId) {
-      return (new RocketIO({
-        type: "comet",
-        channel: roomId,
-        ssl: (process.env.NODE_ENV === 'production' ? true : false)
-      })).connect(API_HOST);
-    }
-  };
-})();
+  connectRocketIO(roomId) {
+    return (new RocketIO({
+      type: "comet",
+      channel: roomId,
+      ssl: (process.env.NODE_ENV === 'production' ? true : false)
+    })).connect(API_HOST);
+  }
+};
