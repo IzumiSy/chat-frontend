@@ -24,7 +24,7 @@ export default {
   get(key) {
     return window.sessionStorage ?
       window.sessionStorage.getItem(key) :
-      item = shared.data.storageData[key];
+      shared.data.storageData[key];
   },
 
   remove(key) {
