@@ -3,11 +3,25 @@ import webpack from 'webpack';
 import dotenv from 'dotenv';
 import copyWebpackPlugin from 'copy-webpack-plugin';
 
+const DEBUG = !process.argv.includes('--release');
+const VERBOSE = !process.argv.includes('--verbose');
+
 dotenv.config();
 const env = process.env;
 
 module.exports = {
-  devtool: 'inline-source-map',
+  cache: DEBUG,
+  debug: DEBUG,
+
+  stats: {
+    reasons: DEBUG,
+    hash: VERBOSE,
+    version: VERBOSE,
+    cached: VERBOSE,
+    cachedAssets: VERBOSE
+  },
+
+  devtool: DEBUG && 'inline-source-map',
   entry: __dirname + '/src/app.js',
 
   output: {
@@ -61,7 +75,7 @@ module.exports = {
 
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: VERBOSE
       }
     }),
 
