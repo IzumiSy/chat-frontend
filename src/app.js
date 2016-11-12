@@ -1,42 +1,35 @@
-(function() {
-  'use strict';
+import 'babel-polyfill';
+import 'bootstrap';
+import 'nanoscroller';
 
-  require('bootstrap');
-  require('nanoscroller');
+import 'normalize-css';
+import 'flat-ui/bootstrap/css/bootstrap.css';
+import 'flat-ui/css/flat-ui.css';
+import 'spinkit/css/spinkit.css';
+import 'nanoscroller/bin/css/nanoscroller.css';
+import './app.scss';
 
-  require('normalize-css');
-  require('flat-ui/bootstrap/css/bootstrap.css');
-  require('flat-ui/css/flat-ui.css');
-  require('spinkit/css/spinkit.css');
-  require('nanoscroller/bin/css/nanoscroller.css');
-  require('./app.scss');
+import router from "./routes.js";
 
-  var api     = require("./api.js");
-  var router  = require("./routes.js");
-  var storage = require("./storage.js");
+import RootComponent from "./components/root/root.js";
+import ErrorComponent from "./components/error/error.js";
+import EntranceComponent from "./components/entrance/entrance.js";
 
-  var components = {
-    root:    require("./components/root/root.js"),
-    error:   require("./components/error/error.js"),
-    entrace: require("./components/entrance/entrance.js")
-  };
+new Vue({
+  components: {
+    "va-root-view":     RootComponent,
+    "va-error-view":    ErrorComponent,
+    "va-entrance-view": EntranceComponent
+  },
 
-  var app = new Vue({
-    components: {
-      "va-root-view":     components.root,
-      "va-error-view":    components.error,
-      "va-entrance-view": components.entrance
-    },
-
-    created: function() {
-      if (!WebSocket) {
-        console.error("Your browser seems not compatible with WebSocket");
-        // Show an alert that says "Your browser cannot browse this page"
-      }
-
-      router.mapRoutings();
-
-      console.info("[APP] App created.");
+  created: function() {
+    if (!WebSocket) {
+      console.error("Your browser seems not compatible with WebSocket");
+      // Show an alert that says "Your browser cannot browse this page"
     }
-  });
-})();
+
+    router.mapRoutings();
+
+    console.info("[APP] App created.");
+  }
+});
