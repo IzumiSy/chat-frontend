@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Chat Application",
   "scripts": {
-    "start": "webpack-dev-server --progress",
-    "build": "webpack --display-error-details --progress",
+    "start": "webpack-dev-server --progress --verbose",
+    "build": "webpack --display-error-details --progress --release",
     "deploy": "NODE_ENV=production npm run build && gulp deploy-s3",
     "clean": "gulp clean"
   },
