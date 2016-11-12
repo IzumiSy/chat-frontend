@@ -14,19 +14,19 @@ Vue.use(VueRouter);
 const routings = new VueRouter();
 
 const jumpers = {
-  root: function() {
+  root() {
     routings.go({ path: "/" });
   },
 
-  entrance: function() {
+  entrance() {
     routings.go({ path: "/entrance" });
   },
 
-  error: function() {
+  error() {
     routings.go({ path: "/error" });
   },
 
-  jump: function(args) {
+  jump(args) {
     if (args.path) {
       routings.go({ path: args.path });
     }
@@ -34,7 +34,7 @@ const jumpers = {
 };
 
 export default {
-  mapRoutings: function() {
+  mapRoutings() {
     const app = Vue.extend({});
 
     routings.map({
