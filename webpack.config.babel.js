@@ -13,6 +13,8 @@ module.exports = {
   cache: DEBUG,
   debug: DEBUG,
 
+  target: 'web',
+
   stats: {
     reasons: DEBUG,
     hash: VERBOSE,
