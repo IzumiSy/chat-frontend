@@ -4,6 +4,7 @@
 // The MIT License
 var RocketIO = function(opts){
   new EventEmitter().apply(this);
+
   if (typeof opts === "undefined" || opts === null) {
     opts = {};
   }
@@ -71,28 +72,42 @@ var RocketIO = function(opts){
       return io.connect();
     })();
 
-    if(typeof self.io === "undefined"){
+    if (typeof self.io === "undefined"){
       setTimeout(function(){
         self.emit("error", "WebSocketIO and CometIO are not available");
       }, 100);
+
       return self;
     };
-    if(self.io.url.match(/^ws:\/\/.+/)) self.type = "websocket";
-    else if(self.io.url.match(/cometio/)) self.type = "comet";
-    else self.type = "unknown";
+
+    if (self.io.url.match(/^ws:\/\/.+/)) {
+      self.type = "websocket";
+    } else if (self.io.url.match(/cometio/)) {
+      self.type = "comet";
+    } else {
+      self.type = "unknown";
+    }
+
     self.io.on("*", function(event_name, args){
-      if(event_name === "connect") event_name = "__connect";
+      if (event_name === "connect") {
+        event_name = "__connect";
+      }
       self.emit(event_name, args);
     });
+
     ws_close_timer = setTimeout(function(){
       self.close();
       self.type = "comet";
       connect_io();
     }, 3000);
+
     self.once("connect", function(){
-      if(ws_close_timer) clearTimeout(ws_close_timer);
+      if (ws_close_timer) {
+        clearTimeout(ws_close_timer);
+      }
       ws_close_timer = null;
     });
+
     return self;
   };
 
@@ -107,7 +122,11 @@ var RocketIO = function(opts){
 
 var CometIO = function(url, opts){
   new EventEmitter().apply(this);
-  if(typeof opts === "undefined" || opts === null) opts = {};
+
+  if (typeof opts === "undefined" || opts === null) {
+    opts = {};
+  }
+
   this.url = url || "";
   this.session = opts.session || null;
 
@@ -116,143 +135,171 @@ var CometIO = function(url, opts){
   var post_queue = [];
 
   var flush = function(){
-    if(!running || post_queue.length < 1) return;
+    if (!running || post_queue.length < 1) {
+      return;
+    }
+
     var post_data = {
       json: JSON.stringify({
         session: self.session,
         events: post_queue
       })
     };
+
     $.ajax(
       {
-        url : self.url,
-        data : post_data,
-        success : function(data){
+        url: self.url,
+        data: post_data,
+        success: function(data) {
         },
-        error : function(req, stat, e){
+        error: function(req, stat, e) {
           self.emit("error", "CometIO push error");
         },
-        complete : function(e){
+        complete: function(e){
         },
-        type : "POST",
-        dataType : "json",
-        timeout : 10000
+        type: "POST",
+        dataType: "json",
+        timeout: 10000
       }
     );
+
     post_queue = [];
   };
   setInterval(flush, 1000);
 
-  this.push = function(type, data){
-    if(!running || !self.session){
+  this.push = function(type, data) {
+    if (!running || !self.session) {
       self.emit("error", "CometIO not connected");
       return;
     }
     post_queue.push({type: type, data: data})
   };
 
-  this.connect = function(){
-    if(running) return self;
-    self.on("__session_id", function(session){
+  this.connect = function() {
+    if (running) {
+      return self;
+    }
+
+    self.on("__session_id", function(session) {
       self.session = session;
       self.emit("connect", self.session);
     });
+
     running = true;
     get();
+
     return self;
   };
 
-  this.close = function(){
+  this.close = function() {
     running = false;
     self.removeListener("__session_id");
   };
 
-  var get = function(){
-    if(!running) return;
-    $.ajax(
-      {
-        url : self.url+"?"+(new Date()-0),
-        data : {session : self.session},
-        success : function(data_arr){
-          if(data_arr !== null && typeof data_arr == "object" && !!data_arr.length){
-            for(var i = 0; i < data_arr.length; i++){
-              var data = data_arr[i];
-              if(data) self.emit(data.type, data.data);
+  var get = function() {
+    if (!running) {
+      return;
+    }
+
+    $.ajax({
+      url: (self.url + "?"+ (new Date() - 0)),
+      data: { session : self.session },
+      success: function(data_arr) {
+        if (data_arr !== null && typeof data_arr == "object" && !!data_arr.length) {
+          for (var i = 0; i < data_arr.length; i++) {
+            var data = data_arr[i];
+            if (data) {
+              self.emit(data.type, data.data);
             }
           }
-          get();
-        },
-        error : function(req, stat, e){
-          self.emit("error", "CometIO get error");
-          setTimeout(get, 10000);
-        },
-        complete : function(e){
-        },
-        type : "GET",
-        dataType : "json",
-        timeout : 130000
-      }
-    );
+        }
+        get();
+      },
+      error: function(req, stat, e) {
+        self.emit("error", "CometIO get error");
+        setTimeout(get, 10000);
+      },
+      complete: function(e) {
+        // TODO
+      },
+      type: "GET",
+      dataType: "json",
+      timeout: 130000
+    });
   };
 };
 
-var WebSocketIO = function(url, opts){
+var WebSocketIO = function(url, opts) {
   new EventEmitter().apply(this);
-  if(typeof opts === "undefined" || opts === null) opts = {};
+
+  if (typeof opts === "undefined" || opts === null) {
+    opts = {};
+  }
+
   this.url = url || "";
   this.session = opts.session || null;
   this.websocket = null;
   this.connecting = false;
+
   var reconnect_timer_id = null;
   var running = false;
   var self = this;
 
-  self.on("__session_id", function(session_id){
+  self.on("__session_id", function(session_id) {
     self.session = session_id;
     self.emit("connect", self.session);
   });
 
-  this.connect = function(){
-    if(typeof WebSocket === "undefined"){
+  this.connect = function() {
+    if (typeof WebSocket === "undefined") {
       self.emit("error", "websocket not exists in this browser");
       return null;
     }
+
+    var url = self.session ?
+      self.url + "/session=" + self.session : self.url;
+
     self.running = true;
-    var url = self.session ? self.url+"/session="+self.session : self.url;
     self.websocket = new WebSocket(url);
-    self.websocket.onmessage = function(e){
+    self.websocket.onmessage = function(e) {
       var data_ = null;
-      try{
+
+      try {
         data_ = JSON.parse(e.data);
-      }
-      catch(e){
+      } catch(e) {
         self.emit("error", "WebSocketIO data parse error");
       }
-      if(!!data_) self.emit(data_.type, data_.data);
+
+      if (!!data_) {
+        self.emit(data_.type, data_.data);
+      }
     };
-    self.websocket.onclose = function(){
-      if(self.connecting){
+
+    self.websocket.onclose = function() {
+      if (self.connecting) {
         self.connecting = false;
         self.emit("disconnect");
       }
-      if(self.running){
+      if (self.running) {
         reconnect_timer_id = setTimeout(self.connect, 10000);
       }
     };
-    self.websocket.onopen = function(){
+
+    self.websocket.onopen = function() {
       self.connecting = true;
     };
+
     return self;
   };
 
-  this.close = function(){
+  this.close = function() {
     clearTimeout(reconnect_timer_id);
     self.running = false;
     self.websocket.close();
   };
 
-  this.push = function(type, data){
-    if(!self.connecting){
+  this.push = function(type, data) {
+    if (!self.connecting) {
       self.emit("error", "websocket not connected");
       return;
     }
@@ -264,19 +311,25 @@ var WebSocketIO = function(url, opts){
 // https://github.com/shokai/event_emitter.js
 // (c) 2013 Sho Hashimoto <hashimoto@shokai.org>
 // The MIT License
-var EventEmitter = function(){
+var EventEmitter = function() {
   var self = this;
-  this.apply = function(target, prefix){
-    if(!prefix) prefix = "";
-    for(var func in self){
-      if(self.hasOwnProperty(func) && func !== "apply"){
-        target[prefix+func] = this[func];
+
+  this.apply = function(target, prefix) {
+    if (!prefix) {
+      prefix = "";
+    }
+    for (var func in self) {
+      if (self.hasOwnProperty(func) && func !== "apply") {
+        target[prefix + func] = this[func];
       }
     }
   };
+
   this.__events = new Array();
-  this.on = function(type, listener, opts){
-    if (typeof listener !== "function") return;
+  this.on = function(type, listener, opts) {
+    if (typeof listener !== "function") {
+      return;
+    }
 
     const event_id =
       self.__events.length > 0 ?
@@ -295,12 +348,12 @@ var EventEmitter = function(){
     return event_id;
   };
 
-  this.once = function(type, listener){
+  this.once = function(type, listener) {
     self.on(type, listener, {once: true});
   };
 
-  this.emit = function(type, data){
-    for(var i = 0; i < self.__events.length; i++){
+  this.emit = function(type, data) {
+    for (var i = 0; i < self.__events.length; i++) {
       var e = self.__events[i];
       switch(e.type){
       case type:
@@ -316,24 +369,27 @@ var EventEmitter = function(){
     self.removeListener();
   };
 
-  this.removeListener = function(id_or_type){
-    for(var i = self.__events.length-1; i >= 0; i--){
+  this.removeListener = function(id_or_type) {
+    for (var i = self.__events.length-1; i >= 0; i--) {
       var e = self.__events[i];
-      switch(typeof id_or_type){
+      switch (typeof id_or_type) {
       case "number":
-        if(e.id === id_or_type) self.__events.splice(i,1);
+        if (e.id === id_or_type) {
+          self.__events.splice(i,1);
+        }
         break
       case "string":
       case "object":
-        if(e.type === id_or_type) self.__events.splice(i,1);
+        if (e.type === id_or_type) {
+          self.__events.splice(i,1);
+        }
         break
       }
     }
   };
-
 };
 
-if(typeof module !== "undefined" && typeof module.exports !== "undefined"){
+if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
   // module.exports = EventEmitter;
   module.exports = RocketIO;
 }
