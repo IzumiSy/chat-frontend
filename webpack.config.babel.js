@@ -1,12 +1,29 @@
-var webpack = require('webpack');
-var dotenv = require('dotenv');
-var copyWebpackPlugin = require('copy-webpack-plugin');
+import 'babel-polyfill';
+import webpack from 'webpack';
+import dotenv from 'dotenv';
+import copyWebpackPlugin from 'copy-webpack-plugin';
+
+const DEBUG = !process.argv.includes('--release');
+const VERBOSE = !process.argv.includes('--verbose');
 
 dotenv.config();
 const env = process.env;
 
 module.exports = {
-  devtool: 'inline-source-map',
+  cache: DEBUG,
+  debug: DEBUG,
+
+  target: 'web',
+
+  stats: {
+    reasons: DEBUG,
+    hash: VERBOSE,
+    version: VERBOSE,
+    cached: VERBOSE,
+    cachedAssets: VERBOSE
+  },
+
+  devtool: DEBUG && 'inline-source-map',
   entry: __dirname + '/src/app.js',
 
   output: {
@@ -32,10 +49,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'stage-0']
-        }
+        loader: 'babel'
       },
       {
         test: /\.css$/,
@@ -60,7 +74,7 @@ module.exports = {
 
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: VERBOSE
       }
     }),
 
@@ -83,13 +97,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(env.NODE_ENV),
-        apiServerUrl: () => {
+        apiServerUrl: (() => {
           return JSON.stringify(
             (env.NODE_ENV === "production") ?
               env.PRODUCTION_SERVER :
               env.DEVELOPMENT_SERVER
             )
-        }()
+        })()
       }
     })
   ],
