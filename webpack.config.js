@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var dotenv = require('dotenv');
-var transferWebpackPlugin = require('transfer-webpack-plugin');
+var copyWebpackPlugin = require('copy-webpack-plugin');
 
 dotenv.config();
 const env = process.env;
@@ -70,14 +70,14 @@ module.exports = {
       Vue: 'vue'
     }),
 
-    new transferWebpackPlugin([
-       {
-         from: 'node_modules/flat-ui/images/icons/png',
-         to: 'assets/icons'
-       }, {
-         from: 'assets/',
-         to: 'assets/faces'
-       }
+    new copyWebpackPlugin([
+      {
+        from: 'node_modules/flat-ui/images/icons/png',
+        to: 'assets/icons'
+      }, {
+        from: 'assets/',
+        to: 'assets/faces'
+      }
     ]),
 
     new webpack.DefinePlugin({
