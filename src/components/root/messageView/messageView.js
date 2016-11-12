@@ -67,7 +67,7 @@
           _this.addMessage(data);
         });
         this.$on("app:msgView:scrollBottom", function() {
-          _this.scrollToBottom()
+          _this.scrollToBottom();
         });
       },
 
