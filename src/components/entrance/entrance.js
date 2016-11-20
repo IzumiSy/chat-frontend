@@ -99,11 +99,12 @@
 
         var checkDuplication = function(_next) {
           return api.isNameDuplicated(username).then(function(res) {
-            if (res.data && es.data.status) {
+            if (res.data && res.data.status) {
               return _next(new Error("ユーザー名が使われています"));
             }
             return _next();
           }).catch(function(res) {
+            console.error(res);
             return _next(new Error("システムエラー"));
           });
         };
