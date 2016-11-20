@@ -27,7 +27,7 @@ gulp.task("deploy-s3", function() {
     secretAccessKey: process.env.AWS_SECRET
   });
 
-  return gulp.src(dest + "**/*")
+  return gulp.src('dist/**/*')
     .pipe(publisher.publish({}, { noAcl: true }))
     .pipe(publisher.cache())
     .pipe(publisher.sync())
