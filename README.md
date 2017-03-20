@@ -3,7 +3,7 @@ This repository is the frontend side of chat application.
 
 Backend server is here: https://github.com/IzumiSy/chat-api-server
 
-<img src="https://dl.dropboxusercontent.com/u/50923926/chat-frontend-screen-shot.png" width="450">
+<img src="https://d2v9k5u4v94ulw.cloudfront.net/assets/images/279641/original/bc837774-7907-4ec3-88a9-510769fc4e4d.png?1454004103" width="450">
 
 ## Setup
 Install dependencies
