@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 dotenv.config();
 const env = process.env;
@@ -28,6 +29,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        enforce: 'pre',
+        exclude: /(node_modules|libs)/,
+        use: [
+          'jshint-loader'
+        ]
+      }, {
         test: /\.js$/,
         exclude: /(node_modules|libs)/,
         use: {
@@ -91,28 +99,9 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       Vue: 'vue'
-    })
-  ],
+    }),
 
-  resolve: {
-    modules: [
-      "node_modules", "libs"
-    ]
-  }
-
-  /*
-  module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules|libs/,
-        loader: 'jshint-loader'
-      }
-    ],
-  },
-
-  plugins: [
-    new copyWebpackPlugin([
+    new CopyWebpackPlugin([
       {
         from: 'node_modules/flat-ui/images/icons/png',
         to: 'assets/icons'
@@ -120,7 +109,12 @@ module.exports = {
         from: 'assets/',
         to: 'assets/faces'
       }
-    ]),
+    ])
   ],
-  */
+
+  resolve: {
+    modules: [
+      "node_modules", "libs"
+    ]
+  }
 };
