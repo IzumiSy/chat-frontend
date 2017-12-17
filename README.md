@@ -25,12 +25,3 @@ $ npm start
 ```Bash
 $ npm run build
 ```
-## (WIP) Deploy to S3
-Need to edit secret keys in .env
-```Bash
-$ npm run deploy
-```
-## Cleanup
-```Bash
-$ npm run clean
-```
