@@ -1,9 +1,7 @@
+dist/
 node_modules/
 
 .DS_Store
 .env
 .awspublish-*
 npm-debug.log
-
-dist/*
-!dist/index.html
