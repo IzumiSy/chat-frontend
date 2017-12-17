@@ -35,7 +35,10 @@ export default {
         test: /\.js$/,
         exclude: /(node_modules|libs)/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       }, {
         test: /\.css$/,
