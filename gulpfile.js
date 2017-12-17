@@ -1,18 +1,6 @@
-import gulp from "gulp";
-import s3 from "gulp-awspublish";
-import del from "del";
-import dotenv from "dotenv";
-
-const dest = "dist";
-
-gulp.task("clean", () => {
-  return del([
-    `${dest}/**/*`,
-    `!${dest}/index.html`
-  ]).then(function() {
-    return process.exit(0);
-  });
-});
+const gulp = require("gulp");
+const s3 = require("gulp-awspublish");
+const dotenv = require("dotenv");
 
 gulp.task("deploy-s3", () => {
   dotenv.config();

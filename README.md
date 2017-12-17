@@ -30,7 +30,3 @@ Need to edit secret keys in .env
 ```Bash
 $ npm run deploy
 ```
-## Cleanup
-```Bash
-$ npm run clean
-```
