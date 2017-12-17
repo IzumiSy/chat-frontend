@@ -30,13 +30,6 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        enforce: 'pre',
-        exclude: /(node_modules|libs)/,
-        use: [
-          'jshint-loader'
-        ]
-      }, {
-        test: /\.js$/,
         exclude: /(node_modules|libs)/,
         use: {
           loader: 'babel-loader',
