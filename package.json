@@ -46,8 +46,6 @@
     "css-loader": "^0.28.7",
     "dotenv": "^2.0.0",
     "file-loader": "^1.1.6",
-    "gulp": "^3.9.0",
-    "gulp-awspublish": "^3.3.0",
     "html-webpack-plugin": "^2.30.1",
     "jasmine": "^2.4.1",
     "jshint": "^2.9.4",
