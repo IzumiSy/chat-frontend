@@ -88,7 +88,6 @@ const entranceComponent = {
     },
 
     entranceTransaction() {
-      var _this = this;
       var username = this.username;
 
       var checkDuplication = function(_next) {
@@ -103,16 +102,16 @@ const entranceComponent = {
         });
       };
 
-      var setUserFace = function(_next) {
-        _this.faces = _.sample(shared.FACE_ASSETS, 3);
-        _this.currentView = 2;
+      var setUserFace = (_next) => {
+        this.faces = _.sample(shared.FACE_ASSETS, 3);
+        this.currentView = 2;
         return _next();
       };
 
-      Bucks.onError(function(e, bucks) {
-        _this.resWaiting = false;
+      Bucks.onError((e, bucks) => {
+        this.resWaiting = false;
         if (e.message) {
-          _this.setError(e.message);
+          this.setError(e.message);
         } else {
           shared.jumpers.error();
         }
@@ -121,12 +120,12 @@ const entranceComponent = {
       this.setError(null);
       this.resWaiting = true;
 
-      (new Bucks()).then(function(res, next) {
-        _this.message = "ユーザ名が使えるかチェックしています...";
+      (new Bucks()).then((res, next) => {
+        this.message = "ユーザ名が使えるかチェックしています...";
         checkDuplication(next);
       }).then(function(res, next) {
         setUserFace(next);
-        _this.resWaiting = false;
+        this.resWaiting = false;
       }).end();
     }
   }
