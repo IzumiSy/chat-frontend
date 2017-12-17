@@ -46,7 +46,7 @@
     "copy-webpack-plugin": "^4.0.0",
     "css-loader": "^0.28.7",
     "dotenv": "^2.0.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^1.1.6",
     "gulp": "^3.9.0",
     "gulp-awspublish": "^3.3.0",
     "jasmine": "^2.4.1",
