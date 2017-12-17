@@ -1,17 +1,13 @@
-import 'babel-polyfill';
-import webpack from 'webpack';
-import dotenv from 'dotenv';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
-
-const DEBUG = !process.argv.includes('--release');
-const VERBOSE = !process.argv.includes('--verbose');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 dotenv.config();
 const env = process.env;
 
-export default {
+module.exports = {
   target: 'web',
 
   entry: __dirname + '/src/app.js',
