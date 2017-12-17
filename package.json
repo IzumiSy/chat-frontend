@@ -54,9 +54,8 @@
     "jshint-loader": "^0.8.3",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^3.10.1",
-    "pug": "^2.0.0-beta6",
     "pug-loader": "^2.3.0",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
