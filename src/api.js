@@ -19,7 +19,7 @@ const setTokenHeader = function(token) {
 
 export default {
   api: {
-    ping: resource(API_HOST + "/api/ping"),
+    ping: resource(API_HOST + "/healthcheck"),
 
     isNameDup: resource(API_HOST + "/api/user/duplicate/:name"),
     newUser:   resource(API_HOST + "/api/user/new"),
