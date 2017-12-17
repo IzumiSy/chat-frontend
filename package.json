@@ -34,8 +34,8 @@
     "vue-router": "^0.7.7"
   },
   "engines": {
-    "node": "v2.5.0",
-    "npm": "v3.8.0"
+    "node": "v7.1.0",
+    "npm": "v4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
