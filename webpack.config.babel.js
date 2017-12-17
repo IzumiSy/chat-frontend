@@ -1,7 +1,9 @@
 import 'babel-polyfill';
 import webpack from 'webpack';
 import dotenv from 'dotenv';
-import copyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 const DEBUG = !process.argv.includes('--release');
 const VERBOSE = !process.argv.includes('--verbose');
@@ -10,20 +12,8 @@ dotenv.config();
 const env = process.env;
 
 export default {
-  cache: DEBUG,
-  debug: DEBUG,
-
   target: 'web',
 
-  stats: {
-    reasons: DEBUG,
-    hash: VERBOSE,
-    version: VERBOSE,
-    cached: VERBOSE,
-    cachedAssets: VERBOSE
-  },
-
-  devtool: DEBUG && 'inline-source-map',
   entry: __dirname + '/src/app.js',
 
   output: {
@@ -31,68 +21,59 @@ export default {
     filename: 'app.js'
   },
 
+  devtool: 'source-map',
+
   devServer: {
-    contentBase: 'dist',
-    port: 8000
+    contentBase: './dist',
+    port: 8000,
+    hot: true
   },
 
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules|libs/,
-        loader: 'jshint-loader'
-      }
-    ],
-
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
+        exclude: /(node_modules|libs)/,
+        use: {
+          loader: 'babel-loader'
+        }
+      }, {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
       }, {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader'
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }, {
         test: /\.jade$/,
-        loader: 'pug-loader'
+        use: ['pug-loader']
       }, {
         test: /\.(png|svg|eot|ttf|woff)(\?.*)?$/,
-        loader: 'file?name=/assets/[name].[ext]'
+        use: ['file-loader']
       }
     ]
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: VERBOSE
-      }
+    new UglifyJSPlugin({
+      sourceMap: true
     }),
 
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      Vue: 'vue'
-    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
 
-    new copyWebpackPlugin([
-      {
-        from: 'node_modules/flat-ui/images/icons/png',
-        to: 'assets/icons'
-      }, {
-        from: 'assets/',
-        to: 'assets/faces'
-      }
+    new CleanWebpackPlugin([
+      'dist'
     ]),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    }),
 
     new webpack.DefinePlugin({
       'process.env': {
@@ -105,12 +86,42 @@ export default {
             )
         })()
       }
+    }),
+
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Vue: 'vue'
     })
   ],
 
   resolve: {
-    modulesDirectories: [
+    modules: [
       "node_modules", "libs"
     ]
   }
+
+  /*
+  module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules|libs/,
+        loader: 'jshint-loader'
+      }
+    ],
+  },
+
+  plugins: [
+    new copyWebpackPlugin([
+      {
+        from: 'node_modules/flat-ui/images/icons/png',
+        to: 'assets/icons'
+      }, {
+        from: 'assets/',
+        to: 'assets/faces'
+      }
+    ]),
+  ],
+  */
 };
