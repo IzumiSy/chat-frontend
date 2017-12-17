@@ -35,7 +35,7 @@
   },
   "engines": {
     "node": "v7.1.0",
-    "npm": "v4.2.0"
+    "npm": "v5.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
