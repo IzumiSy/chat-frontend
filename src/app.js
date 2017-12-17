@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import 'bootstrap';
 import 'nanoscroller';
 
