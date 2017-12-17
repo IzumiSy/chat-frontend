@@ -29,12 +29,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
         enforce: 'pre',
+        test: /\.js$/,
         exclude: /(node_modules|libs)/,
-        use: [
-          'jshint-loader'
-        ]
+        loader: 'eslint-loader'
       }, {
         test: /\.js$/,
         exclude: /(node_modules|libs)/,
