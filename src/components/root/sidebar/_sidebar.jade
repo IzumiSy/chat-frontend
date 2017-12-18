@@ -17,7 +17,6 @@ ul.room-list
 ul.user-list
   li.user-item(
     v-for="user in users"
-    v-on:click="onUserClicked(user)"
     v-bind:class="userItemClasses()"
   )
     span.fui-user

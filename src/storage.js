@@ -1,37 +1,37 @@
-import shared from "./shared.js";
+import shared from './shared.js'
 
 // If the browse does not support localStorage
 // storage module wraps straging with shared.js module
 
 export default {
-  isAvailable() {
-    return window.sessionStorage ?
-      true : (() => {
-        shared.data.storageData = [];
-        return false;
-      })();
+  isAvailable () {
+    return window.sessionStorage
+      ? true : (() => {
+        shared.data.storageData = []
+        return false
+      })()
   },
 
-  set(key, value) {
-    return window.sessionStorage ?
-      window.sessionStorage.setItem(key, value) :
-      (() => {
-        shared.data.storageData[key] = value;
-        return { key: key, value: value };
-      })();
+  set (key, value) {
+    return window.sessionStorage
+      ? window.sessionStorage.setItem(key, value)
+      : (() => {
+        shared.data.storageData[key] = value
+        return { key: key, value: value }
+      })()
   },
 
-  get(key) {
-    return window.sessionStorage ?
-      window.sessionStorage.getItem(key) :
-      shared.data.storageData[key];
+  get (key) {
+    return window.sessionStorage
+      ? window.sessionStorage.getItem(key)
+      : shared.data.storageData[key]
   },
 
-  remove(key) {
+  remove (key) {
     if (window.sessionStorage) {
-      window.sessionStorage.removeItem(key);
+      window.sessionStorage.removeItem(key)
     } else {
-      delete shared.data.storageData[key];
+      delete shared.data.storageData[key]
     }
   }
-};
+}

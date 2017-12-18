@@ -1,21 +1,15 @@
-(function() {
-  'use strict';
+import api from '../../../api.js'
+import shared from '../../../shared.js'
+import storage from '../../../storage.js'
 
-  var api = require("../../../api.js");
-  var shared = require("../../../shared.js");
-  var storage = require("../../../storage.js");
+export default {
+  template: require('./_header.jade')(),
 
-  var headerComponent = {
-    template: require("./_header.jade")(),
-
-    methods: {
-      logout: function() {
-        api.userRoomLeave("all");
-        storage.remove("token");
-        shared.jumpers.entrance();
-      }
+  methods: {
+    logout () {
+      api.userRoomLeave('all')
+      storage.remove('token')
+      shared.jumpers.entrance()
     }
-  };
-
-  module.exports = headerComponent;
-})();
+  }
+}
