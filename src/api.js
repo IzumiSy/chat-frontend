@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import RocketIO from 'rocket.io/rocketio.js'
 import storage from './storage.js'
 import VueResource from 'vue-resource'
@@ -9,11 +10,11 @@ Vue.use(VueResource)
 // Option argument of Vue.resource(...) should have emulateJSON
 // it can prevent sending pre-flight request when accessing to
 // the backend server to call API.
-const resource = function(url) {
+const resource = (url) => {
   return Vue.resource(url, null, null, { emulateJSON: true })
 }
 
-const setTokenHeader = function(token) {
+const setTokenHeader = (token) => {
   Vue.http.headers.common.Authorization = ('Basic ' + token)
 }
 
@@ -83,7 +84,7 @@ export default {
     return (new RocketIO({
       type: 'comet',
       channel: roomId,
-      ssl: (process.env.NODE_ENV === 'production' ? true : false)
+      ssl: (process.env.NODE_ENV === 'production')
     })).connect(API_HOST)
   }
 }

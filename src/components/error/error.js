@@ -1,24 +1,18 @@
-(function() {
-  'use strict';
+import shared from '../../shared.js'
+import storage from '../../storage.js'
 
-  require('./error.scss');
+import './error.scss'
 
-  var shared = require("../../shared.js");
-  var storage = require("../../storage.js");
+export default {
+  template: require('./error.jade')(),
 
-  var errorComponent = {
-    template: require("./error.jade")(),
+  created () {
+    storage.remove('token')
+  },
 
-    created: function() {
-      storage.remove("token");
-    },
-
-    methods: {
-      reload: function() {
-        shared.jumpers.entrance();
-      }
+  methods: {
+    reload () {
+      shared.jumpers.entrance()
     }
-  };
-
-  module.exports = errorComponent;
-})();
+  }
+}
