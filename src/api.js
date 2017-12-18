@@ -22,7 +22,6 @@ export default {
   api: {
     ping: resource(API_HOST + '/healthcheck'),
 
-    isNameDup: resource(API_HOST + '/api/user/duplicate/:name'),
     newUser: resource(API_HOST + '/api/user/new'),
     getUser: resource(API_HOST + '/api/user/:id'),
     patchUser: resource(API_HOST + '/api/user/:id'),
@@ -37,11 +36,6 @@ export default {
 
   pingRequest () {
     return this.api.ping.get()
-  },
-
-  isNameDuplicated (name) {
-    setTokenHeader(storage.get('token'))
-    return this.api.isNameDup.get({ name: name })
   },
 
   createNewUser (name, face) {
