@@ -10,7 +10,7 @@ import storage from '../../storage.js'
 
 import './entrance.scss'
 
-export default {
+export default Vue.extend({
   template: require('./entrance.jade')(),
 
   data () {
@@ -132,4 +132,4 @@ export default {
       }).end()
     }
   }
-}
+})

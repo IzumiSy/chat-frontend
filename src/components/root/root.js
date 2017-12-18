@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import api from '../../api.js'
 import shared from '../../shared.js'
 import rocketio from '../../rocketio.js'
@@ -9,7 +11,7 @@ import messageInput from './messageInput/messageInput.js'
 
 import './root.scss'
 
-module.exports = {
+export default Vue.extend({
   template: require('./root.jade')(),
 
   components: {
@@ -75,4 +77,4 @@ module.exports = {
       })
     }
   }
-}
+})
