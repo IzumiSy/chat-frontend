@@ -1,5 +1,6 @@
 # Chat App Frontend
-This repository is the frontend side of chat application.  
+[![HoundCI](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://houndci.com/)
+> Full SPA chat application powered with Vue.js  
 
 Backend server is here: https://github.com/IzumiSy/chat-api-server
 
