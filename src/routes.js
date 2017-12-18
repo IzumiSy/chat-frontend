@@ -11,6 +11,7 @@ import EntranceComponent from './components/entrance/entrance.js'
 // be difficult to understand code stream in app.js if doing that.
 
 Vue.use(VueRouter)
+
 const routings = new VueRouter()
 
 const jumpers = {

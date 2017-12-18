@@ -1,9 +1,10 @@
+import Vue from 'vue'
 import shared from '../../shared.js'
 import storage from '../../storage.js'
 
 import './error.scss'
 
-export default {
+export default Vue.extend({
   template: require('./error.jade')(),
 
   created () {
@@ -15,4 +16,4 @@ export default {
       shared.jumpers.entrance()
     }
   }
-}
+})

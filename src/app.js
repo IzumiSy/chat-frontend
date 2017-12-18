@@ -8,21 +8,11 @@ import 'spinkit/css/spinkit.css'
 import 'nanoscroller/bin/css/nanoscroller.css'
 import './app.scss'
 
-import router from './routes.js'
-
-import RootComponent from './components/root/root.js'
-import ErrorComponent from './components/error/error.js'
-import EntranceComponent from './components/entrance/entrance.js'
-
 import Vue from 'vue'
 
-new Vue({
-  components: {
-    'va-root-view': RootComponent,
-    'va-error-view': ErrorComponent,
-    'va-entrance-view': EntranceComponent
-  },
+import router from './routes.js'
 
+new Vue({
   created () {
     router.mapRoutings()
     console.info('[APP] App created.')
