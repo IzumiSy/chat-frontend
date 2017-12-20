@@ -21,7 +21,7 @@
     "bootstrap": "^3.3.5",
     "bucks": "^0.8.4",
     "flat-ui": "^2.1.1",
-    "jquery": "^2.1.4",
+    "jquery": "^3.2.1",
     "nanoscroller": "^0.8.7",
     "normalize-css": "^2.3.1",
     "rocketio-client": "0.0.4",
