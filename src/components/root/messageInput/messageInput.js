@@ -3,7 +3,7 @@ import Vue from 'vue'
 import api from '../../../api.js'
 import shared from '../../../shared.js'
 
-module.exports = {
+export default {
   template: require('./_message_input.jade')(),
 
   data () {

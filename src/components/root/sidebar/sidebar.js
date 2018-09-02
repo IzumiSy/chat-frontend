@@ -4,7 +4,7 @@ import utils from '../../../utils.js'
 
 import './sidebar.scss'
 
-module.exports = {
+export default {
   template: require('./_sidebar.jade')(),
 
   data () {
