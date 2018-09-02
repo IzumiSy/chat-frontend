@@ -2,7 +2,7 @@ import $ from 'jquery'
 import Vue from 'vue'
 import shared from '../../../shared.js'
 
-module.exports = {
+export default {
   template: require('./_message_view.jade')(),
 
   data () {
