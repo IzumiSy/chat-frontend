@@ -1,5 +1,5 @@
+import fetch from 'isomorphic-fetch'
 import RocketIO from 'rocket.io/rocketio.js'
-import fetch from 'whatwg-fetch'
 import If from 'ifx'
 
 export const ERROR_TYPE = {

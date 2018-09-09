@@ -1,10 +1,7 @@
 import _ from 'underscore'
 import Vue from 'vue'
-
 import api from '../../api.js'
 import shared from '../../shared.js'
-import storage from '../../storage.js'
-
 import './entrance.scss'
 
 export default Vue.extend({
@@ -20,27 +17,24 @@ export default Vue.extend({
   },
 
   methods: {
-    submit () {
+    async submit () {
       this.currentView = 2
       this.waiting = true
 
-      const face = _.sample(shared.FACE_ASSETS)
-      api.createNewUser(this.username, face).then((res) => {
-        console.log(res)
-        if (!res.data.room_id) {
-          console.warn('Response data does not have room_id')
-          shared.jumpers.error()
-          return
-        }
-        storage.set('token', res.data.token)
-        shared.data.currentRoomId = res.data.room_id.$oid
-        shared.data.user = res.data
+      try {
+        const face = _.sample(shared.FACE_ASSETS)
+        const user = await api.createNewUser(this.username, face)
+
+        shared.data.currentRoomId = user.room_id.$oid
+        shared.data.user = user
         shared.jumpers.root()
-      }).catch((res) => {
+      } catch (e) {
+        console.error(e)
+
         this.currentView = 1
         this.waiting = false
         this.error = '入室できませんでした。'
-      })
+      }
     }
   }
 })
