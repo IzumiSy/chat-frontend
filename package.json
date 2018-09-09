@@ -22,6 +22,7 @@
     "bucks": "^0.8.4",
     "flat-ui": "^2.1.1",
     "ifx": "^1.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.3.1",
     "nanoscroller": "^0.8.7",
     "normalize-css": "^2.3.1",
@@ -29,8 +30,7 @@
     "spinkit": "^1.2.5",
     "underscore": "^1.9.1",
     "vue": "^1.0.8",
-    "vue-router": "^0.7.7",
-    "whatwg-fetch": "^2.0.4"
+    "vue-router": "^0.7.7"
   },
   "engines": {
     "node": "v7.1.0",
