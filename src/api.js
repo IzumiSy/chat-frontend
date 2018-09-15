@@ -1,77 +1,112 @@
-import Vue from 'vue'
+import fetch from 'isomorphic-fetch'
 import RocketIO from 'rocket.io/rocketio.js'
-import storage from './storage.js'
-import VueResource from 'vue-resource'
+import If from 'ifx'
+
+export const ERROR_TYPE = {
+  NETWORK_ERROR: 'NETWORK_ERROR',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  INVALID_TOKEN: 'INVALID_TOKEN',
+  UNPROCESSABLE: 'UNPROCESSABLE',
+  NOT_FOUND: 'NOT_FOUND',
+  BAD_GATEWAY: 'BAD_GATEWAY',
+  API_SERVER_ERROR: 'API_SERVER_ERROR'
+}
+
+const handleErrors = (res) => {
+  if (res.ok) {
+    return res
+  }
+
+  throw Error(
+    If(res.status === 401)(() =>
+      ERROR_TYPE.UNAUTHORIZED
+    ).ElseIf(res.status === 400)(() =>
+      ERROR_TYPE.INVALID_TOKEN
+    ).ElseIf(res.status === 404)(() =>
+      ERROR_TYPE.NOT_FOUND
+    ).ElseIf(res.status === 422)(() =>
+      ERROR_TYPE.UNPROCESSABLE
+    ).ElseIf(res.status === 502)(() =>
+      ERROR_TYPE.BAD_GATEWAY
+    ).Else(() =>
+      ERROR_TYPE.API_SERVER_ERROR
+    )
+  )
+}
+
+const opts = {
+  mode: 'cors',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+  }
+}
 
 const API_HOST = process.env.apiServerUrl
 
-Vue.use(VueResource)
-
-// Option argument of Vue.resource(...) should have emulateJSON
-// it can prevent sending pre-flight request when accessing to
-// the backend server to call API.
-const resource = (url) => {
-  return Vue.resource(url, null, null, { emulateJSON: true })
-}
-
-const setTokenHeader = (token) => {
-  Vue.http.headers.common.Authorization = ('Basic ' + token)
-}
+const fetchWithErrorHandling = (url, options) =>
+  fetch(url, Object.assign({}, opts, options))
+    .catch(() => { throw Error(ERROR_TYPE.NETWORK_ERROR) })
+    .then(handleErrors)
+    .then(res => res.json())
 
 export default {
-  api: {
-    ping: resource(API_HOST + '/healthcheck'),
-
-    newUser: resource(API_HOST + '/api/user/new'),
-    getUser: resource(API_HOST + '/api/user/:id'),
-    patchUser: resource(API_HOST + '/api/user/:id'),
-
-    allRooms: resource(API_HOST + '/api/room'),
-    getUsers: resource(API_HOST + '/api/room/:id/users'),
-    roomEnter: resource(API_HOST + '/api/room/:id/enter'),
-    roomLeave: resource(API_HOST + '/api/room/:id/leave'),
-
-    sendMessage: resource(API_HOST + '/api/message/:id')
-  },
-
   pingRequest () {
-    return this.api.ping.get()
+    return fetchWithErrorHandling(`${API_HOST}/healthcheck`, {
+      method: 'GET'
+    })
   },
 
   createNewUser (name, face) {
-    setTokenHeader(storage.get('token'))
-    return this.api.newUser.save({ name: name, face: face })
+    return fetchWithErrorHandling(`${API_HOST}/api/user/new`, {
+      method: 'POST',
+      body: JSON.stringify({
+        name, face
+      })
+    })
   },
 
-  patchUser (userId, data) {
-    setTokenHeader(storage.get('token'))
-    return this.api.patchUser.save({ id: userId }, { data: data })
+  patchUser (id, data) {
+    return fetchWithErrorHandling(`${API_HOST}/api/user/${id}`, {
+      method: 'POST',
+      body: JSON.strinfigy({
+        data
+      })
+    })
   },
 
   getAllRooms () {
-    setTokenHeader(storage.get('token'))
-    return this.api.allRooms.get()
+    return fetchWithErrorHandling(`${API_HOST}/api/rooms`, {
+      method: 'GET'
+    })
   },
 
   getRoomUsers (roomId) {
-    setTokenHeader(storage.get('token'))
-    return this.api.getUsers.get({ id: roomId })
+    return fetchWithErrorHandling(`${API_HOST}/api/room/${roomId}/users`, {
+      method: 'GET'
+    })
   },
 
   userRoomEnter (roomId) {
-    setTokenHeader(storage.get('token'))
-    return this.api.roomEnter.save({ id: roomId }, {})
+    return fetchWithErrorHandling(`${API_HOST}/api/room/${roomId}/enter`, {
+      method: 'POST'
+    })
   },
 
   userRoomLeave (roomId) {
-    setTokenHeader(storage.get('token'))
-    return this.api.roomLeave.save({ id: roomId }, {})
+    return fetchWithErrorHandling(`${API_HOST}/api/room/${roomId}/leave`, {
+      method: 'POST'
+    })
   },
 
   sendMessage (roomId, message) {
-    var params = { content: message }
-    setTokenHeader(storage.get('token'))
-    return this.api.sendMessage.save({ id: roomId }, params)
+    return fetchWithErrorHandling(`${API_HOST}/api/message/${roomId}`, {
+      method: 'POST',
+      body: JSON.strinfigy({
+        content: message
+      })
+    })
   },
 
   connectRocketIO (roomId) {

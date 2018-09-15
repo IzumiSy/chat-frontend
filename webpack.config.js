@@ -36,12 +36,7 @@ module.exports = {
       }, {
         test: /\.js$/,
         exclude: /(node_modules|libs)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        loader: 'babel-loader'
       }, {
         test: /\.css$/,
         use: [
