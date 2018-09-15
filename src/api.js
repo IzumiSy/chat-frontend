@@ -103,7 +103,7 @@ export default {
   sendMessage (roomId, message) {
     return fetchWithErrorHandling(`${API_HOST}/api/message/${roomId}`, {
       method: 'POST',
-      body: JSON.strinfigy({
+      body: JSON.stringify({
         content: message
       })
     })
