@@ -88,7 +88,7 @@ export default {
 
       // This dispater cannot be asynchronizing, because
       // app:root:fetchRoomData needs waiting for update of user list in backend.
-      api.userRoomEnter(nextRoomId).then((res) => {
+      api.userRoomEnter(nextRoomId).then(room => {
         this.$dispatch('app:root:fetchRoomData', nextRoomId)
         this.nowLoading = false
       }, () => {
