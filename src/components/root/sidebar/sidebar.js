@@ -64,7 +64,7 @@ export default {
       })
     },
 
-    onRoomClicked (room) {
+    async onRoomClicked (room) {
       if (this.networkError || this.nowLoading) {
         return
       }
@@ -83,17 +83,17 @@ export default {
 
       this.$dispatch('app:root:roomChange')
 
-      // userRoomLeave doesnt have to be called here.
-      // because userRoomEnter updates current room data to the new one.
-
-      // This dispater cannot be asynchronizing, because
-      // app:root:fetchRoomData needs waiting for update of user list in backend.
-      api.userRoomEnter(nextRoomId).then((res) => {
+      try {
+        // userRoomLeave doesnt have to be called here.
+        // because userRoomEnter updates current room data to the new one.
+        // This dispater cannot be asynchronizing, because
+        // app:root:fetchRoomData needs waiting for update of user list in backend.
+        await api.userRoomEnter(nextRoomId)
         this.$dispatch('app:root:fetchRoomData', nextRoomId)
         this.nowLoading = false
-      }, () => {
-        console.warn(`Error at api.userRoomEnter: Id(${nextRoomId})`)
-      })
+      } catch (e) {
+        console.error(e)
+      }
     },
 
     // roomItemClasses returns v-bind:class contents for its own,

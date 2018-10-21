@@ -50,15 +50,15 @@ export default Vue.extend({
     },
 
     fetchUsersAndMessages (roomId) {
-      api.getAllRooms().then((res) => {
-        this.$broadcast('app:sidebar:updateRooms', res.data)
-        shared.data.rooms = res.data
+      api.getAllRooms().then(rooms => {
+        this.$broadcast('app:sidebar:updateRooms', rooms)
+        shared.data.rooms = rooms
       }, () => {
         console.warn('Error at api.getAllRooms')
       })
-      api.getRoomUsers(roomId).then((res) => {
-        this.$broadcast('app:sidebar:updateUsers', res.data)
-        shared.data.currentRoomUsers = res.data
+      api.getRoomUsers(roomId).then(roomUsers => {
+        this.$broadcast('app:sidebar:updateUsers', roomUsers)
+        shared.data.currentRoomUsers = roomUsers
       }, () => {
         console.warn('Error at api.getRoomUsers')
       })
