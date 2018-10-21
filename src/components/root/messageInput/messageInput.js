@@ -54,32 +54,32 @@ export default {
       $(this.$el).find('input.message').focus()
     },
 
-    sendMessage () {
+    async sendMessage () {
       // Prevention for mis-enter with IME on
       if (this.message !== this.previousInput) {
         return
       }
 
-      var message = this.message
-      var currentRoomId = shared.data.currentRoomId
+      const message = this.message
+      const currentRoomId = shared.data.currentRoomId
 
       if (!currentRoomId) {
         console.warn('Error: currentRoomId is undefined or invalid.')
         return
       }
 
-      this.resWaiting = true
-      api.sendMessage(currentRoomId, message).then((res) => {
+      try {
+        this.resWaiting = true
+        await api.sendMessage(currentRoomId, message)
         this.$set('message', null)
         this.$dispatch('app:root:newMessage')
         this.resWaiting = false
-
         Vue.nextTick(() => {
           $(this.$el).find('input.message').focus()
         })
-      }, () => {
-        console.warn('Error at api.sendMessage(...)')
-      })
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 }
